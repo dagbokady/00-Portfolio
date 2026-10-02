@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="4572d821-345b-4020-9ab0-16986b1318aa" name="Changes" comment="fix bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/cv.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +103,7 @@
       <workItem from="1767437346504" duration="33000" />
       <workItem from="1767560510202" duration="3472000" />
       <workItem from="1769167566532" duration="412000" />
-      <workItem from="1790925816701" duration="672000" />
+      <workItem from="1790925816701" duration="1703000" />
     </task>
     <task id="LOCAL-00001" summary="add experience and certifications">
       <option name="closed" value="true" />
