@@ -40,23 +40,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="2.095414696159181" />
-      <entry key="MS500" value="4.5870156622502805" />
-      <entry key="S2" value="8.890521011960871" />
-      <entry key="S5" value="17.532568725386284" />
-      <entry key="S10" value="27.951782886562654" />
-      <entry key="S30" value="48.73838573068138" />
-      <entry key="S60" value="68.15789341146596" />
-      <entry key="M2" value="87.6570655555876" />
-      <entry key="M5" value="105.4302936478166" />
-      <entry key="M10" value="113.21329085638975" />
-      <entry key="M15" value="117.93779561491046" />
-      <entry key="M30" value="134.21661309502187" />
-      <entry key="H1" value="163.17353169420667" />
-      <entry key="H2" value="194.1686910373403" />
-      <entry key="H4" value="217.60796932639673" />
-      <entry key="D1" value="243.1011768756885" />
-      <entry key="W1" value="248.1392254717585" />
+      <entry key="MS100" value="1.1041631832893342" />
+      <entry key="MS500" value="2.639602174475845" />
+      <entry key="S2" value="6.657522507023435" />
+      <entry key="S5" value="13.600741148020802" />
+      <entry key="S10" value="24.548764835030685" />
+      <entry key="S30" value="53.25993483424989" />
+      <entry key="S60" value="77.89879905805489" />
+      <entry key="M2" value="102.28250358061996" />
+      <entry key="M5" value="124.85575569211775" />
+      <entry key="M10" value="134.74549103547196" />
+      <entry key="M15" value="140.22304766225685" />
+      <entry key="M30" value="157.2455712911331" />
+      <entry key="H1" value="186.58846492577442" />
+      <entry key="H2" value="217.82302384075024" />
+      <entry key="H4" value="241.41505661576866" />
+      <entry key="D1" value="267.0653855778147" />
+      <entry key="W1" value="272.13400969248096" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -78,23 +78,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="2.013646924621331" />
-      <entry key="MS500" value="4.544107800279165" />
-      <entry key="S2" value="8.867881049254821" />
-      <entry key="S5" value="17.51377112085044" />
-      <entry key="S10" value="27.936692874303464" />
-      <entry key="S30" value="48.72968455440073" />
-      <entry key="S60" value="68.15187395285491" />
-      <entry key="M2" value="87.65322205568337" />
-      <entry key="M5" value="105.42845242556355" />
-      <entry key="M10" value="113.2122937683052" />
-      <entry key="M15" value="117.9370693441112" />
-      <entry key="M30" value="134.21607687244165" />
-      <entry key="H1" value="163.17307788621682" />
-      <entry key="H2" value="194.16835692969659" />
-      <entry key="H4" value="217.60776027473236" />
-      <entry key="D1" value="243.10113425776453" />
-      <entry key="W1" value="248.1392191616164" />
+      <entry key="MS100" value="1.073423331762696" />
+      <entry key="MS500" value="2.624145820552656" />
+      <entry key="S2" value="6.646981044213557" />
+      <entry key="S5" value="13.588974549845613" />
+      <entry key="S10" value="24.535908596575972" />
+      <entry key="S30" value="53.24988199049074" />
+      <entry key="S60" value="77.8914954836703" />
+      <entry key="M2" value="102.27776163391393" />
+      <entry key="M5" value="124.85346066731096" />
+      <entry key="M10" value="134.74424709884724" />
+      <entry key="M15" value="140.22215247780167" />
+      <entry key="M30" value="157.24494897331454" />
+      <entry key="H1" value="186.58796770156542" />
+      <entry key="H2" value="217.82266779868516" />
+      <entry key="H4" value="241.4148364845882" />
+      <entry key="D1" value="267.06534108884017" />
+      <entry key="W1" value="272.1340031142884" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -105,34 +105,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "JavaScript Debug.index.html.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Node.js.Unnamed.executor": "Debug",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "javascript.preferred.runtime.type.id": "node",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "/Users/darkvdy/Documents/Projets-2026/00-Web-Curriculum-Vitae",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "editor.preferences.completion",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;JavaScript Debug.index.html.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Node.js.Unnamed.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/darkvdy/Documents/Projets-2026/00-Web-Curriculum-Vitae&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -158,6 +158,7 @@
       <workItem from="1767560510202" duration="3472000" />
       <workItem from="1769167566532" duration="412000" />
       <workItem from="1790925816701" duration="8432000" />
+      <workItem from="1790940330957" duration="150000" />
     </task>
     <task id="LOCAL-00001" summary="add experience and certifications">
       <option name="closed" value="true" />

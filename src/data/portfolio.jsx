@@ -15,7 +15,7 @@ export const identity = {
   email: 'dagbokady@gmail.com',
   links: [
     { label: 'GitHub', href: 'https://github.com/dagbokady', icon: 'github' },
-    { label: 'LinkedIn', href: 'https://linkedin.com/in/christ-phanuel-dagbo', icon: 'linkedin' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/christ-phanuel-dagbo', icon: 'linkedin' },
     { label: 'Recherche CodEval (PDF)', href: '/files/recherche-codeval.pdf', icon: 'file' },
   ],
 }

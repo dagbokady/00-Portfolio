@@ -201,7 +201,7 @@ body { top: 0 !important; }
 }
 .side-links a { color: #444; text-decoration: none; }
 .side-links a:hover { color: var(--link); text-decoration: underline; }
-.icon { width: 18px; height: 18px; fill: currentColor; flex: none; }
+.icon { width: 18px; height: 18px; flex: none; }
 
 /* Contenu principal */
 .content section { margin-bottom: 44px; }

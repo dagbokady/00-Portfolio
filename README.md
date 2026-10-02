@@ -95,4 +95,4 @@ s'affiche à la place.
 
 - Email : [dagbokady@gmail.com](mailto:dagbokady@gmail.com)
 - GitHub : [dagbokady](https://github.com/dagbokady)
-- LinkedIn : [christ-phanuel-dagbo](https://linkedin.com/in/christ-phanuel-dagbo)
+- LinkedIn : [christ-phanuel-dagbo](https://www.linkedin.com/in/christ-phanuel-dagbo)
