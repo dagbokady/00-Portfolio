@@ -39,6 +39,13 @@ const ICONS = {
   linkedin:
     'M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.5h4V21H3V9.5Zm6.5 0h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4V9.5Z',
   file: 'M6 2h8l6 6v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Zm7 1.5V9h5.5L13 3.5ZM8 13h8v1.5H8V13Zm0 3.5h8V18H8v-1.5Z',
+  person: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4Z',
+  science:
+    'M19.8 18.4 14 10.67V6.5l1.35-1.69c.26-.33.03-.81-.39-.81H9.04c-.42 0-.65.48-.39.81L10 6.5v4.17L4.2 18.4c-.49.66-.02 1.6.8 1.6h14c.82 0 1.29-.94.8-1.6Z',
+  build:
+    'M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4Z',
+  work:
+    'M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2Zm-6 0h-4V4h4v2Z',
 }
 
 function Icon({ name }) {
@@ -49,11 +56,11 @@ function Icon({ name }) {
   )
 }
 
-function Section({ id, emoji, title, children }) {
+function Section({ id, icon, title, children }) {
   return (
     <section id={id}>
       <h2 className="section-title">
-        <span className="emoji" aria-hidden="true">{emoji}</span>
+        <span className="section-icon"><Icon name={icon} /></span>
         {title}
       </h2>
       {children}
@@ -165,18 +172,42 @@ function CompanyLogo({ src, name }) {
   return <img src={src} alt={name} onError={() => setFailed(true)} />
 }
 
+// Masqué tant que le fichier du logo n'est pas présent
+function SchoolLogo({ src }) {
+  const [failed, setFailed] = useState(false)
+  if (failed) return null
+  return <img className="school-logo" src={src} alt="ESATIC" onError={() => setFailed(true)} />
+}
+
+// La colonne de gauche défile au même rythme que la page : quand on arrive en bas à droite,
+// elle est arrivée en bas elle aussi
 function Sidebar() {
+  const ref = useRef(null)
+  useEffect(() => {
+    const sync = () => {
+      const aside = ref.current
+      const pageRange = document.documentElement.scrollHeight - window.innerHeight
+      const asideRange = aside.scrollHeight - aside.clientHeight
+      if (pageRange <= 0 || asideRange <= 0) return
+      aside.scrollTop = (window.scrollY / pageRange) * asideRange
+    }
+    sync()
+    window.addEventListener('scroll', sync, { passive: true })
+    window.addEventListener('resize', sync)
+    return () => {
+      window.removeEventListener('scroll', sync)
+      window.removeEventListener('resize', sync)
+    }
+  }, [])
   return (
-    <aside className="sidebar">
+    <aside className="sidebar" ref={ref}>
       <div className="avatar-wrap">
         <img className="gold-frame" src="/files/cadre-dore.webp" alt="" aria-hidden="true" />
         <img className="avatar" src={identity.photo} alt={identity.name} />
       </div>
       <h1 className="name">{identity.name}</h1>
       <div className="role">{identity.role}</div>
-      <div className="country">
-        Côte d'Ivoire
-      </div>
+      <SchoolLogo src={identity.schoolLogo} />
       <p className="bio">{identity.bio}</p>
       <ul className="side-links">
         <li><Icon name="pin" />{identity.location}</li>
@@ -195,8 +226,7 @@ function Sidebar() {
   )
 }
 
-function Paper({ paper, index }) {
-  const [open, setOpen] = useState(true)
+function Paper({ paper }) {
   return (
     <li className="paper">
       <span className="venue-tag">[{paper.tag}]</span> <strong>{paper.authors}</strong>.{' '}
@@ -206,21 +236,7 @@ function Paper({ paper, index }) {
         <a key={link.href} className="paper-link" href={link.href} target="_blank" rel="noreferrer">
           [{link.label}]
         </a>
-      ))}{' '}
-      <button className="paper-link as-button" onClick={() => setOpen(!open)} aria-expanded={open}>
-        [{open ? 'masquer le résumé' : 'résumé'}]
-      </button>
-      {paper.status && <span className="status">{paper.status}</span>}
-      {open && (
-        <div className="abstract" id={`abstract-${index}`}>
-          <p>{paper.abstract}</p>
-          <ul>
-            {paper.highlights.map((item, i) => (
-              <li key={i}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+      ))}
     </li>
   )
 }
@@ -232,7 +248,7 @@ function App() {
       <div className="layout" id="top">
         <Sidebar />
         <main className="content">
-          <Section id="about" emoji="🚩" title="À propos">
+          <Section id="about" icon="person" title="À propos">
             <p>{about.intro}</p>
             <p>{about.interests}</p>
             <ul className="topics">
@@ -247,33 +263,32 @@ function App() {
             </p>
           </Section>
 
-          <Section id="research" emoji="⭐" title="Travaux de recherche">
+          <Section id="research" icon="science" title="Travaux de recherche">
             <ol className="papers">
-              {research.map((paper, i) => (
-                <Paper key={paper.title} paper={paper} index={i} />
+              {research.map((paper) => (
+                <Paper key={paper.title} paper={paper} />
               ))}
             </ol>
           </Section>
 
-          <Section id="projects" emoji="🛠️" title="Projets">
+          <Section id="projects" icon="build" title="Projets">
             <ol className="papers">
               {projects.map((p) => (
                 <li key={p.title} className="paper">
                   <span className="venue-tag">[{p.tag}]</span> <strong>{p.title}</strong>.{' '}
-                  <span className="venue">{p.role}</span>.
-                  {p.stack && <span className="stack"> {p.stack}.</span>}{' '}
                   {p.url && (
                     <a className="paper-link" href={p.url} target="_blank" rel="noreferrer">
                       [{p.url.replace(/^https?:\/\//, '')}]
                     </a>
                   )}
+                  {p.stack && <div className="stack">{p.stack}</div>}
                   <div className="project-text">{p.text}</div>
                 </li>
               ))}
             </ol>
           </Section>
 
-          <Section id="experience" emoji="💼" title="Parcours">
+          <Section id="experience" icon="work" title="Parcours">
             <h3 className="sub-title">Expérience</h3>
             <ul className="timeline">
               {experience.map((e) => (

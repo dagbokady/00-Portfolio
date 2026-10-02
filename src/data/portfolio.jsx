@@ -2,8 +2,15 @@ export const identity = {
   name: 'Christ-Phanuel DAGBO',
   fullName: 'DAGBO Kady Christ-Phanuel',
   photo: '/files/photo.png',
-  role: 'Étudiant-chercheur @ ESATIC',
-  bio: "Master 2 Génie Logiciel. Recherche sur l'évaluation automatique de code et la montée en charge des systèmes de correction.",
+  role: 'Étudiant en Master 2 @ ESATIC',
+  schoolLogo: '/files/logos/esatic.jpg',
+  bio: (
+    <>
+      Master 2 SIGL-ID2C : Systèmes Informatiques et <strong>Génie Logiciel</strong>, option{' '}
+      <strong>Ingénierie Data et Cloud Computing</strong>. Recherche sur l'évaluation automatique
+      de code et la montée en charge des systèmes de correction.
+    </>
+  ),
   location: "Abidjan, Côte d'Ivoire",
   email: 'dagbokady@gmail.com',
   links: [
@@ -16,11 +23,17 @@ export const identity = {
 export const about = {
   intro: (
     <>
-      Bonjour ! Je suis Christ-Phanuel DAGBO, étudiant en <strong>Master 2 Génie Logiciel</strong> à
+      Bonjour ! Je suis Christ-Phanuel DAGBO, étudiant en <strong>Master 2 SIGL-ID2C</strong>{' '}
+      (Systèmes Informatiques et <strong>Génie Logiciel</strong>, option{' '}
+      <strong>Ingénierie Data et Cloud Computing</strong>) à
       l'École Supérieure Africaine des Technologies de l'Information et de la Communication
-      (<strong>ESATIC</strong>, Abidjan). Je suis développeur d'applications web et mobile, et je
-      mène en parallèle un travail de recherche sur <strong>CodEval</strong>, la plateforme de
-      correction automatique de programmes que je conçois avec mon équipe.
+      (<strong>ESATIC</strong>, Abidjan). Je suis <strong>ingénieur logiciel</strong> et mon métier est
+      de résoudre des problèmes : analyser un problème, comprendre les besoins réels, puis
+      concevoir des solutions logicielles <strong>fiables, performantes et orientées utilisateur</strong>. Je mène en
+      parallèle un travail de recherche sur la <strong>montée en charge des plateformes de
+      correction automatique de programmes</strong> : comment répartir la correction de centaines
+      de copies entre plusieurs correcteurs, sur un ou plusieurs serveurs, sans perdre de travail
+      en cas de panne.
     </>
   ),
   interests: (
@@ -48,27 +61,6 @@ export const research = [
     venue: 'Travail de recherche, ESATIC',
     year: '2026',
     links: [{ label: 'pdf', href: '/files/recherche-codeval.pdf' }],
-    status: 'Campagnes de mesure en cours',
-    abstract: (
-      <>
-        Le worker de CodEval corrige les copies l'une après l'autre et réserve une campagne entière
-        comme unité de travail : ajouter des correcteurs ne sert donc à rien tant que le grain n'est
-        pas redécoupé. Ce travail compare quatre organisations tirées de la littérature (traitement
-        séquentiel, pool de processus local, workers distribués autour d'un courtier de messages,
-        messagerie serverless) et propose une architecture <strong>P</strong> où chaque couple
-        (copie, exercice) devient une tâche persistante dans PostgreSQL, réservée avec un{' '}
-        <strong>bail qui expire</strong>. Les correcteurs, interchangeables, ne se coordonnent qu'à
-        travers cette file : on peut en lancer plusieurs sur un serveur ou sur un second nœud sans
-        modifier le code, et une panne laisse les tâches inachevées visibles et reprises par un
-        autre.
-      </>
-    ),
-    highlights: [
-      <>Trois hypothèses testées : goulot d'étranglement du séquentiel (H1), gain du parallélisme intra-nœud (H2), passage à l'échelle inter-nœuds (H3).</>,
-      <>Banc de mesure reproductible : évaluation <strong>BENCH-SRIT</strong> (5 exercices, 20 points) et 500 copies tirées à partir d'une graine, figées par une empreinte.</>,
-      <>Six critères chiffrés, dont trois éliminatoires, fixés <strong>avant</strong> toute mesure, avec une règle de décision écrite à l'avance.</>,
-      <>Premières mesures sur l'effet de la granularité : ajustement de la loi de Gunther (σ = 0,221, κ = 0,018), soit un débit maximal autour de 6 à 7 correcteurs sur un poste à 8 cœurs.</>,
-    ],
   },
 ]
 
@@ -76,7 +68,6 @@ export const projects = [
   {
     tag: 'SaaS',
     title: "CodEval · Plateforme d'évaluation pratique en programmation",
-    role: 'Product Owner & lead technique · En cours',
     url: 'https://codeval.space',
     stack: 'FastAPI, PostgreSQL, Docker, React',
     text: (
@@ -91,8 +82,8 @@ export const projects = [
   {
     tag: 'Web',
     title: 'EsaticShare · Plateforme de ressources académiques',
-    role: 'Conception, architecture et développement · En service',
     url: 'https://esaticshare.vercel.app',
+    stack: 'FastAPI, SQLAlchemy, PostgreSQL, JWT, React, Vite',
     text: (
       <>
         Partage de documents de cours, devoirs et opportunités entre étudiants, avec un{' '}
@@ -119,10 +110,28 @@ export const experience = [
       </>
     ),
   },
+  {
+    date: 'Depuis juil. 2026',
+    title: 'Responsable production digitale & communication',
+    org: "A-LEX, Anciens du Lycée d'Excellence Alassane Ouattara (temps partiel, hybride)",
+    logo: '/files/logos/a-lex.png',
+    logoAlt: 'A-LEX',
+    text: (
+      <>
+        Développer l'image de marque d'A-LEX et assurer la communication interne et externe de
+        l'association. Missions :
+        <ul className="missions">
+          <li>Élaborer la stratégie de communication.</li>
+          <li>Concevoir les visuels, vidéos et supports de communication.</li>
+          <li>Concevoir les outils digitaux de gestion de l'association.</li>
+        </ul>
+      </>
+    ),
+  },
 ]
 
 export const education = [
-  { date: 'En cours', title: 'Master 2 Génie Logiciel', org: 'ESATIC, Abidjan' },
+  { date: 'En cours', title: 'Master 2 SIGL-ID2C · Systèmes Informatiques et Génie Logiciel, option Ingénierie Data et Cloud Computing', org: 'ESATIC, Abidjan' },
   { date: '2022 – 2025', title: "Licence Systèmes d'Information et Génie Logiciel", org: 'ESATIC, Abidjan' },
   { date: '2022', title: 'Baccalauréat série C', org: "Lycée d'excellence Alassane Ouattara" },
 ]
