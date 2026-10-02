@@ -1,127 +1,98 @@
-# Curriculum Vitae - Version Web
+# Portfolio · Christ-Phanuel DAGBO
 
-Un projet de CV interactif, initialement en HTML et CSS pur, désormais rendu avec React et Vite.
+Portfolio académique et professionnel de **Christ-Phanuel DAGBO**, étudiant en Master 2 SIGL-ID2C
+(Systèmes Informatiques et Génie Logiciel, option Ingénierie Data et Cloud Computing) à l'ESATIC,
+Abidjan.
 
-## 📋 Description
+Le site présente mon profil, mes travaux de recherche, mes projets et mon parcours, sur le modèle
+des pages personnelles de chercheurs.
 
-Ce projet est un curriculum vitae en ligne responsive qui présente de manière structurée et esthétique les informations professionnelles d'une personne. L'objectif était de créer une version web d'un CV en utilisant uniquement HTML et CSS, sans frameworks ni JavaScript.
+![Aperçu du portfolio](docs/apercu.jpg)
 
-## ✨ Fonctionnalités
+## Sections
 
-- **Structure sémantique** HTML5
-- **Mise en page moderne** avec Flexbox et CSS Grid
+- **À propos** : présentation, intérêts de recherche, contact
+- **Travaux de recherche** : publications et travaux en cours, avec lien vers le PDF
+- **Projets** : projets réalisés, lien vers le site et technologies utilisées
+- **Parcours** : expériences (avec le logo de la structure), formation, compétences,
+  certifications et langues
 
+La colonne de gauche (photo, titre, école, liens) reste visible pendant la lecture et défile au
+même rythme que la page.
 
-## 🗂️ Structure du projet
+## Fonctionnalités
+
+- **Responsive** : mise en page en deux colonnes sur ordinateur, une seule colonne sur tablette et
+  téléphone, testée de 320 px à 1280 px de large
+- **Traduction** : bouton de traduction dans la barre de navigation (français, anglais, japonais,
+  chinois, russe, espagnol, allemand), via Google Traduction
+- **Contenu séparé du code** : tout le texte du site est dans un seul fichier de données
+
+## Technologies
+
+- [React 19](https://react.dev) et [Vite](https://vite.dev)
+- CSS sans framework (Grid et Flexbox), dans `style.css`
+- Police [Lora](https://fonts.google.com/specimen/Lora) (Google Fonts) pour la colonne de gauche
+- Icônes en SVG intégrées directement dans le code, sans bibliothèque externe
+
+## Lancer le projet
+
+Prérequis : Node.js 20.19+ ou 22.12+ (exigé par Vite 8).
+
+```bash
+git clone https://github.com/dagbokady/00-Web-Curriculum-Vitae.git
+cd 00-Web-Curriculum-Vitae
+npm install
+npm run dev
+```
+
+Le site est alors disponible sur http://localhost:5173.
+
+| Commande          | Rôle                                           |
+| ----------------- | ---------------------------------------------- |
+| `npm run dev`     | Serveur de développement avec rechargement     |
+| `npm run build`   | Version de production dans `dist/`             |
+| `npm run preview` | Sert la version de production en local         |
+| `npm run lint`    | Vérifie le code avec ESLint                    |
+
+## Structure
 
 ```
-00-Web_Curriculum_Vitae/
-│
-├── index.html          # Point d'entrée Vite
-├── style.css           # Feuille de style principale
+00-Web-Curriculum-Vitae/
+├── index.html              # Page d'entrée (titre, favicon, police)
+├── style.css               # Tous les styles du site
 ├── src/
-│   ├── main.jsx        # Montage de l'application React
-│   ├── App.jsx         # Composants du CV
-│   └── data/cv.jsx     # Contenu du CV (expériences, projets, compétences…)
-├── files/             # Dossier des ressources
-├── README.md           # Ce fichier
-└── .gitignore          # Fichiers à ignorer par Git
+│   ├── main.jsx            # Montage de l'application React
+│   ├── App.jsx             # Composants : navigation, colonne de gauche, sections
+│   └── data/portfolio.jsx  # Contenu du site
+├── public/
+│   ├── favicon.png         # Favicon (photo circulaire)
+│   └── files/              # Photo, cadre, PDF de recherche, logos
+└── docs/apercu.jpg         # Capture utilisée dans ce README
 ```
 
-## 🛠️ Technologies utilisées
+## Modifier le contenu
 
-- **React 19 + Vite** : Rendu du CV à partir des données
-- **HTML5** : Structure sémantique du document
-- **CSS3** : Styles, mises en page et animations
-- **Flexbox & CSS Grid** : Mise en page moderne
-- **Google Fonts** : Typographie (Roboto)
-- **Font Awesome** : Icônes (via CDN)
+Tout se passe dans [`src/data/portfolio.jsx`](src/data/portfolio.jsx) :
 
-## 🚀 Comment utiliser
+| Export           | Contenu                                                   |
+| ---------------- | --------------------------------------------------------- |
+| `identity`       | Nom, photo, titre, logo de l'école, bio, liens            |
+| `about`          | Texte de présentation et intérêts de recherche            |
+| `research`       | Travaux de recherche (titre, lieu, année, liens)          |
+| `projects`       | Projets (étiquette, titre, lien, technologies, texte)     |
+| `experience`     | Expériences (date, poste, structure, logo, description)   |
+| `education`      | Formation                                                 |
+| `skills`         | Compétences par catégorie                                 |
+| `certifications` | Certifications avec lien de vérification                  |
+| `languages`      | Langues parlées                                           |
 
-1. **Cloner le projet** :
-   ```bash
-   git clone https://github.com/dagbokady/00-Web-Curriculum-Vitae.git
-   ```
+Les images (photo, logos) et le PDF se placent dans `public/files/` et s'appellent avec un chemin
+commençant par `/files/...`. Si le logo d'une expérience est introuvable, le nom de la structure
+s'affiche à la place.
 
-2. **Installer et lancer** :
-   ```bash
-   npm install
-   npm run dev
-   ```
-   Pour générer la version statique : `npm run build` (sortie dans `dist/`).
+## Contact
 
-3. **Modifier le contenu** :
-    - Éditer `src/data/cv.jsx` pour personnaliser les informations
-    - Modifier `style.css` pour changer le design
-
-## 📱 Sections du CV
-
-1. **En-tête** : Photo, nom et titre professionnel
-2. **Profil** : Description personnelle et objectifs
-3. **Expérience professionnelle** : Postes occupés avec dates
-4. **Formation** : Diplômes et études
-5. **Compétences** : Compétences techniques et professionnelles
-6. **Langues** : Langues parlées avec niveau
-7. **Centres d'intérêt** : Hobbies et activités
-
-
-## 🎨 image
-
-![image](files/img.png)
-
-
-### Modifier la typographie
-Changer les polices dans `style.css` :
-```css
-body {
-    font-family: Avenir, Helvetica, Arial, sans-serif
-}
-```
-
-### Ajouter une photo
-Placer votre photo dans `files` et l'ajouter dans `src/App.jsx`.
-
-## 📱 Responsive Design
-
-Le CV n'est pas encore responsive
-
-## 📝 Bonnes pratiques implémentées
-
-- Code HTML valide W3C
-- CSS organisé et commenté
-- Images optimisées
-- Accessibilité (attributs alt, contrastes)
-- Compatibilité cross-browser
-- Performance optimale
-
-## 🤝 Contribution
-
-Ce projet étant un exercice pédagogique, les suggestions d'amélioration sont les bienvenues :
-1. Forkez le projet
-2. Créez une branche pour votre fonctionnalité
-3. Committez vos changements
-4. Pushez vers la branche
-5. Ouvrez une Pull Request
-
-## 📄 Licence
-
-Projet éducatif - Libre de réutilisation et modification
-
-## 👨‍🎓 Contexte pédagogique
-
-Ce projet a été développé comme exercice pratique pour :
-- Maîtriser les bases du HTML/CSS
-- Comprendre le responsive design
-- Apprendre à structurer un projet web simple
-
-
-## ✉️ Contact
-
-Pour toute question ou retour sur ce projet :
-- Étudiant : DAGBO KADY CHRIST-PHANUEL
-- Email : dagbokady@gmail.com
-
----
-
-Dernière mise à jour : 23-01-2025
+- Email : [dagbokady@gmail.com](mailto:dagbokady@gmail.com)
+- GitHub : [dagbokady](https://github.com/dagbokady)
+- LinkedIn : [christ-phanuel-dagbo](https://linkedin.com/in/christ-phanuel-dagbo)
