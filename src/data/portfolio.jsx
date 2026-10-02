@@ -3,7 +3,6 @@ export const identity = {
   fullName: 'DAGBO Kady Christ-Phanuel',
   photo: '/files/photo.png',
   role: 'Étudiant-chercheur @ ESATIC',
-  school: 'École Supérieure Africaine des TIC',
   bio: "Master 2 Génie Logiciel. Recherche sur l'évaluation automatique de code et la montée en charge des systèmes de correction.",
   location: "Abidjan, Côte d'Ivoire",
   email: 'dagbokady@gmail.com',
@@ -77,7 +76,8 @@ export const projects = [
   {
     tag: 'SaaS',
     title: "CodEval · Plateforme d'évaluation pratique en programmation",
-    role: 'Product Owner & lead technique · GL Prime · En cours',
+    role: 'Product Owner & lead technique · En cours',
+    url: 'https://codeval.space',
     stack: 'FastAPI, PostgreSQL, Docker, React',
     text: (
       <>
@@ -92,34 +92,12 @@ export const projects = [
     tag: 'Web',
     title: 'EsaticShare · Plateforme de ressources académiques',
     role: 'Conception, architecture et développement · En service',
+    url: 'https://esaticshare.vercel.app',
     text: (
       <>
         Partage de documents de cours, devoirs et opportunités entre étudiants, avec un{' '}
         <strong>système de rôles et de permissions</strong> pour le dépôt, la modération et l'accès,
         et un travail sur la sécurité applicative (authentification, validation des fichiers).
-      </>
-    ),
-  },
-  {
-    tag: 'Studio',
-    title: 'GL Prime · Studio de création de produits numériques',
-    role: 'Product Owner & lead technique',
-    text: (
-      <>
-        Équipe organisée en pôles backend, frontend, UI/UX, cybersécurité, qualité et documentation.
-        Mise en place du workflow Git, des revues de pull requests, de la documentation d'API et du
-        découpage en sprints.
-      </>
-    ),
-  },
-  {
-    tag: 'Apprentissage',
-    title: '100 applications en 1 an',
-    role: 'Programme personnel · github.com/dagbokady',
-    text: (
-      <>
-        Applications web et mobile développées de bout en bout pour approfondir l'architecture
-        logicielle, les API sécurisées, les ORM, la gestion des tokens et les WAF.
       </>
     ),
   },
@@ -130,6 +108,8 @@ export const experience = [
     date: 'Avr. 2025 – Juin 2025',
     title: 'Stagiaire MOA & développeur full-stack',
     org: 'SUNU GROUP / SUNU DIGITECH',
+    logo: '/files/logos/sunu-digitech.jpg',
+    logoAlt: 'SUNU DigiTech',
     text: (
       <>
         Plateforme interne de gestion des commandes et des stocks : analyse des besoins et

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   identity,
   about,
@@ -18,7 +18,20 @@ const NAV = [
   { id: 'experience', label: 'Parcours' },
 ]
 
+// Langues proposées ; la traduction est faite par Google Traduction
+const LANGUAGES = [
+  { code: 'fr', label: 'Français' },
+  { code: 'en', label: 'English' },
+  { code: 'ja', label: '日本語' },
+  { code: 'zh-CN', label: '中文' },
+  { code: 'ru', label: 'Русский' },
+  { code: 'es', label: 'Español' },
+  { code: 'de', label: 'Deutsch' },
+]
+
 const ICONS = {
+  translate:
+    'M12.87 15.07 10.33 12.56l.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17A15.7 15.7 0 0 1 9 11.35 15.6 15.6 0 0 1 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04ZM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12Zm-2.62 7 1.62-4.33L19.12 17h-3.24Z',
   pin: 'M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z',
   mail: 'M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm9 7.2L4 7.3V17h16V7.3l-8 4.9ZM5.2 7 12 11.1 18.8 7H5.2Z',
   github:
@@ -48,28 +61,121 @@ function Section({ id, emoji, title, children }) {
   )
 }
 
+function currentLanguage() {
+  const match = document.cookie.match(/googtrans=\/fr\/([^;]+)/)
+  return match ? match[1] : 'fr'
+}
+
+// Google Traduction lit le cookie « googtrans » au chargement : on le règle puis on recharge.
+function setLanguage(code) {
+  const host = window.location.hostname
+  const expired = 'expires=Thu, 01 Jan 1970 00:00:00 GMT'
+  document.cookie = `googtrans=; path=/; ${expired}`
+  document.cookie = `googtrans=; path=/; domain=${host}; ${expired}`
+  document.cookie = `googtrans=; path=/; domain=.${host}; ${expired}`
+  if (code !== 'fr') document.cookie = `googtrans=/fr/${code}; path=/`
+  window.location.reload()
+}
+
+function useGoogleTranslate() {
+  useEffect(() => {
+    if (document.getElementById('google-translate-script')) return
+    window.googleTranslateElementInit = () => {
+      new window.google.translate.TranslateElement(
+        {
+          pageLanguage: 'fr',
+          includedLanguages: LANGUAGES.map((l) => l.code).join(','),
+          autoDisplay: false,
+        },
+        'google_translate_element',
+      )
+    }
+    const script = document.createElement('script')
+    script.id = 'google-translate-script'
+    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'
+    document.body.appendChild(script)
+  }, [])
+}
+
+function LanguagePicker() {
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+  const active = currentLanguage()
+  useGoogleTranslate()
+
+  useEffect(() => {
+    if (!open) return
+    const close = (e) => {
+      if (!ref.current?.contains(e.target)) setOpen(false)
+    }
+    document.addEventListener('click', close)
+    return () => document.removeEventListener('click', close)
+  }, [open])
+
+  return (
+    <div className="lang notranslate" ref={ref} translate="no">
+      <button
+        className="lang-button"
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+        aria-label="Traduire la page"
+        title="Traduire la page"
+      >
+        <Icon name="translate" />
+      </button>
+      {open && (
+        <ul className="lang-menu">
+          {LANGUAGES.map((lang) => (
+            <li key={lang.code}>
+              <button
+                className={lang.code === active ? 'active' : ''}
+                onClick={() => setLanguage(lang.code)}
+              >
+                {lang.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+      <div id="google_translate_element" hidden />
+    </div>
+  )
+}
+
 function TopNav() {
   return (
     <nav className="topnav">
       <div className="topnav-inner">
-        <a href="#top" className="brand">Accueil</a>
-        {NAV.map((item) => (
-          <a key={item.id} href={`#${item.id}`}>{item.label}</a>
-        ))}
+        <div className="topnav-links">
+          <a href="#top" className="brand">Accueil</a>
+          {NAV.map((item) => (
+            <a key={item.id} href={`#${item.id}`}>{item.label}</a>
+          ))}
+        </div>
+        <LanguagePicker />
       </div>
     </nav>
   )
 }
 
+// Affiche le nom en toutes lettres tant que le fichier du logo n'est pas présent
+function CompanyLogo({ src, name }) {
+  const [failed, setFailed] = useState(false)
+  if (failed) return <span className="logo-fallback">{name}</span>
+  return <img src={src} alt={name} onError={() => setFailed(true)} />
+}
+
 function Sidebar() {
   return (
     <aside className="sidebar">
-      <img className="avatar" src={identity.photo} alt={identity.name} />
+      <div className="avatar-wrap">
+        <img className="gold-frame" src="/files/cadre-dore.webp" alt="" aria-hidden="true" />
+        <img className="avatar" src={identity.photo} alt={identity.name} />
+      </div>
       <h1 className="name">{identity.name}</h1>
       <div className="role">{identity.role}</div>
-      <div className="school">
-        <span className="school-mark">ESATIC</span>
-        <span className="school-name">{identity.school}</span>
+      <div className="country">
+        Côte d'Ivoire
       </div>
       <p className="bio">{identity.bio}</p>
       <ul className="side-links">
@@ -155,7 +261,12 @@ function App() {
                 <li key={p.title} className="paper">
                   <span className="venue-tag">[{p.tag}]</span> <strong>{p.title}</strong>.{' '}
                   <span className="venue">{p.role}</span>.
-                  {p.stack && <span className="stack"> {p.stack}.</span>}
+                  {p.stack && <span className="stack"> {p.stack}.</span>}{' '}
+                  {p.url && (
+                    <a className="paper-link" href={p.url} target="_blank" rel="noreferrer">
+                      [{p.url.replace(/^https?:\/\//, '')}]
+                    </a>
+                  )}
                   <div className="project-text">{p.text}</div>
                 </li>
               ))}
@@ -166,10 +277,17 @@ function App() {
             <h3 className="sub-title">Expérience</h3>
             <ul className="timeline">
               {experience.map((e) => (
-                <li key={e.title}>
+                <li key={e.title} className="experience">
                   <span className="date-label">{e.date}</span>
-                  <div>
-                    <em>{e.title}</em>, {e.org}. {e.text}
+                  <div className="experience-row">
+                    <div className="experience-text">
+                      <em>{e.title}</em>, {e.org}. {e.text}
+                    </div>
+                    {e.logo && (
+                      <div className="experience-logo">
+                        <CompanyLogo src={e.logo} name={e.logoAlt} />
+                      </div>
+                    )}
                   </div>
                 </li>
               ))}
