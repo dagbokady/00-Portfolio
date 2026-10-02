@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4572d821-345b-4020-9ab0-16986b1318aa" name="Changes" comment="fix bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/portfolio.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/portfolio.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +39,65 @@
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="2.2005561718654425" />
+      <entry key="MS500" value="5.479846770914683" />
+      <entry key="S2" value="13.386130113091182" />
+      <entry key="S5" value="23.12878383830823" />
+      <entry key="S10" value="32.16761803557418" />
+      <entry key="S30" value="43.03246522790793" />
+      <entry key="S60" value="46.749388664058614" />
+      <entry key="M2" value="48.80286984372863" />
+      <entry key="M5" value="50.103208263092824" />
+      <entry key="M10" value="50.5485536106312" />
+      <entry key="M15" value="50.698353282957264" />
+      <entry key="M30" value="50.848834264261534" />
+      <entry key="H1" value="50.924331321777856" />
+      <entry key="H2" value="50.962144181232524" />
+      <entry key="H4" value="50.981066717314725" />
+      <entry key="D1" value="50.99684370630622" />
+      <entry key="W1" value="50.99954908261359" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="2.1549377629101025" />
+      <entry key="MS500" value="5.4450345107955584" />
+      <entry key="S2" value="13.35885004505492" />
+      <entry key="S5" value="23.083578721869543" />
+      <entry key="S10" value="32.110647517991055" />
+      <entry key="S30" value="42.993929918561065" />
+      <entry key="S60" value="46.72621265125523" />
+      <entry key="M2" value="48.7901488899132" />
+      <entry key="M5" value="50.097825479139956" />
+      <entry key="M10" value="50.54581116031621" />
+      <entry key="M15" value="50.696513484585786" />
+      <entry key="M30" value="50.84790857759949" />
+      <entry key="H1" value="50.923867024337945" />
+      <entry key="H2" value="50.961911668076766" />
+      <entry key="H4" value="50.98095036951412" />
+      <entry key="D1" value="50.996824302326615" />
+      <entry key="W1" value="50.99954631030585" />
+    </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -103,7 +159,7 @@
       <workItem from="1767437346504" duration="33000" />
       <workItem from="1767560510202" duration="3472000" />
       <workItem from="1769167566532" duration="412000" />
-      <workItem from="1790925816701" duration="3827000" />
+      <workItem from="1790925816701" duration="5010000" />
     </task>
     <task id="LOCAL-00001" summary="add experience and certifications">
       <option name="closed" value="true" />
