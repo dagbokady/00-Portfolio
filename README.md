@@ -1,6 +1,6 @@
 # Curriculum Vitae - Version Web
 
-Un projet de CV interactif développé en HTML et CSS pur, créé comme exercice pédagogique pour démontrer les bases du développement web front-end.
+Un projet de CV interactif, initialement en HTML et CSS pur, désormais rendu avec React et Vite.
 
 ## 📋 Description
 
@@ -17,8 +17,12 @@ Ce projet est un curriculum vitae en ligne responsive qui présente de manière 
 ```
 00-Web_Curriculum_Vitae/
 │
-├── index.html          # Page principale du CV
+├── index.html          # Point d'entrée Vite
 ├── style.css           # Feuille de style principale
+├── src/
+│   ├── main.jsx        # Montage de l'application React
+│   ├── App.jsx         # Composants du CV
+│   └── data/cv.jsx     # Contenu du CV (expériences, projets, compétences…)
 ├── files/             # Dossier des ressources
 ├── README.md           # Ce fichier
 └── .gitignore          # Fichiers à ignorer par Git
@@ -26,6 +30,7 @@ Ce projet est un curriculum vitae en ligne responsive qui présente de manière 
 
 ## 🛠️ Technologies utilisées
 
+- **React 19 + Vite** : Rendu du CV à partir des données
 - **HTML5** : Structure sémantique du document
 - **CSS3** : Styles, mises en page et animations
 - **Flexbox & CSS Grid** : Mise en page moderne
@@ -39,12 +44,15 @@ Ce projet est un curriculum vitae en ligne responsive qui présente de manière 
    git clone https://github.com/dagbokady/00-Web-Curriculum-Vitae.git
    ```
 
-2. **Ouvrir le fichier HTML** :
-    - Double-cliquer sur `index.html` ou
-    - Lancer avec un serveur local
+2. **Installer et lancer** :
+   ```bash
+   npm install
+   npm run dev
+   ```
+   Pour générer la version statique : `npm run build` (sortie dans `dist/`).
 
 3. **Modifier le contenu** :
-    - Éditer `index.html` pour personnaliser les informations
+    - Éditer `src/data/cv.jsx` pour personnaliser les informations
     - Modifier `style.css` pour changer le design
 
 ## 📱 Sections du CV
@@ -72,7 +80,7 @@ body {
 ```
 
 ### Ajouter une photo
-Placer votre photo dans `files` et mettre à jour le chemin dans `index.html`.
+Placer votre photo dans `files` et l'ajouter dans `src/App.jsx`.
 
 ## 📱 Responsive Design
 
