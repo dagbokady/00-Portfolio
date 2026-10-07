@@ -202,7 +202,9 @@ body { top: 0 !important; }
 .side-links a { color: #444; text-decoration: none; }
 .side-links a:hover { color: var(--link); text-decoration: underline; }
 .icon { width: 18px; height: 18px; flex: none; }
-.side-languages { list-style: none; padding: 0; margin: 2px 0 8px; color: #555; font-size: 11.25px; line-height: 1.5; }
+.side-languages { list-style: none; padding: 0; margin: 4px 0 6px; color: #555; font-size: 11.25px; line-height: 1.5; }
+.side-languages li { display: flex; align-items: center; gap: 7px; padding: 1px 0; }
+.flag { width: 18px; height: 12px; flex: none; border-radius: 2px; box-shadow: 0 0 0 1px rgba(0, 0, 0, .12); }
 .bio-line { display: block; }
 .bio-line + .bio-line { margin-top: 8px; }
 
@@ -498,6 +500,7 @@ a.paper-title:hover { color: var(--link); }
   .bio { text-align: center; max-width: 520px; margin-left: auto; margin-right: auto; }
   .avatar-wrap { margin: 0 auto; width: min(181px, 48vw); }
   .school-logo { margin: 4px auto 6px; }
+  .side-languages li { justify-content: center; }
   .side-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 18px; }
   .topnav-inner { justify-content: space-between; gap: 12px; padding: 0 20px; }
   .topnav-links { gap: 22px; }

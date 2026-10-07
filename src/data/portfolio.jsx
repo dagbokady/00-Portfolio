@@ -18,7 +18,11 @@ export const identity = {
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/christ-phanuel-dagbo', icon: 'linkedin' },
     { label: 'Recherche CodEval', href: '/recherche/codeval', icon: 'file' },
   ],
-  languages: ['Français (natif)', 'Anglais (B1)', 'Japonais (débutant)'],
+  languages: [
+    { label: 'Français (natif)', flag: 'fr' },
+    { label: 'Anglais (B1)', flag: 'gb' },
+    { label: 'Japonais (débutant)', flag: 'jp' },
+  ],
 }
 
 export const about = {

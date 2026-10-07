@@ -80,6 +80,40 @@ const ICONS = {
   ),
 }
 
+// Drapeaux dessinés en SVG : les émojis drapeaux ne s'affichent pas sous Windows
+const FLAGS = {
+  fr: (
+    <>
+      <rect width="10" height="20" fill="#002395" />
+      <rect x="10" width="10" height="20" fill="#fff" />
+      <rect x="20" width="10" height="20" fill="#ED2939" />
+    </>
+  ),
+  gb: (
+    <>
+      <rect width="30" height="20" fill="#012169" />
+      <path d="M0 0 30 20M30 0 0 20" stroke="#fff" strokeWidth="4" />
+      <path d="M0 0 30 20M30 0 0 20" stroke="#C8102E" strokeWidth="1.6" />
+      <path d="M15 0v20M0 10h30" stroke="#fff" strokeWidth="6" />
+      <path d="M15 0v20M0 10h30" stroke="#C8102E" strokeWidth="3.4" />
+    </>
+  ),
+  jp: (
+    <>
+      <rect width="30" height="20" fill="#fff" />
+      <circle cx="15" cy="10" r="6" fill="#BC002D" />
+    </>
+  ),
+}
+
+function Flag({ code }) {
+  return (
+    <svg className="flag" viewBox="0 0 30 20" aria-hidden="true">
+      {FLAGS[code]}
+    </svg>
+  )
+}
+
 function Icon({ name }) {
   return (
     <svg className="icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -237,13 +271,16 @@ function Sidebar() {
         <img className="avatar" src={identity.photo} alt={identity.name} />
       </div>
       <h1 className="name">{identity.name}</h1>
-      <ul className="side-languages">
-        {identity.languages.map((lang) => (
-          <li key={lang}>{lang}</li>
-        ))}
-      </ul>
       <div className="role">{identity.role}</div>
       <SchoolLogo src={identity.schoolLogo} />
+      <ul className="side-languages">
+        {identity.languages.map((lang) => (
+          <li key={lang.label}>
+            {lang.label}
+            <Flag code={lang.flag} />
+          </li>
+        ))}
+      </ul>
       <p className="bio">
         {identity.bio.map((line, i) => (
           <span key={i} className="bio-line">{line}</span>
