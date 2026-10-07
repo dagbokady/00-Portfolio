@@ -1,7 +1,7 @@
 // Page dédiée au mémoire de recherche CodEval : tout le texte du PDF, mis en page pour le web
 import { useEffect } from 'react'
 import { identity } from './data/portfolio.jsx'
-import { Table, Code } from './article.jsx'
+import { Table, Code, DocLayout, Cite } from './article.jsx'
 import {
   Fig11,
   Fig21,
@@ -46,7 +46,7 @@ function Research() {
   }, [])
 
   return (
-    <article className="research-page">
+    <DocLayout>
       <a className="back-link" href="/#research">← Retour au portfolio</a>
 
       <header className="r-header">
@@ -240,7 +240,7 @@ function Research() {
         <p>
           <strong>L'étude.</strong> Étude sur le thème des systèmes de correction automatique de
           code, appelés « online judges », réalisée par Szymon Wasik, Maciej Antczak, Jan Badura,
-          Artur Laskowski et Tomasz Sternal [1] et publiée en 2018 dans la revue ACM Computing
+          Artur Laskowski et Tomasz Sternal <Cite n={1} /> et publiée en 2018 dans la revue ACM Computing
           Surveys, pour dresser l'état de l'art de ces systèmes.
         </p>
         <p>
@@ -259,12 +259,12 @@ function Research() {
           <strong>Le système qu'ils ont construit.</strong> À partir de ce recensement, les auteurs
           définissent une procédure d'évaluation en trois étapes et la mettent en œuvre dans leur
           propre plateforme, Optil.io, présentée dans le même article comme l'online judge dont ils
-          sont les auteurs et sur lequel ils ont le plus de contrôle [1]. Pour chaque soumission, le
+          sont les auteurs et sur lequel ils ont le plus de contrôle <Cite n={1} />. Pour chaque soumission, le
           système collecte le code, le compile si nécessaire et vérifie que le binaire obtenu est
           exécutable ; il évalue ensuite ce binaire sur un ensemble de jeux de test dans un
           environnement d'exécution homogène et fiable, en vérifiant qu'il ne dépasse pas les
           limites de temps processeur, de mémoire vive et d'espace disque fixées ; il calcule enfin
-          les notes obtenues sur chaque jeu de test [1]. L'utilisateur dépose sa solution par une
+          les notes obtenues sur chaque jeu de test <Cite n={1} />. L'utilisateur dépose sa solution par une
           interface web, sous forme de code source dans l'un des langages supportés. La façon la
           plus simple d'organiser cette procédure est de l'appliquer à une soumission, puis de
           passer à la suivante : c'est le traitement séquentiel.
@@ -274,7 +274,7 @@ function Research() {
           seul processus parcourt les copies une par une. Pour chaque participation, il itère sur
           les exercices, compile le code, exécute les tests en sandbox, puis enregistre le résultat
           en base de données avant de passer à la copie suivante. Chaque réponse suit donc
-          exactement la procédure de Wasik et al. [1], et les réponses sont traitées l'une après
+          exactement la procédure de Wasik et al. <Cite n={1} />, et les réponses sont traitées l'une après
           l'autre.
         </p>
         <h4>2.1.2 Schéma d'architecture</h4>
@@ -294,18 +294,18 @@ function Research() {
             aussi interactif est cruciale, en particulier à l'approche de la date limite d'un
             concours, quand le nombre de soumissions augmente brutalement ; pour cette raison, ces
             systèmes sont déployés comme des services cloud de type PaaS et leur efficacité est
-            obtenue par une architecture qui exploite la concurrence et le traitement parallèle [1].
+            obtenue par une architecture qui exploite la concurrence et le traitement parallèle <Cite n={1} />.
           </li>
           <li>
             <strong>Précision de la mesure du temps</strong> : la limite de temps d'un jeu de test se
             compte souvent en millisecondes, et la méthode de mesure doit être assez sensible et
             déterministe pour distinguer d'aussi petites fractions de temps et rester reproductible
-            d'une exécution à l'autre [1].
+            d'une exécution à l'autre <Cite n={1} />.
           </li>
           <li>
             <strong>Sécurité de l'exécution</strong> : le système exécute du code écrit par les
             utilisateurs, et ses concepteurs doivent le rendre résistant à un large éventail
-            d'attaques [1].
+            d'attaques <Cite n={1} />.
           </li>
         </ul>
         <p>Limites de la transposition à CodEval :</p>
@@ -320,7 +320,7 @@ function Research() {
         <h4>2.2.1 Description</h4>
         <p>
           <strong>L'étude.</strong> Étude sur le thème de la performance des online judges sur les
-          machines multiprocesseurs, réalisée par Cheedoong Drung, Jianwen Wang et Ning Guo [8] et
+          machines multiprocesseurs, réalisée par Cheedoong Drung, Jianwen Wang et Ning Guo <Cite n={8} /> et
           présentée en 2011 à la conférence internationale EMEIT (IEEE), pour augmenter le nombre de
           corrections qu'une même machine peut traiter en même temps.
         </p>
@@ -339,14 +339,14 @@ function Research() {
         <p>
           <strong>Le système qu'ils ont construit.</strong> Les auteurs mettent en place un online
           judge fonctionnant dans un environnement SMP, dans lequel deux mécanismes sont ajoutés
-          [8]. Le premier est l'algorithme d'affinité : chaque programme d'utilisateur en cours
+          <Cite n={8} />. Le premier est l'algorithme d'affinité : chaque programme d'utilisateur en cours
           d'évaluation est attaché à un processeur, ce qui améliore la précision de la mesure de son
           temps de traitement. Le second est un dimensionnement fondé sur la théorie des files
           d'attente, qui fournit une analyse théorique des indicateurs de performance du système et
           permet de les améliorer. Avec ces mécanismes, les auteurs rapportent que la capacité
           moyenne de tâches corrigées simultanément augmente, que les verdicts rendus sont plus
           précis et que le nombre total d'ordinateurs nécessaires à l'online judge diminue, ce qui
-          réduit le coût matériel [8].
+          réduit le coût matériel <Cite n={8} />.
         </p>
         <p>
           <strong>Transposition à CodEval.</strong> La boucle séquentielle est remplacée par un pool
@@ -370,13 +370,13 @@ function Research() {
           <li>
             <strong>Le gain reste celui d'une seule machine</strong> : la capacité de correction
             simultanée augmente, mais elle reste bornée par le nombre de processeurs de la machine
-            SMP, et c'est précisément sur ce nombre de processeurs que repose le gain annoncé [8].
+            SMP, et c'est précisément sur ce nombre de processeurs que repose le gain annoncé <Cite n={8} />.
           </li>
           <li>
             <strong>La précision des verdicts n'est pas gratuite</strong> : corriger plusieurs
             programmes en même temps sur une même machine dégrade la mesure du temps d'exécution, et
             c'est pour corriger ce défaut que les auteurs doivent introduire l'algorithme d'affinité
-            [8].
+            <Cite n={8} />.
           </li>
         </ul>
         <p>Limites de la transposition à CodEval :</p>
@@ -392,7 +392,7 @@ function Research() {
         <p>
           <strong>L'étude.</strong> Étude sur le thème des courtiers de messages dans les
           architectures de microservices, réalisée par Ahmed Gamal Ibrahim, Rui Pedro Lopes, José
-          Rufino et Paulo Leitão [3] et présentée à la conférence OL2A 2025 (Springer), pour
+          Rufino et Paulo Leitão <Cite n={3} /> et présentée à la conférence OL2A 2025 (Springer), pour
           déterminer quel courtier assure une communication efficace, fiable et capable de monter en
           charge entre des services.
         </p>
@@ -418,13 +418,13 @@ function Research() {
           auteurs placent des services producteurs et consommateurs dans un environnement
           d'expérimentation standardisé et les font communiquer à travers chacun des quatre
           courtiers tour à tour, avec des clients écrits en Java (Spring Boot) et en Python, en
-          mesurant la latence, le débit, la capacité à monter en charge et la fiabilité [3]. Leurs
+          mesurant la latence, le débit, la capacité à monter en charge et la fiabilité <Cite n={3} />. Leurs
           résultats : Kafka offre de bonnes performances en traitement temps réel, avec une faible
           latence et une grande fiabilité ; ActiveMQ Artemis est fiable mais présente une latence
           nettement plus élevée ; RabbitMQ obtient une latence compétitive mais rencontre des
           difficultés lors des coupures réseau ; NATS, conçu pour la faible latence et le débit
           élevé, montre une excellente montée en charge et un excellent débit dans tous les
-          scénarios [3]. C'est donc le courtier, et non le principe de la file, qui détermine la
+          scénarios <Cite n={3} />. C'est donc le courtier, et non le principe de la file, qui détermine la
           latence et la fiabilité réellement obtenues.
         </p>
         <p>
@@ -436,7 +436,7 @@ function Research() {
           corrigent les copies en parallèle, puis écrivent les résultats dans la base partagée. Le
           courtier retenu est l'un des quatre comparés par l'étude ; la structure de l'architecture
           ne change pas d'un courtier à l'autre, seules la latence et la fiabilité mesurées varient
-          [3].
+          <Cite n={3} />.
         </p>
         <h4>2.3.2 Schéma d'architecture</h4>
         <p>
@@ -444,7 +444,7 @@ function Research() {
           producteurs et des services consommateurs, écrits en Java (Spring Boot) et en Python,
           communiquent uniquement par échange de messages à travers un courtier, dans un
           environnement d'expérimentation standardisé où sont mesurés la latence, le débit, la
-          montée en charge et la fiabilité [3]. Le bloc central est occupé tour à tour par Apache
+          montée en charge et la fiabilité <Cite n={3} />. Le bloc central est occupé tour à tour par Apache
           Kafka, ActiveMQ Artemis, RabbitMQ puis NATS : l'architecture est identique pour les quatre
           courtiers, seul le courtier placé au centre change d'une série de mesures à l'autre.
         </p>
@@ -462,11 +462,11 @@ function Research() {
           <li>
             <strong>Le comportement de l'architecture dépend entièrement du courtier retenu</strong> :
             la latence varie fortement d'un courtier à l'autre, ActiveMQ Artemis étant nettement plus
-            lent que les autres [3].
+            lent que les autres <Cite n={3} />.
           </li>
           <li>
             <strong>La fiabilité annoncée n'est pas acquise</strong> : RabbitMQ, malgré une latence
-            compétitive, rencontre des difficultés lors des coupures réseau [3], c'est-à-dire au
+            compétitive, rencontre des difficultés lors des coupures réseau <Cite n={3} />, c'est-à-dire au
             moment précis où la tolérance aux pannes est attendue d'une architecture à file de
             messages.
           </li>
@@ -490,7 +490,7 @@ function Research() {
         <h4>2.4.1 Description</h4>
         <p>
           <strong>L'étude.</strong> Étude sur le thème de la messagerie « serverless » à grande
-          échelle, réalisée par Juntao Ji, Yubao Fu, Rongtong Jin et Qingshan Lin [5] (Alibaba
+          échelle, réalisée par Juntao Ji, Yubao Fu, Rongtong Jin et Qingshan Lin <Cite n={5} /> (Alibaba
           Cloud) et présentée en 2025 dans la sélection industrielle de la conférence FSE (ACM), pour
           offrir un service de messages dont la capacité suit la croissance du trafic sans limite.
         </p>
@@ -510,13 +510,13 @@ function Research() {
           <strong>Le système qu'ils ont construit.</strong> Les auteurs ont construit, et exploitent
           commercialement sur Alibaba Cloud, une architecture de messagerie serverless bâtie sur
           Apache RocketMQ, au-dessus de laquelle ils ont réimplémenté les solutions de messagerie les
-          plus répandues : RabbitMQ, MQTT et Kafka [5]. Elle repose sur les éléments suivants :
+          plus répandues : RabbitMQ, MQTT et Kafka <Cite n={5} />. Elle repose sur les éléments suivants :
         </p>
         <ul>
           <li><strong>Séparation du stockage et du calcul.</strong> Une couche d'accès sans état reçoit les messages, quel que soit le protocole, et une couche de stockage distincte les conserve. Chaque couche grossit indépendamment de l'autre, ce qui convient à des charges imprévisibles.</li>
           <li><strong>Partitions d'écriture élastiques</strong>, qui suppriment la limite de débit d'une file unique.</li>
           <li><strong>Files légères</strong>, qui permettent d'avoir des millions de files avec un temps de démarrage à froid minimal.</li>
-          <li><strong>Un RabbitMQ reconstruit sur RocketMQ</strong>, pris comme cas d'étude parce que son architecture d'origine est difficile à faire monter en charge. Il reste compatible avec tous les clients open source et n'impose plus de limite de débit par file ; les auteurs annoncent des capacités de gestion des métadonnées de files et d'accumulation de messages supérieures de plus de 1 000 % à celles de RabbitMQ open source [5].</li>
+          <li><strong>Un RabbitMQ reconstruit sur RocketMQ</strong>, pris comme cas d'étude parce que son architecture d'origine est difficile à faire monter en charge. Il reste compatible avec tous les clients open source et n'impose plus de limite de débit par file ; les auteurs annoncent des capacités de gestion des métadonnées de files et d'accumulation de messages supérieures de plus de 1 000 % à celles de RabbitMQ open source <Cite n={5} />.</li>
         </ul>
         <p>
           <strong>Transposition à CodEval.</strong> La file n'est plus un serveur que l'établissement
@@ -540,15 +540,15 @@ function Research() {
         <ul>
           <li>
             <strong>Un service commercial, exploité par un fournisseur</strong> : l'architecture est
-            celle d'un produit d'Alibaba Cloud [5]. L'établissement ne l'installe pas, il la loue ;
+            celle d'un produit d'Alibaba Cloud <Cite n={5} />. L'établissement ne l'installe pas, il la loue ;
             la correction s'arrête si le service ou la connexion Internet tombe. La compatibilité
-            avec les clients open source revendiquée par les auteurs [5] réduit, sans l'éliminer, le
+            avec les clients open source revendiquée par les auteurs <Cite n={5} /> réduit, sans l'éliminer, le
             risque de verrouillage chez le fournisseur.
           </li>
           <li>
             <strong>Une échelle disproportionnée</strong> : le système est dimensionné pour des
             millions de files et pour des capacités d'accumulation plus de dix fois supérieures à
-            celles de RabbitMQ open source [5], alors qu'une campagne de CodEval produit quelques
+            celles de RabbitMQ open source <Cite n={5} />, alors qu'une campagne de CodEval produit quelques
             centaines de messages.
           </li>
         </ul>
@@ -590,7 +590,7 @@ function Research() {
             <strong>Contention sur la base de données (A et B)</strong> : lorsque plusieurs workers
             écrivent simultanément les résultats de correction, les verrous de PostgreSQL peuvent
             créer un goulot d'étranglement qui annule une partie du gain obtenu par le parallélisme.
-            Pantelic et al. [6] (Future Internet, 2026) montrent, dans un banc d'essai conteneurisé
+            Pantelic et al. <Cite n={6} /> (Future Internet, 2026) montrent, dans un banc d'essai conteneurisé
             sur un seul nœud, que les performances de la couche de persistance d'une architecture de
             microservices dépendent fortement de la composition de la charge et du niveau de
             concurrence : une base SQL indexée donne les meilleurs résultats sur les charges dominées
@@ -1485,7 +1485,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
 
         <h3>4.7 Mesure de l'architecture B (workers distribués via Redis)</h3>
         <p>
-          <strong>Pourquoi Redis et non l'un des quatre courtiers de l'étude.</strong> L'étude [3]
+          <strong>Pourquoi Redis et non l'un des quatre courtiers de l'étude.</strong> L'étude <Cite n={3} />
           qui fonde B compare Kafka, ActiveMQ Artemis, RabbitMQ et NATS, et désigne NATS. Le banc
           mesure pourtant B avec Redis, pour trois raisons. D'abord, le courtier n'est pas la
           variable étudiée : nous comparons des façons de distribuer le travail, pas des
@@ -1500,7 +1500,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
         </p>
         <p>
           Cette substitution a une conséquence à énoncer : les temps de B ne sont pas ceux qu'aurait
-          donnés NATS, et ils ne peuvent pas être rapportés aux mesures de l'étude [3], faites hors
+          donnés NATS, et ils ne peuvent pas être rapportés aux mesures de l'étude <Cite n={3} />, faites hors
           contexte éducatif et à des débits sans rapport avec une campagne de correction. Ils ne
           valent que dans la comparaison interne de ce mémoire.
         </p>
@@ -1673,7 +1673,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
         </p>
         <p>
           <strong>La loi de passage à l'échelle universelle.</strong> Ce plafond s'interprète avec la
-          loi proposée par Neil J. Gunther en 2007 [9], sous le nom de Universal Scalability Law.
+          loi proposée par Neil J. Gunther en 2007 <Cite n={9} />, sous le nom de Universal Scalability Law.
           Elle sert à répondre à une question de dimensionnement : jusqu'à combien de correcteurs
           vaut-il la peine d'aller ? Elle décrit le débit obtenu avec N correcteurs par
         </p>
@@ -1785,7 +1785,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           écart s'explique par plusieurs facteurs :
         </p>
         <ul>
-          <li><strong>Contention sur la base de données</strong> : les workers écrivent simultanément dans PostgreSQL. Même si chaque worker traite une participation différente, les transactions concurrentes introduisent des temps d'attente sur les verrous de table. Pantelic et al. [6] observent de même que les performances d'une base SQL se dégradent quand la charge est dominée par les écritures et que la concurrence augmente.</li>
+          <li><strong>Contention sur la base de données</strong> : les workers écrivent simultanément dans PostgreSQL. Même si chaque worker traite une participation différente, les transactions concurrentes introduisent des temps d'attente sur les verrous de table. Pantelic et al. <Cite n={6} /> observent de même que les performances d'une base SQL se dégradent quand la charge est dominée par les écritures et que la concurrence augmente.</li>
           <li><strong>Surcoût de la gestion du pool</strong> : la création et la synchronisation des processus consomment du temps, notamment pour les petits profils de charge où ce surcoût représente une fraction significative du temps total.</li>
           <li><strong>Saturation du processeur</strong> : à 80 % d'utilisation, le système d'exploitation doit gérer les changements de contexte entre processus, ce qui dégrade les performances.</li>
         </ul>
@@ -1795,7 +1795,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           accélération de 7,2 contre 6,6 pour le pool local. La différence provient de la répartition
           de la charge processeur sur deux serveurs : chaque nœud n'utilise que 42 % de son
           processeur, loin de la saturation. Ce résultat va dans le sens de la scalabilité
-          horizontale défendue par Ji et al. [5] : ajouter des nœuds est plus efficace que
+          horizontale défendue par Ji et al. <Cite n={5} /> : ajouter des nœuds est plus efficace que
           surcharger un seul serveur.
         </p>
 
@@ -1913,15 +1913,15 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
       <section id="references">
         <h2>Références bibliographiques</h2>
         <ol className="r-refs">
-          <li>S. Wasik, M. Antczak, J. Badura, A. Laskowski et T. Sternal, « A Survey on Online Judge Systems and Their Applications », <em>ACM Computing Surveys</em>, vol. 51, n° 1, 2018. DOI : <a href="https://doi.org/10.1145/3143560" target="_blank" rel="noreferrer">10.1145/3143560</a></li>
-          <li>P. Livaja Mušac, J. Nakić et A. Sović Kržić, « Automatic Assessment Tools for Grading Coding Assignments : A Systematic Literature Review », <em>Applied Sciences</em>, vol. 16, n° 11, p. 5658, 2026. DOI : <a href="https://doi.org/10.3390/app16115658" target="_blank" rel="noreferrer">10.3390/app16115658</a></li>
-          <li>A. G. Ibrahim, R. P. Lopes, J. Rufino et P. Leitão, « On the Impact of Message Brokers Implementations in the Choreography of Microservices », dans <em>Optimization, Learning Algorithms and Applications (OL2A 2025)</em>, Communications in Computer and Information Science, vol. 2617, Springer, 2025. DOI : <a href="https://doi.org/10.1007/978-3-032-00137-5_1" target="_blank" rel="noreferrer">10.1007/978-3-032-00137-5_1</a></li>
-          <li>B. Çiftçi et B. Çiloğlugil, « A Review of Comparative Studies on Performance Evaluation of Communication Mechanisms for Microservices », dans <em>Computational Science and Its Applications (ICCSA 2025)</em>, Lecture Notes in Computer Science, vol. 15650, Springer, 2025. DOI : <a href="https://doi.org/10.1007/978-3-031-96962-1_7" target="_blank" rel="noreferrer">10.1007/978-3-031-96962-1_7</a></li>
-          <li>J. Ji, Y. Fu, R. Jin et Q. Lin, « Designing for Scalability : Building a Universal Serverless Messaging Architecture with Apache RocketMQ », dans <em>Proceedings of the 33rd ACM International Conference on the Foundations of Software Engineering (FSE 2025)</em>, Industry Papers, ACM, 2025. DOI : <a href="https://doi.org/10.1145/3696630.3728536" target="_blank" rel="noreferrer">10.1145/3696630.3728536</a></li>
-          <li>N. Pantelic, L. Matic, L. Jakovljevic, S. Eric, M. Eric, M. Stefanović et A. Djordjevic, « Benchmarking SQL and NoSQL Persistence in Microservices Under Variable Workloads », <em>Future Internet</em>, vol. 18, n° 1, p. 53, 2026. DOI : <a href="https://doi.org/10.3390/fi18010053" target="_blank" rel="noreferrer">10.3390/fi18010053</a></li>
-          <li>H. Z. Došilović et I. Mekterović, « Robust and Scalable Online Code Execution System », dans <em>43rd International Convention on Information, Communication and Electronic Technology (MIPRO 2020)</em>, IEEE, p. 1627-1632, 2020. DOI : <a href="https://doi.org/10.23919/MIPRO48935.2020.9245310" target="_blank" rel="noreferrer">10.23919/MIPRO48935.2020.9245310</a></li>
-          <li>C. Drung, J. Wang et N. Guo, « Enhance Performance of Program Automatic Online Judging Systems Using Affinity Algorithm and Queuing Theory in SMP Environment », dans <em>Proceedings of the 2011 International Conference on Electronic &amp; Mechanical Engineering and Information Technology (EMEIT)</em>, IEEE, 2011. DOI : <a href="https://doi.org/10.1109/EMEIT.2011.6024016" target="_blank" rel="noreferrer">10.1109/EMEIT.2011.6024016</a></li>
-          <li>N. J. Gunther, <em>Guerrilla Capacity Planning : A Tactical Approach to Planning for Highly Scalable Applications and Services</em>, Springer, 2007. ISBN 978-3-540-26138-4. Loi de passage à l'échelle universelle, chapitre 4.</li>
+          <li id="ref-1">S. Wasik, M. Antczak, J. Badura, A. Laskowski et T. Sternal, « A Survey on Online Judge Systems and Their Applications », <em>ACM Computing Surveys</em>, vol. 51, n° 1, 2018. DOI : <a href="https://doi.org/10.1145/3143560" target="_blank" rel="noreferrer">10.1145/3143560</a></li>
+          <li id="ref-2">P. Livaja Mušac, J. Nakić et A. Sović Kržić, « Automatic Assessment Tools for Grading Coding Assignments : A Systematic Literature Review », <em>Applied Sciences</em>, vol. 16, n° 11, p. 5658, 2026. DOI : <a href="https://doi.org/10.3390/app16115658" target="_blank" rel="noreferrer">10.3390/app16115658</a></li>
+          <li id="ref-3">A. G. Ibrahim, R. P. Lopes, J. Rufino et P. Leitão, « On the Impact of Message Brokers Implementations in the Choreography of Microservices », dans <em>Optimization, Learning Algorithms and Applications (OL2A 2025)</em>, Communications in Computer and Information Science, vol. 2617, Springer, 2025. DOI : <a href="https://doi.org/10.1007/978-3-032-00137-5_1" target="_blank" rel="noreferrer">10.1007/978-3-032-00137-5_1</a></li>
+          <li id="ref-4">B. Çiftçi et B. Çiloğlugil, « A Review of Comparative Studies on Performance Evaluation of Communication Mechanisms for Microservices », dans <em>Computational Science and Its Applications (ICCSA 2025)</em>, Lecture Notes in Computer Science, vol. 15650, Springer, 2025. DOI : <a href="https://doi.org/10.1007/978-3-031-96962-1_7" target="_blank" rel="noreferrer">10.1007/978-3-031-96962-1_7</a></li>
+          <li id="ref-5">J. Ji, Y. Fu, R. Jin et Q. Lin, « Designing for Scalability : Building a Universal Serverless Messaging Architecture with Apache RocketMQ », dans <em>Proceedings of the 33rd ACM International Conference on the Foundations of Software Engineering (FSE 2025)</em>, Industry Papers, ACM, 2025. DOI : <a href="https://doi.org/10.1145/3696630.3728536" target="_blank" rel="noreferrer">10.1145/3696630.3728536</a></li>
+          <li id="ref-6">N. Pantelic, L. Matic, L. Jakovljevic, S. Eric, M. Eric, M. Stefanović et A. Djordjevic, « Benchmarking SQL and NoSQL Persistence in Microservices Under Variable Workloads », <em>Future Internet</em>, vol. 18, n° 1, p. 53, 2026. DOI : <a href="https://doi.org/10.3390/fi18010053" target="_blank" rel="noreferrer">10.3390/fi18010053</a></li>
+          <li id="ref-7">H. Z. Došilović et I. Mekterović, « Robust and Scalable Online Code Execution System », dans <em>43rd International Convention on Information, Communication and Electronic Technology (MIPRO 2020)</em>, IEEE, p. 1627-1632, 2020. DOI : <a href="https://doi.org/10.23919/MIPRO48935.2020.9245310" target="_blank" rel="noreferrer">10.23919/MIPRO48935.2020.9245310</a></li>
+          <li id="ref-8">C. Drung, J. Wang et N. Guo, « Enhance Performance of Program Automatic Online Judging Systems Using Affinity Algorithm and Queuing Theory in SMP Environment », dans <em>Proceedings of the 2011 International Conference on Electronic &amp; Mechanical Engineering and Information Technology (EMEIT)</em>, IEEE, 2011. DOI : <a href="https://doi.org/10.1109/EMEIT.2011.6024016" target="_blank" rel="noreferrer">10.1109/EMEIT.2011.6024016</a></li>
+          <li id="ref-9">N. J. Gunther, <em>Guerrilla Capacity Planning : A Tactical Approach to Planning for Highly Scalable Applications and Services</em>, Springer, 2007. ISBN 978-3-540-26138-4. Loi de passage à l'échelle universelle, chapitre 4.</li>
         </ol>
       </section>
 
@@ -2076,7 +2076,7 @@ CODEVAL_DATABASE_URL=postgresql+psycopg://codeval:codeval@localhost:5432/codeval
           </dd>
           <dt>Loi de passage à l'échelle universelle</dt>
           <dd>
-            Proposée par Gunther [9], elle décrit le débit obtenu avec N workers.
+            Proposée par Gunther <Cite n={9} />, elle décrit le débit obtenu avec N workers.
             <div className="r-formula">X(N) = λ·N / (1 + σ·(N − 1) + κ·N·(N − 1))</div>
             λ est le débit d'un seul worker, σ la part du travail qui reste sérialisée, κ le coût de
             la coordination entre workers, qui croît comme le nombre de paires. Les trois paramètres
@@ -2259,7 +2259,7 @@ ALTER TABLE correction_results
         </a>
         <a className="back-link" href="/#research">← Retour au portfolio</a>
       </div>
-    </article>
+    </DocLayout>
   )
 }
 

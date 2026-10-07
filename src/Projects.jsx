@@ -1,7 +1,7 @@
 // Pages détaillées des projets : contenu public de chaque projet (repris de son dépôt vitrine)
 import { useEffect } from 'react'
 import { identity } from './data/portfolio.jsx'
-import { Picture, Table, Code } from './article.jsx'
+import { Picture, Table, Code, DocLayout, Cite } from './article.jsx'
 import { CodevalArchitecture, CodevalLifecycle, CodevalWorkflow, EsaticShareArchitecture } from './diagrams/projects.jsx'
 
 const GITHUB_ICON = (
@@ -34,6 +34,52 @@ function ProjectLinks({ site, repo }) {
   )
 }
 
+// Liste numérotée des références ; chaque entrée est appelée dans le texte par <Cite n={…} />
+function References({ items }) {
+  return (
+    <section>
+      <h2>Références</h2>
+      <ol className="r-refs">
+        {items.map((ref, i) => (
+          <li key={i} id={`ref-${i + 1}`}>
+            {ref.text}
+            {ref.href && (
+              <>
+                {' '}
+                <a href={ref.href} {...(ref.href.startsWith('/') ? {} : { target: '_blank', rel: 'noreferrer' })}>
+                  {ref.href.startsWith('/') ? 'lire en ligne' : ref.href.replace(/^https?:\/\//, '')}
+                </a>
+              </>
+            )}
+          </li>
+        ))}
+      </ol>
+    </section>
+  )
+}
+
+const CODEVAL_REFS = [
+  { text: <>C.-P. Dagbo, « Montée en charge de la plateforme de correction automatique CodEval », mémoire de recherche, ESATIC, 2026.</>, href: '/recherche/codeval' },
+  { text: <>S. Wasik et al., « A Survey on Online Judge Systems and Their Applications », <em>ACM Computing Surveys</em>, vol. 51, n° 1, 2018.</>, href: 'https://doi.org/10.1145/3143560' },
+  { text: <>PostgreSQL, documentation de <code>SELECT</code> : clause de verrouillage <code>FOR UPDATE … SKIP LOCKED</code>.</>, href: 'https://www.postgresql.org/docs/current/sql-select.html#SQL-FOR-UPDATE-SHARE' },
+  { text: <>SQLAlchemy 2.0, documentation.</>, href: 'https://docs.sqlalchemy.org/en/20/' },
+  { text: <>FastAPI, documentation.</>, href: 'https://fastapi.tiangolo.com/' },
+  { text: <>Alembic, documentation des migrations.</>, href: 'https://alembic.sqlalchemy.org/' },
+  { text: <>N. J. Gunther, <em>Guerrilla Capacity Planning</em>, Springer, 2007, ISBN 978-3-540-26138-4 (loi de passage à l'échelle universelle).</> },
+  { text: <>IETF, RFC 7208 (SPF), RFC 6376 (DKIM) et RFC 7489 (DMARC).</>, href: 'https://www.rfc-editor.org/rfc/rfc7489' },
+]
+
+const ESATICSHARE_REFS = [
+  { text: <>OWASP, <em>File Upload Cheat Sheet</em> (contrôle du type réel des fichiers, liste blanche).</>, href: 'https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html' },
+  { text: <>IETF, RFC 6266 : utilisation de l'en-tête <code>Content-Disposition</code> en HTTP.</>, href: 'https://www.rfc-editor.org/rfc/rfc6266' },
+  { text: <>IETF, RFC 7519 : JSON Web Token (JWT).</>, href: 'https://www.rfc-editor.org/rfc/rfc7519' },
+  { text: <>IETF, RFC 6797 : HTTP Strict Transport Security (HSTS).</>, href: 'https://www.rfc-editor.org/rfc/rfc6797' },
+  { text: <>IETF, RFC 9309 : Robots Exclusion Protocol (<code>robots.txt</code>).</>, href: 'https://www.rfc-editor.org/rfc/rfc9309' },
+  { text: <>IETF, RFC 8292 : identification du serveur d'application pour le Web Push (VAPID).</>, href: 'https://www.rfc-editor.org/rfc/rfc8292' },
+  { text: <>FastAPI, documentation des WebSockets.</>, href: 'https://fastapi.tiangolo.com/advanced/websockets/' },
+  { text: <>MDN, applications web progressives (manifeste et Service Worker).</>, href: 'https://developer.mozilla.org/fr/docs/Web/Progressive_web_apps' },
+]
+
 function ProjectPage({ title, tagline, kicker, site, repo, children }) {
   useEffect(() => {
     const previous = document.title
@@ -42,7 +88,7 @@ function ProjectPage({ title, tagline, kicker, site, repo, children }) {
   }, [title])
 
   return (
-    <article className="research-page">
+    <DocLayout>
       <a className="back-link" href="/#projects">← Retour au portfolio</a>
       <header className="r-header">
         <div className="r-kicker">{kicker}</div>
@@ -59,7 +105,7 @@ function ProjectPage({ title, tagline, kicker, site, repo, children }) {
         <ProjectLinks site={site} repo={repo} />
         <a className="back-link" href="/#projects">← Retour au portfolio</a>
       </div>
-    </article>
+    </DocLayout>
   )
 }
 
@@ -183,7 +229,7 @@ export function CodEval() {
         <h3>Choix techniques</h3>
         <ul>
           <li><strong>Correction hors de l'API.</strong> Les campagnes de correction sont consommées par un worker distinct et réplicable, pour qu'une correction de 500 copies ne ralentisse pas les étudiants qui composent au même moment.</li>
-          <li><strong>Pas d'infrastructure superflue.</strong> Pas de Redis ni de RabbitMQ : la file de correction est une table PostgreSQL, et la réservation sans attente (<code>SKIP LOCKED</code>) suffit à faire coexister plusieurs workers.</li>
+          <li><strong>Pas d'infrastructure superflue.</strong> Pas de Redis ni de RabbitMQ : la file de correction est une table PostgreSQL, et la réservation sans attente (<code>SKIP LOCKED</code>) <Cite n={3} /> suffit à faire coexister plusieurs workers.</li>
           <li><strong>Idempotence.</strong> Le traitement est idempotent par (campagne, participation, exercice) : un worker tué en pleine correction reprend sans produire de doublon. Une relance crée une nouvelle campagne sans écraser l'historique.</li>
           <li><strong>Exécution de code non fiable isolée.</strong> Le code des étudiants s'exécute dans un bac à sable aux ressources limitées, derrière une interface <code>Sandbox</code> qui permet de changer de niveau d'isolation sans toucher au moteur de correction.</li>
           <li><strong>Intégrité des corrigés.</strong> Les bonnes réponses ne quittent jamais le serveur avant la publication des résultats : elles sont retirées de tout ce qui est envoyé à l'étudiant.</li>
@@ -211,7 +257,7 @@ export function CodEval() {
           Un banc de mesure reproductible appelle le vrai moteur de correction et le vrai bac à
           sable, sur un jeu de 500 copies générées avec une graine fixée (réponses correctes,
           partielles, erreurs de compilation, boucles infinies, copies vides). Ce travail est
-          détaillé dans le <a href="/recherche/codeval">mémoire de recherche</a>.
+          détaillé dans le <a href="/recherche/codeval">mémoire de recherche</a> <Cite n={1} />.
         </p>
         <Table
           rows={[
@@ -224,6 +270,7 @@ export function CodEval() {
           ]}
         />
         <p>
+          Le débit selon le nombre de workers est analysé avec la loi de Gunther <Cite n={7} />.
           Le banc a orienté la suite : le découpage fin des tâches est la prochaine évolution du
           moteur de correction.
         </p>
@@ -234,9 +281,9 @@ export function CodEval() {
         <ul>
           <li><strong>Tests d'intégration sur PostgreSQL</strong> (mêmes types et mêmes verrous qu'en production) couvrant le parcours complet : inscription, rôles, création d'une évaluation, ouverture de session, sauvegarde, soumission, gel, <strong>correction réelle avec compilation et exécution</strong>, ajustement tracé, relance d'une seconde campagne, export.</li>
           <li><strong>Lint</strong> ESLint côté frontend, build Vite vérifié.</li>
-          <li><strong>Migrations</strong> Alembic, attente de la base au démarrage, schéma reproductible sur base vide.</li>
+          <li><strong>Migrations</strong> Alembic <Cite n={6} />, attente de la base au démarrage, schéma reproductible sur base vide.</li>
           <li><strong>Déploiement</strong> conteneurisé (Docker), HTTPS, sauvegardes automatisées.</li>
-          <li><strong>E-mails</strong> transactionnels avec domaine authentifié (SPF / DKIM / DMARC).</li>
+          <li><strong>E-mails</strong> transactionnels avec domaine authentifié (SPF / DKIM / DMARC) <Cite n={8} />.</li>
         </ul>
       </section>
 
@@ -250,6 +297,8 @@ export function CodEval() {
           <li>Livrer un produit complet seul : modèle de données, API, interface, déploiement, e-mails, documentation.</li>
         </ul>
       </section>
+
+      <References items={CODEVAL_REFS} />
     </ProjectPage>
   )
 }
@@ -321,7 +370,7 @@ export function EsaticShare() {
         </ul>
         <h3>Insertion professionnelle</h3>
         <ul>
-          <li><strong>Veille automatique d'offres de stage et d'emploi</strong> : collecte depuis des sources ivoiriennes publiques, dans le respect de <code>robots.txt</code>, puis filtrage par pays et par filière tech. Rien n'est publié sans validation de l'admin.</li>
+          <li><strong>Veille automatique d'offres de stage et d'emploi</strong> : collecte depuis des sources ivoiriennes publiques, dans le respect de <code>robots.txt</code> <Cite n={5} />, puis filtrage par pays et par filière tech. Rien n'est publié sans validation de l'admin.</li>
           <li><strong>Annuaire des entreprises d'accueil</strong>, <strong>parrainage</strong> par les anciens (alumni).</li>
           <li><strong>Carte de membre</strong> numérique, exportable, avec une page publique partageable.</li>
         </ul>
@@ -360,7 +409,9 @@ export function EsaticShare() {
         <h2>Sécurité</h2>
         <p>
           Comme la plateforme stocke des données d'étudiants et des fichiers envoyés par les
-          utilisateurs, la sécurité fait partie du cahier des charges dès le départ :
+          utilisateurs, la sécurité fait partie du cahier des charges dès le départ. Les mesures
+          suivent les recommandations de l'OWASP <Cite n={1} /> et les RFC citées en références
+          <Cite n={2} /> <Cite n={3} /> <Cite n={4} /> :
         </p>
         <Table
           rows={[
@@ -396,7 +447,7 @@ export function EsaticShare() {
         <p>
           Un moteur de règles complet (prises obligatoires, rafles, promotion en dame), une file de
           matchmaking, un chronomètre côté serveur, des spectateurs, un chat et des réactions, le
-          tout en <strong>WebSocket</strong> avec FastAPI. En cas de déconnexion, l'abandon est{' '}
+          tout en <strong>WebSocket</strong> avec FastAPI <Cite n={7} />. En cas de déconnexion, l'abandon est{' '}
           <strong>différé</strong> pour laisser au joueur le temps de revenir. Les résultats
           alimentent un classement et un palmarès mensuel.
         </p>
@@ -464,6 +515,8 @@ export function EsaticShare() {
           ]}
         />
       </section>
+
+      <References items={ESATICSHARE_REFS} />
     </ProjectPage>
   )
 }
