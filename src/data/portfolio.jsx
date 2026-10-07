@@ -16,13 +16,13 @@ export const identity = {
   links: [
     { label: 'GitHub', href: 'https://github.com/dagbokady', icon: 'github' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/christ-phanuel-dagbo', icon: 'linkedin' },
-    { label: 'Recherche CodEval', href: '/recherche/codeval', icon: 'file' },
   ],
   languages: [
     { label: 'Français (natif)', flag: 'fr' },
     { label: 'Anglais (B1)', flag: 'gb' },
     { label: 'Japonais (débutant)', flag: 'jp' },
   ],
+  softSkills: ['Autonomie', 'Rigueur', "Esprit d'analyse", 'Communication', 'Travail en équipe', 'Gestion de projet'],
 }
 
 export const about = {

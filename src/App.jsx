@@ -273,6 +273,11 @@ function Sidebar() {
       <h1 className="name">{identity.name}</h1>
       <div className="role">{identity.role}</div>
       <SchoolLogo src={identity.schoolLogo} />
+      <p className="bio">
+        {identity.bio.map((line, i) => (
+          <span key={i} className="bio-line">{line}</span>
+        ))}
+      </p>
       <ul className="side-languages">
         {identity.languages.map((lang) => (
           <li key={lang.label}>
@@ -281,11 +286,12 @@ function Sidebar() {
           </li>
         ))}
       </ul>
-      <p className="bio">
-        {identity.bio.map((line, i) => (
-          <span key={i} className="bio-line">{line}</span>
+      <h2 className="side-title">Compétences transversales</h2>
+      <ul className="side-soft-skills">
+        {identity.softSkills.map((skill) => (
+          <li key={skill}>{skill}</li>
         ))}
-      </p>
+      </ul>
       <ul className="side-links">
         <li><Icon name="pin" />{identity.location}</li>
         <li>
@@ -398,18 +404,13 @@ function Home() {
             </ul>
 
             <h3 className="sub-title">Compétences</h3>
-            <div className="skills">
+            <ul className="topics">
               {skills.map((group) => (
-                <div key={group.name} className="skill-group">
-                  <h4>{group.name}</h4>
-                  <ul>
-                    {group.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
+                <li key={group.name}>
+                  <strong>{group.name}</strong> : {group.items.join(', ')}
+                </li>
               ))}
-            </div>
+            </ul>
 
             <h3 className="sub-title">Certifications</h3>
             <ul className="topics">
