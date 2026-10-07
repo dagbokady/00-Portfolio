@@ -47,8 +47,9 @@ function slugify(text) {
 }
 
 // Page détaillée avec une navigation fixe à gauche, construite à partir des titres de l'article :
-// les h2 donnent les entrées, les h3 de la partie en cours de lecture s'affichent en dessous
-export function DocLayout({ children }) {
+// les h2 donnent les entrées, les h3 de la partie en cours de lecture s'affichent en dessous.
+// `paper` met la page en forme comme un article scientifique (police à empattements, retraits)
+export function DocLayout({ paper, children }) {
   const ref = useRef(null)
   const [items, setItems] = useState([])
   const [active, setActive] = useState({ h2: null, h3: null })
@@ -77,9 +78,9 @@ export function DocLayout({ children }) {
       found.push({ id, label: h2.textContent, el: section, subs })
     })
 
-    // La partie active est la dernière dont le haut a dépassé le bas de la barre du haut
+    // La partie active est la dernière dont le titre a passé le premier quart de l'écran
     const spy = () => {
-      const line = 96
+      const line = Math.max(120, window.innerHeight / 4)
       let h2 = null
       let h3 = null
       for (const item of found) {
@@ -144,7 +145,7 @@ export function DocLayout({ children }) {
         </ol>
         <a className="doc-nav-top" href="#">↑ Haut de page</a>
       </nav>
-      <article className="research-page" ref={ref}>
+      <article className={`research-page${paper ? ' paper-style' : ''}`} ref={ref}>
         {children}
       </article>
     </div>

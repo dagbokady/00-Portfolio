@@ -463,6 +463,36 @@ a.paper-title:hover { color: var(--link); }
 .p-gallery .r-figure.narrow img { width: 100%; max-height: none; }
 .page-footer { max-width: 860px; margin: 0 auto 32px; padding-left: 24px; padding-right: 24px; }
 
+/* Pages détaillées : titres en couleur, retrait de première ligne, listes à retrait suspendu */
+:root { --title: #1d3f8f; }
+.research-page h2, .research-page h3, .research-page h4 { color: var(--title); }
+.research-page h2 { border-bottom-color: #d6deef; }
+.research-page section > p { text-indent: 1.5em; }
+.research-page section > :is(h2, h3, h4) + p,
+.research-page section > p:first-child { text-indent: 0; }
+.research-page section > :is(ul, ol) { padding-left: 2.4em; }
+.research-page section > ol > li::marker { content: "(" counter(list-item) ")\00a0\00a0"; }
+.research-page li { padding-left: 2px; }
+.r-num { display: inline-block; min-width: 2.6em; margin-right: .4em; }
+.r-refs { padding-left: 2.6em !important; }
+.research-page .r-refs > li::marker { content: "[" counter(list-item) "]\00a0\00a0"; color: var(--title); font-weight: 600; }
+
+/* Mémoire de recherche : mise en page d'article scientifique */
+.paper-style { font-family: 'Libertinus Serif', 'Lora', Georgia, serif; font-size: 16.5px; line-height: 1.5; }
+.paper-style :is(h2, h3, h4) { font-family: inherit; font-weight: 700; }
+.paper-style h2 { font-size: 23px; }
+.paper-style h3 { font-size: 19px; }
+.paper-style h4 { font-size: 17px; }
+.paper-style section > p, .paper-style li { text-align: justify; hyphens: auto; }
+.paper-style section > p { margin: 0 0 4px; }
+.paper-style .r-refs li { text-align: left; hyphens: none; }
+.paper-style section > p + :not(p) { margin-top: 12px; }
+.paper-style .r-figure figcaption, .paper-style .r-table figcaption, .paper-style .dg figcaption {
+  font-family: inherit; font-style: normal; font-weight: 700; color: #222; font-size: 15px;
+}
+.paper-style .r-table table { font-family: 'Source Sans 3', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; }
+.paper-style .r-toc, .paper-style .r-note, .paper-style .r-details { font-size: 15.5px; }
+
 /* Pages détaillées : navigation fixe à gauche */
 .doc-nav {
   position: sticky;
