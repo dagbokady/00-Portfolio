@@ -78,7 +78,7 @@ export const projects = [
       <>
         Les enseignants créent des évaluations, les étudiants composent dans un environnement
         contrôlé, et un worker corrige en exécutant le code (C, pseudo-code transpilé en Python) dans
-        une <strong>sandbox isolée</strong> contre des jeux de tests. Conçu, développé et déployé
+        une <strong>sandbox isolée</strong> contre des jeux de tests. Conçu, développé et déployé{' '}
         <strong>seul</strong>, de bout en bout. Objet de mon travail de recherche.
       </>
     ),
