@@ -18,7 +18,7 @@ export const identity = {
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/christ-phanuel-dagbo', icon: 'linkedin' },
     { label: 'Recherche CodEval', href: '/recherche/codeval', icon: 'file' },
   ],
-  languages: ['Français (natif)', 'Anglais (B1)'],
+  languages: ['Français (natif)', 'Anglais (B1)', 'Japonais (débutant)'],
 }
 
 export const about = {
@@ -78,8 +78,8 @@ export const projects = [
       <>
         Les enseignants créent des évaluations, les étudiants composent dans un environnement
         contrôlé, et un worker corrige en exécutant le code (C, pseudo-code transpilé en Python) dans
-        une <strong>sandbox isolée</strong> contre des jeux de tests. Équipe de 13 personnes en
-        sprints. Objet de mon travail de recherche.
+        une <strong>sandbox isolée</strong> contre des jeux de tests. Conçu, développé et déployé
+        <strong>seul</strong>, de bout en bout. Objet de mon travail de recherche.
       </>
     ),
   },

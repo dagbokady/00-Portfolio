@@ -1753,6 +1753,11 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
       {/* ---------------------------------------------------------------- */}
       <section id="chapitre-6">
         <h2>Chapitre 6 : Discussion</h2>
+        <aside className="r-note">
+          Les analyses de ce chapitre sont des projections : elles raisonnent à partir de la
+          structure des architectures et du comportement attendu de chacune, en attendant les
+          campagnes de mesure décrites au chapitre 4.
+        </aside>
         <p>
           Ce chapitre analyse les résultats présentés au chapitre 5, vérifie les hypothèses
           formulées au chapitre 1 et identifie les limites de l'étude.
