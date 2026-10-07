@@ -16,8 +16,9 @@ export const identity = {
   links: [
     { label: 'GitHub', href: 'https://github.com/dagbokady', icon: 'github' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/christ-phanuel-dagbo', icon: 'linkedin' },
-    { label: 'Recherche CodEval (PDF)', href: '/files/recherche-codeval.pdf', icon: 'file' },
+    { label: 'Recherche CodEval', href: '/recherche/codeval', icon: 'file' },
   ],
+  languages: ['Français (natif)', 'Anglais (B1)'],
 }
 
 export const about = {
@@ -60,7 +61,8 @@ export const research = [
       "Montée en charge de la plateforme de correction automatique CodEval : étude de quatre architectures de traitement et proposition d'une architecture fondée sur une file de tâches persistante en base de données",
     venue: 'Travail de recherche, ESATIC',
     year: '2026',
-    links: [{ label: 'pdf', href: '/files/recherche-codeval.pdf' }],
+    page: '/recherche/codeval',
+    links: [{ label: 'lire la recherche', href: '/recherche/codeval' }],
   },
 ]
 
@@ -69,6 +71,8 @@ export const projects = [
     tag: 'SaaS',
     title: "CodEval · Plateforme d'évaluation pratique en programmation",
     url: 'https://codeval.space',
+    repo: 'https://github.com/dagbokady/codevalpublic',
+    page: '/projets/codeval',
     stack: 'FastAPI, PostgreSQL, Docker, React',
     text: (
       <>
@@ -83,6 +87,8 @@ export const projects = [
     tag: 'Web',
     title: 'EsaticShare · Plateforme de ressources académiques',
     url: 'https://esaticshare.vercel.app',
+    repo: 'https://github.com/dagbokady/esaticshare',
+    page: '/projets/esaticshare',
     stack: 'FastAPI, SQLAlchemy, PostgreSQL, JWT, React, Vite',
     text: (
       <>
@@ -131,9 +137,9 @@ export const experience = [
 ]
 
 export const education = [
-  { date: 'En cours', title: 'Master 2 SIGL-ID2C · Systèmes Informatiques et Génie Logiciel, option Ingénierie Data et Cloud Computing', org: 'ESATIC, Abidjan' },
-  { date: '2022 – 2025', title: "Licence Systèmes d'Information et Génie Logiciel", org: 'ESATIC, Abidjan' },
-  { date: '2022', title: 'Baccalauréat série C', org: "Lycée d'excellence Alassane Ouattara" },
+  { date: 'En cours', title: 'Master 2 SIGL-ID2C · Systèmes Informatiques et Génie Logiciel, option Ingénierie Data et Cloud Computing', org: 'ESATIC, Abidjan', logo: '/files/logos/esatic.jpg', logoAlt: 'ESATIC' },
+  { date: '2022 – 2025', title: "Licence Systèmes d'Information et Génie Logiciel", org: 'ESATIC, Abidjan', logo: '/files/logos/esatic.jpg', logoAlt: 'ESATIC' },
+  { date: '2022', title: 'Baccalauréat série C', org: "Lycée d'excellence Alassane Ouattara", logo: '/files/logos/lycee-alassane-ouattara.png', logoAlt: "Lycée d'excellence Alassane Ouattara" },
 ]
 
 export const skills = [
@@ -149,5 +155,3 @@ export const certifications = [
   { title: 'React Native · Udemy', href: 'https://www.udemy.com/certificate/UC-a7fc0d81-e068-4c44-bc6d-cf562916ee62/' },
   { title: 'English · EF SET (B1)', href: 'https://cert.efset.org/fr/QjvCKh' },
 ]
-
-export const languages = 'Français (maternelle) · Anglais (B1) · Japonais (débutant)'

@@ -8,8 +8,9 @@ import {
   education,
   skills,
   certifications,
-  languages,
 } from './data/portfolio.jsx'
+import Research from './Research.jsx'
+import { CodEval, EsaticShare } from './Projects.jsx'
 
 const NAV = [
   { id: 'about', label: 'À propos' },
@@ -77,39 +78,6 @@ const ICONS = {
       <text x="12" y="17.5" textAnchor="middle" fontSize="6.2" fontWeight="700" fill="#fff" fontFamily="Arial, sans-serif">PDF</text>
     </>
   ),
-  person: (
-    <>
-      <circle cx="12" cy="12" r="11" fill="#E8F0FE" />
-      <circle cx="12" cy="9" r="3.8" fill="#1E4FA8" />
-      <path fill="#4285F4" d="M4.6 19.6c1.2-3.1 4-4.9 7.4-4.9s6.2 1.8 7.4 4.9A10.97 10.97 0 0 1 12 23a10.97 10.97 0 0 1-7.4-3.4Z" />
-    </>
-  ),
-  science: (
-    <>
-      <path fill="#E3F2FD" stroke="#90A4AE" strokeWidth="1" d="M9.5 2.5h5v6.6l5.7 9.3c.6 1-.1 2.1-1.2 2.1H5c-1.1 0-1.8-1.1-1.2-2.1l5.7-9.3V2.5Z" />
-      <path fill="#34A853" d="M7.1 14h9.8l3.3 4.4c.6 1-.1 2.1-1.2 2.1H5c-1.1 0-1.8-1.1-1.2-2.1L7.1 14Z" />
-      <circle cx="10" cy="17" r="1" fill="#C8E6C9" />
-      <circle cx="13.5" cy="18.3" r=".8" fill="#C8E6C9" />
-      <rect x="8.5" y="1.5" width="7" height="2" rx="1" fill="#1E4FA8" />
-    </>
-  ),
-  build: (
-    <>
-      <rect x="2.5" y="3.5" width="19" height="13" rx="1.5" fill="#1E4FA8" />
-      <rect x="4" y="5" width="16" height="10" rx=".5" fill="#E3F2FD" />
-      <path fill="none" stroke="#34A853" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" d="m9 8-2.2 2L9 12m6-4 2.2 2L15 12" />
-      <path fill="none" stroke="#FBBC04" strokeWidth="1.6" strokeLinecap="round" d="m12.8 7.5-1.6 5" />
-      <path fill="#90A4AE" d="M1 18h22l-1.2 2.2c-.2.4-.6.6-1 .6H3.2c-.4 0-.8-.2-1-.6L1 18Z" />
-    </>
-  ),
-  work: (
-    <>
-      <path fill="#5D4037" d="M9 3h6a2 2 0 0 1 2 2v2h-2V5H9v2H7V5a2 2 0 0 1 2-2Z" />
-      <rect x="2" y="7" width="20" height="14" rx="2" fill="#8D6E63" />
-      <rect x="2" y="11.5" width="20" height="2" fill="#6D4C41" />
-      <rect x="10" y="10.5" width="4" height="4" rx="1" fill="#FBBC04" />
-    </>
-  ),
 }
 
 function Icon({ name }) {
@@ -120,13 +88,10 @@ function Icon({ name }) {
   )
 }
 
-function Section({ id, icon, title, children }) {
+function Section({ id, title, children }) {
   return (
     <section id={id}>
-      <h2 className="section-title">
-        <span className="section-icon"><Icon name={icon} /></span>
-        {title}
-      </h2>
+      <h2 className="section-title">{title}</h2>
       {children}
     </section>
   )
@@ -213,14 +178,16 @@ function LanguagePicker() {
   )
 }
 
-function TopNav() {
+// Sur une page détaillée, les liens ramènent aux sections de la page d'accueil
+function TopNav({ home }) {
+  const base = home ? '' : '/'
   return (
     <nav className="topnav">
       <div className="topnav-inner">
         <div className="topnav-links">
-          <a href="#top" className="brand">Accueil</a>
+          <a href={`${base}#top`} className="brand">Accueil</a>
           {NAV.map((item) => (
-            <a key={item.id} href={`#${item.id}`}>{item.label}</a>
+            <a key={item.id} href={`${base}#${item.id}`}>{item.label}</a>
           ))}
         </div>
         <LanguagePicker />
@@ -282,22 +249,32 @@ function Sidebar() {
         {identity.links.map((link) => (
           <li key={link.href}>
             <Icon name={link.icon} />
-            <a href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
+            <a href={link.href} {...external(link.href)}>{link.label}</a>
           </li>
+        ))}
+      </ul>
+      <ul className="side-languages">
+        {identity.languages.map((lang) => (
+          <li key={lang}>{lang}</li>
         ))}
       </ul>
     </aside>
   )
 }
 
+// Les liens vers une autre page du site restent dans l'onglet courant
+function external(href) {
+  return href.startsWith('/') ? {} : { target: '_blank', rel: 'noreferrer' }
+}
+
 function Paper({ paper }) {
   return (
     <li className="paper">
       <span className="venue-tag">[{paper.tag}]</span> <strong>{paper.authors}</strong>.{' '}
-      <span className="paper-title">{paper.title}</span>.{' '}
+      <a className="paper-title" href={paper.page}>{paper.title}</a>.{' '}
       <span className="venue">{paper.venue}</span>, {paper.year}.{' '}
       {paper.links.map((link) => (
-        <a key={link.href} className="paper-link" href={link.href} target="_blank" rel="noreferrer">
+        <a key={link.href} className="paper-link" href={link.href} {...external(link.href)}>
           [{link.label}]
         </a>
       ))}
@@ -305,14 +282,14 @@ function Paper({ paper }) {
   )
 }
 
-function App() {
+function Home() {
   return (
     <>
-      <TopNav />
+      <TopNav home />
       <div className="layout" id="top">
         <Sidebar />
         <main className="content">
-          <Section id="about" icon="person" title="À propos">
+          <Section id="about" title="À propos">
             <p>{about.intro}</p>
             <p>{about.interests}</p>
             <ul className="topics">
@@ -327,7 +304,7 @@ function App() {
             </p>
           </Section>
 
-          <Section id="research" icon="science" title="Travaux de recherche">
+          <Section id="research" title="Travaux de recherche">
             <ol className="papers">
               {research.map((paper) => (
                 <Paper key={paper.title} paper={paper} />
@@ -335,14 +312,21 @@ function App() {
             </ol>
           </Section>
 
-          <Section id="projects" icon="build" title="Projets">
+          <Section id="projects" title="Projets">
             <ol className="papers">
               {projects.map((p) => (
                 <li key={p.title} className="paper">
-                  <span className="venue-tag">[{p.tag}]</span> <strong>{p.title}</strong>.{' '}
+                  <span className="venue-tag">[{p.tag}]</span>{' '}
+                  <a className="project-title" href={p.page}><strong>{p.title}</strong></a>.{' '}
+                  <a className="paper-link" href={p.page}>[détails]</a>
                   {p.url && (
                     <a className="paper-link" href={p.url} target="_blank" rel="noreferrer">
                       [{p.url.replace(/^https?:\/\//, '')}]
+                    </a>
+                  )}
+                  {p.repo && (
+                    <a className="paper-link" href={p.repo} target="_blank" rel="noreferrer">
+                      [dépôt public]
                     </a>
                   )}
                   {p.stack && <div className="stack">{p.stack}</div>}
@@ -352,7 +336,7 @@ function App() {
             </ol>
           </Section>
 
-          <Section id="experience" icon="work" title="Parcours">
+          <Section id="experience" title="Parcours">
             <h3 className="sub-title">Expérience</h3>
             <ul className="timeline">
               {experience.map((e) => (
@@ -377,7 +361,14 @@ function App() {
               {education.map((e) => (
                 <li key={e.title}>
                   <span className="date-label">{e.date}</span>
-                  <div><em>{e.title}</em>, {e.org}.</div>
+                  <div className="experience-row">
+                    <div className="experience-text">
+                      <em>{e.title}</em>, <strong>{e.org}</strong>.
+                    </div>
+                    <div className="experience-logo">
+                      <CompanyLogo src={e.logo} name={e.logoAlt} />
+                    </div>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -389,7 +380,7 @@ function App() {
               ))}
             </ul>
 
-            <h3 className="sub-title">Certifications & langues</h3>
+            <h3 className="sub-title">Certifications</h3>
             <ul className="topics">
               {certifications.map((c) => (
                 <li key={c.href}>
@@ -397,13 +388,31 @@ function App() {
                   <a className="paper-link" href={c.href} target="_blank" rel="noreferrer">[certificat]</a>
                 </li>
               ))}
-              <li>{languages}</li>
             </ul>
           </Section>
 
           <footer className="footer">© {new Date().getFullYear()} {identity.name}</footer>
         </main>
       </div>
+    </>
+  )
+}
+
+// Chaque page détaillée a sa propre adresse ; vercel.json renvoie ces adresses vers index.html
+const PAGES = {
+  '/recherche/codeval': Research,
+  '/projets/codeval': CodEval,
+  '/projets/esaticshare': EsaticShare,
+}
+
+function App() {
+  const Page = PAGES[window.location.pathname.replace(/\/+$/, '')]
+  if (!Page) return <Home />
+  return (
+    <>
+      <TopNav />
+      <Page />
+      <footer className="footer page-footer">© {new Date().getFullYear()} {identity.name}</footer>
     </>
   )
 }
