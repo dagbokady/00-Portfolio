@@ -4,13 +4,13 @@ export const identity = {
   photo: '/files/photo.png',
   role: 'Étudiant en Master 2 @ ESATIC',
   schoolLogo: '/files/logos/esatic.jpg',
-  bio: (
+  bio: [
     <>
-      Master 2 SIGL-ID2C : Systèmes Informatiques et <strong>Génie Logiciel</strong>, option{' '}
-      <strong>Ingénierie Data et Cloud Computing</strong>. Recherche sur l'évaluation automatique
-      de code et la montée en charge des systèmes de correction.
-    </>
-  ),
+      Master II <strong>Génie logiciel</strong> option{' '}
+      <strong>Ingénierie Data et Cloud Computing</strong>
+    </>,
+    "Recherche sur l'évaluation automatique de code et la montée en charge des systèmes de correction.",
+  ],
   location: "Abidjan, Côte d'Ivoire",
   email: 'dagbokady@gmail.com',
   links: [
@@ -136,10 +136,21 @@ export const experience = [
   },
 ]
 
+// Du plus ancien au plus récent : la frise se lit de gauche à droite, un logo par établissement
 export const education = [
-  { date: 'En cours', title: 'Master 2 SIGL-ID2C · Systèmes Informatiques et Génie Logiciel, option Ingénierie Data et Cloud Computing', org: 'ESATIC, Abidjan', logo: '/files/logos/esatic.jpg', logoAlt: 'ESATIC' },
-  { date: '2022 – 2025', title: "Licence Systèmes d'Information et Génie Logiciel", org: 'ESATIC, Abidjan', logo: '/files/logos/esatic.jpg', logoAlt: 'ESATIC' },
-  { date: '2022', title: 'Baccalauréat série C', org: "Lycée d'excellence Alassane Ouattara", logo: '/files/logos/lycee-alassane-ouattara.png', logoAlt: "Lycée d'excellence Alassane Ouattara" },
+  {
+    school: "Lycée d'excellence Alassane Ouattara",
+    logo: '/files/logos/lycee-alassane-ouattara.png',
+    items: [{ date: '2022', title: 'Baccalauréat série C' }],
+  },
+  {
+    school: 'ESATIC, Abidjan',
+    logo: '/files/logos/esatic.jpg',
+    items: [
+      { date: '2022 – 2025', title: "Licence Systèmes d'Information et Génie Logiciel" },
+      { date: 'En cours', title: 'Master II Génie logiciel, option Ingénierie Data et Cloud Computing' },
+    ],
+  },
 ]
 
 export const skills = [

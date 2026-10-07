@@ -1,7 +1,22 @@
 // Page dédiée au mémoire de recherche CodEval : tout le texte du PDF, mis en page pour le web
 import { useEffect } from 'react'
 import { identity } from './data/portfolio.jsx'
-import { Picture, Table, Code } from './article.jsx'
+import { Table, Code } from './article.jsx'
+import {
+  Fig11,
+  Fig21,
+  Fig22,
+  Fig23,
+  Fig24,
+  Fig31,
+  Fig32,
+  Fig33,
+  Fig34,
+  Fig35,
+  Fig36,
+  Fig41,
+  Fig42,
+} from './diagrams/research.jsx'
 
 const PDF = '/files/recherche-codeval.pdf'
 
@@ -22,16 +37,6 @@ const CONTENTS = [
   { id: 'annexes', label: 'Annexes A à E' },
   { id: 'glossaire', label: 'Glossaire, sigles et notations' },
 ]
-
-function Figure({ n, alt }) {
-  return (
-    <Picture
-      src={`/files/recherche/figure-${n.replace('.', '-')}.webp`}
-      alt={alt}
-      caption={`Figure ${n} - ${alt}`}
-    />
-  )
-}
 
 function Research() {
   useEffect(() => {
@@ -122,7 +127,7 @@ function Research() {
           des limites de temps et de mémoire pour garantir la sécurité du serveur. La figure 1.1
           présente l'architecture générale de la plateforme.
         </p>
-        <Figure n="1.1" alt="Architecture générale de la plateforme CodEval" />
+        <Fig11 />
         <p>
           L'enseignant crée une évaluation, rédige ses exercices avec leurs jeux de tests, puis ouvre
           une session pour sa classe. Les étudiants rédigent leurs réponses dans un environnement
@@ -273,7 +278,7 @@ function Research() {
           l'autre.
         </p>
         <h4>2.1.2 Schéma d'architecture</h4>
-        <Figure n="2.1" alt="Traitement séquentiel : organisation et déroulement" />
+        <Fig21 />
         <h4>2.1.3 Avantages</h4>
         <ul>
           <li><strong>Simplicité d'implémentation</strong> : aucune gestion de concurrence, pas de synchronisation entre processus.</li>
@@ -351,7 +356,7 @@ function Research() {
           manière indépendante, puis écrit ses résultats en base.
         </p>
         <h4>2.2.2 Schéma d'architecture</h4>
-        <Figure n="2.2" alt="Pool de processus local sur une machine multiprocesseur (architecture A), ici avec trois workers" />
+        <Fig22 />
         <h4>2.2.3 Avantages</h4>
         <ul>
           <li><strong>Accélération significative</strong> : le temps de correction est divisé par N, le nombre de workers, tant que le processeur n'est pas saturé.</li>
@@ -443,7 +448,7 @@ function Research() {
           Kafka, ActiveMQ Artemis, RabbitMQ puis NATS : l'architecture est identique pour les quatre
           courtiers, seul le courtier placé au centre change d'une série de mesures à l'autre.
         </p>
-        <Figure n="2.3" alt="Dispositif à courtier de messages mesuré par Ibrahim et al. (architecture B)" />
+        <Fig23 />
         <h4>2.3.3 Avantages</h4>
         <ul>
           <li><strong>Scalabilité horizontale</strong> : ajouter un serveur ajoute proportionnellement de la capacité de traitement. Le gain est quasi linéaire avec le nombre de workers.</li>
@@ -522,7 +527,7 @@ function Research() {
           écrites dans PostgreSQL.
         </p>
         <h4>2.4.2 Schéma d'architecture</h4>
-        <Figure n="2.4" alt="Messagerie serverless élastique et workers éphémères (architecture C)" />
+        <Fig24 />
         <h4>2.4.3 Avantages</h4>
         <ul>
           <li><strong>Élasticité complète</strong> : la capacité de correction passe de zéro à un grand nombre de workers selon la charge, sans intervention.</li>
@@ -655,7 +660,7 @@ function Research() {
           Chaque limite relevée au chapitre 2 devient une exigence que l'architecture proposée doit
           satisfaire. La figure 3.1 montre cette correspondance.
         </p>
-        <Figure n="3.1" alt="Traduction des limites des architectures étudiées en exigences de conception" />
+        <Fig31 />
 
         <h3>3.3 Principe de l'architecture proposée</h3>
         <h4>3.3.1 Ce que fait CodEval aujourd'hui</h4>
@@ -747,7 +752,7 @@ function Research() {
 
         <h3>3.4 Description de l'architecture</h3>
         <h4>3.4.1 Vue d'ensemble</h4>
-        <Figure n="3.2" alt="Vue d'ensemble de l'architecture proposée (P)" />
+        <Fig32 />
         <h4>3.4.2 Composants</h4>
         <p>L'architecture compte cinq éléments, dont un seul est nouveau.</p>
         <p>
@@ -796,7 +801,7 @@ function Research() {
           autres workers ont déjà fini. Avec un découpage par réponse et les tâches lourdes en tête
           de file, cette réponse lente démarre tôt et les réponses rapides comblent les trous.
         </p>
-        <Figure n="3.3" alt="Effet de la granularité sur l'équilibre de charge (c = copie, ex = exercice)" />
+        <Fig33 />
         <p>
           Une granularité plus fine a un coût : chaque tâche demande une réservation et une écriture
           en base. Pour l'amortir, un worker réserve et écrit ses tâches par lots de k, avec k valant
@@ -809,16 +814,16 @@ function Research() {
           les QCM, vrai/faux, correspondances et réponses courtes (comparaison directe).
         </p>
         <h4>3.4.4 Cycle de vie d'une tâche</h4>
-        <Figure n="3.4" alt="États d'une tâche de correction" />
+        <Fig34 />
         <p>
           Une tâche failed ne bloque pas la campagne : celle-ci se termine avec le statut partial,
           comme aujourd'hui quand <code>process_run</code> rencontre une exception sur un exercice.
           L'enseignant voit les réponses concernées et peut relancer une campagne.
         </p>
         <h4>3.4.5 Déroulement d'une campagne</h4>
-        <Figure n="3.5" alt="Séquence de traitement d'une campagne" />
+        <Fig35 />
         <h4>3.4.6 Déploiement</h4>
-        <Figure n="3.6" alt="Les deux modes de déploiement de l'architecture proposée" />
+        <Fig36 />
 
         <h3>3.5 Comparaison avec les architectures étudiées</h3>
         <Table
@@ -925,7 +930,7 @@ function Research() {
           <li><strong>La sonde d'API</strong> interroge l'API toutes les 200 millisecondes pendant la correction et note son temps de réponse.</li>
           <li><strong>L'horloge de référence</strong> est celle de PostgreSQL. Dans la base de test, chaque note enregistrée porte l'heure de son écriture. Toutes les durées en découlent, ce qui évite de comparer des horloges différentes.</li>
         </ul>
-        <Figure n="4.1" alt="Dispositif expérimental sur le poste de mesure" />
+        <Fig41 />
         <h4>4.1.4 Conditions de mesure</h4>
         <p>Avant chaque série de mesures :</p>
         <ol>
@@ -1251,7 +1256,7 @@ ALTER TABLE correction_results
           Une mesure correspond à un quadruplet (architecture, N, charge, répétition). Elle se
           déroule toujours selon les huit étapes de la figure 4.2.
         </p>
-        <Figure n="4.2" alt="Les huit étapes d'une mesure" />
+        <Fig42 />
         <p>
           Recréer la base avant chaque mesure garantit que toutes partent du même état, sans
           historique de campagnes ni cache de tables différents. Le worker démarre avant le

@@ -36,6 +36,8 @@ même rythme que la page.
 - CSS sans framework (Grid et Flexbox), dans `style.css`
 - Police [Lora](https://fonts.google.com/specimen/Lora) (Google Fonts) pour la colonne de gauche
 - Icônes en SVG intégrées directement dans le code, sans bibliothèque externe
+- [anime.js](https://animejs.com) pour les schémas animés des pages détaillées (traits qui se
+  dessinent, points qui circulent sur les flèches) et la frise de formation
 
 ## Lancer le projet
 

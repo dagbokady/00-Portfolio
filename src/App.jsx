@@ -5,11 +5,11 @@ import {
   research,
   projects,
   experience,
-  education,
   skills,
   certifications,
 } from './data/portfolio.jsx'
 import Research from './Research.jsx'
+import Education from './Education.jsx'
 import { CodEval, EsaticShare } from './Projects.jsx'
 
 const NAV = [
@@ -237,9 +237,18 @@ function Sidebar() {
         <img className="avatar" src={identity.photo} alt={identity.name} />
       </div>
       <h1 className="name">{identity.name}</h1>
+      <ul className="side-languages">
+        {identity.languages.map((lang) => (
+          <li key={lang}>{lang}</li>
+        ))}
+      </ul>
       <div className="role">{identity.role}</div>
       <SchoolLogo src={identity.schoolLogo} />
-      <p className="bio">{identity.bio}</p>
+      <p className="bio">
+        {identity.bio.map((line, i) => (
+          <span key={i} className="bio-line">{line}</span>
+        ))}
+      </p>
       <ul className="side-links">
         <li><Icon name="pin" />{identity.location}</li>
         <li>
@@ -251,11 +260,6 @@ function Sidebar() {
             <Icon name={link.icon} />
             <a href={link.href} {...external(link.href)}>{link.label}</a>
           </li>
-        ))}
-      </ul>
-      <ul className="side-languages">
-        {identity.languages.map((lang) => (
-          <li key={lang}>{lang}</li>
         ))}
       </ul>
     </aside>
@@ -356,23 +360,6 @@ function Home() {
               ))}
             </ul>
 
-            <h3 className="sub-title">Formation</h3>
-            <ul className="timeline">
-              {education.map((e) => (
-                <li key={e.title}>
-                  <span className="date-label">{e.date}</span>
-                  <div className="experience-row">
-                    <div className="experience-text">
-                      <em>{e.title}</em>, <strong>{e.org}</strong>.
-                    </div>
-                    <div className="experience-logo">
-                      <CompanyLogo src={e.logo} name={e.logoAlt} />
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-
             <h3 className="sub-title">Compétences</h3>
             <ul className="topics">
               {skills.map((s) => (
@@ -389,6 +376,9 @@ function Home() {
                 </li>
               ))}
             </ul>
+
+            <h3 className="sub-title">Formation</h3>
+            <Education />
           </Section>
 
           <footer className="footer">© {new Date().getFullYear()} {identity.name}</footer>

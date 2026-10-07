@@ -2,6 +2,7 @@
 import { useEffect } from 'react'
 import { identity } from './data/portfolio.jsx'
 import { Picture, Table, Code } from './article.jsx'
+import { CodevalArchitecture, CodevalLifecycle, CodevalWorkflow, EsaticShareArchitecture } from './diagrams/projects.jsx'
 
 const GITHUB_ICON = (
   <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -119,20 +120,7 @@ export function CodEval() {
       <section>
         <h2>Comment ça fonctionne</h2>
         <Picture src={`${CODEVAL_IMG}/fonctionnement.webp`} alt="Les quatre étapes : créer, composer, corriger, recevoir" caption="Les quatre étapes : créer, composer, corriger, recevoir" />
-        <Code>{`Enseignant                          Étudiant                     Système
-──────────                          ────────                     ───────
-crée l'évaluation
-  + exercices + jeux de tests
-programme la session  ────────────► voit l'épreuve à venir
-ouvre la session      ────────────► compose en plein écran
-                                    (sans exécution)
-                                    rend sa copie          ────► fige la production
-clôture (ou fin du temps)                                  ────► gèle toutes les copies
-lance la correction                                        ────► worker : compile,
-                                                                  exécute, note
-relit, ajuste, annote
-publie les résultats  ────────────► consulte sa copie corrigée
-exporte (Excel / CSV)`}</Code>
+        <CodevalWorkflow />
       </section>
 
       <section>
@@ -190,27 +178,8 @@ exporte (Excel / CSV)`}</Code>
 
       <section>
         <h2>Architecture</h2>
-        <Code>{`                 ┌────────────────────────┐
-  navigateur ───►│  React 19 + Vite (SPA) │  3 espaces : admin · enseignant · étudiant
-                 └───────────┬────────────┘
-                             │ REST + JWT
-                 ┌───────────▼────────────┐
-                 │   API FastAPI          │  autorisation à chaque requête,
-                 │   + planificateur      │  ouverture des sessions programmées
-                 └───────────┬────────────┘
-                             │
-                 ┌───────────▼────────────┐
-                 │     PostgreSQL 17      │  données + file de correction (une table)
-                 └───────────▲────────────┘
-                             │ SELECT … FOR UPDATE SKIP LOCKED
-                 ┌───────────┴──────────────┐
-                 │ Worker(s) de correction  │  compile, exécute en bac à sable, note
-                 │ réplicables              │
-                 └──────────────────────────┘`}</Code>
-        <h3>Cycle de vie d'une évaluation</h3>
-        <Code>{`draft ──► scheduled ──► running ──► closed ──► correcting ──► corrected ──► validated
-                                                    │
-                                                    └──► relance : nouvelle campagne numérotée`}</Code>
+        <CodevalArchitecture />
+        <CodevalLifecycle />
         <h3>Choix techniques</h3>
         <ul>
           <li><strong>Correction hors de l'API.</strong> Les campagnes de correction sont consommées par un worker distinct et réplicable, pour qu'une correction de 500 copies ne ralentisse pas les étudiants qui composent au même moment.</li>
@@ -372,21 +341,7 @@ export function EsaticShare() {
 
       <section>
         <h2>Architecture</h2>
-        <Code>{`Client : PWA (Vercel)                     API : FastAPI (Render)
-┌────────────────────────────┐   HTTPS / JWT   ┌─────────────────────────────────────┐
-│ React 19 + React Router 7  │ ──────────────► │ 26 routeurs REST + WebSocket (jeux) │
-│ Context API · Axios        │ ◄─ WebSocket ─► │ Couche services : permissions,      │
-├────────────────────────────┤                 │ élections, migration, veille,       │
-│ Service Worker             │ ◄─ Web Push ─── │ e-mails, push                       │
-│ Web Push · installation    │    (VAPID)      │ Tâches asyncio de fond              │
-└────────────────────────────┘                 │ Middlewares : CORS, sécurité, JSON  │
-                                               └──┬──────────┬──────────┬───────┬───┘
-                                                  ▼          ▼          ▼       ▼
-                                           PostgreSQL  Cloudflare R2  E-mails  Sources
-                                           SQLAlchemy  stockage S3    Brevo,   d'offres
-                                              2.0                     Mailjet, (flux
-                                                                      Resend,  publics)
-                                                                      SMTP`}</Code>
+        <EsaticShareArchitecture />
         <p>
           <strong>Organisation du backend</strong> : <code>routers/</code> (HTTP) →{' '}
           <code>services/</code> (règles métier) → <code>models/</code> (SQLAlchemy), avec{' '}
