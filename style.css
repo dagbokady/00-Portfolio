@@ -463,6 +463,40 @@ a.paper-title:hover { color: var(--link); }
 .p-gallery .r-figure.narrow img { width: 100%; max-height: none; }
 .page-footer { max-width: 860px; margin: 0 auto 32px; padding-left: 24px; padding-right: 24px; }
 
+/* Pages détaillées : navigation fixe à gauche */
+.doc-nav {
+  position: sticky;
+  top: 64px;
+  align-self: start;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  margin-top: 40px;
+  padding: 4px 4px 16px 0;
+  font-size: 13.16px;
+  line-height: 1.4;
+  scrollbar-width: thin;
+}
+.doc-nav-title { font-size: 12.29px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: var(--venue); margin-bottom: 10px; }
+.doc-nav ol { list-style: none; margin: 0; padding: 0; }
+.doc-nav li { margin: 0; }
+.doc-nav a { display: block; padding: 5px 10px; border-left: 2px solid var(--line); color: #555; text-decoration: none; }
+.doc-nav a:hover { color: var(--ink); background: #f7f8fa; }
+.doc-nav a.active { color: var(--link); border-left-color: var(--link); font-weight: 600; }
+.doc-nav ol ol a { padding-left: 22px; font-size: 12.29px; }
+.doc-nav-top { margin-top: 14px; border-left: 0 !important; font-size: 12.29px; color: var(--muted) !important; }
+.doc-nav { display: none; }
+/* Sur grand écran, la navigation remplace le sommaire et les schémas restent dans la colonne du texte */
+@media (min-width: 1101px) {
+  .doc-layout { display: grid; grid-template-columns: 250px minmax(0, 860px); gap: 48px; max-width: 1206px; margin: 0 auto; padding: 0 24px; }
+  .doc-layout .research-page { margin: 0; max-width: none; padding-left: 0; padding-right: 0; }
+  .doc-nav { display: block; }
+  .doc-layout .r-toc { display: none; }
+  .doc-layout .research-page .dg { width: 100%; margin-left: 0; }
+}
+.cite { text-decoration: none; white-space: nowrap; }
+.cite:hover { text-decoration: underline; }
+.r-refs li:target { background: #fff8e6; }
+
 /* Schémas animés (style trait fin sur fond beige) */
 :root { --dg-bg: #d9d5ce; --dg-box: #e8e4dd; --dg-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace; }
 .dg { margin: 24px 0 28px; }
