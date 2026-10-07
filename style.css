@@ -208,6 +208,13 @@ body { top: 0 !important; }
 .bio-line { display: block; }
 .bio-line + .bio-line { margin-top: 8px; }
 
+/* Compétences : une carte par catégorie */
+.skills { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin: 4px 0 16px; }
+.skill-group { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+.skill-group h4 { margin: 0 0 8px; font-size: 10.5px; text-transform: uppercase; letter-spacing: .6px; color: var(--venue); }
+.skill-group ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.skill-group li { padding: 2px 9px; border-radius: 999px; background: #f2f4f7; color: #333; font-size: 10.5px; }
+
 /* Formation : frise chronologique de gauche à droite */
 .edu-scroll { overflow-x: auto; margin: 8px 0 16px; }
 .edu { --edu-head: 92px; position: relative; display: flex; gap: 0; min-width: 540px; padding-bottom: 4px; }

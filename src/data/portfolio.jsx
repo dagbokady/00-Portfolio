@@ -28,32 +28,24 @@ export const identity = {
 export const about = {
   intro: (
     <>
-      Bonjour ! Je suis Christ-Phanuel DAGBO, étudiant en <strong>Master 2 SIGL-ID2C</strong>{' '}
-      (Systèmes Informatiques et <strong>Génie Logiciel</strong>, option{' '}
-      <strong>Ingénierie Data et Cloud Computing</strong>) à
-      l'École Supérieure Africaine des Technologies de l'Information et de la Communication
-      (<strong>ESATIC</strong>, Abidjan). Je suis <strong>ingénieur logiciel</strong> et mon métier est
-      de résoudre des problèmes : analyser un problème, comprendre les besoins réels, puis
-      concevoir des solutions logicielles <strong>fiables, performantes et orientées utilisateur</strong>. Je mène en
-      parallèle un travail de recherche sur la <strong>montée en charge des plateformes de
-      correction automatique de programmes</strong> : comment répartir la correction de centaines
-      de copies entre plusieurs correcteurs, sur un ou plusieurs serveurs, sans perdre de travail
-      en cas de panne.
+      Bonjour ! Je suis Christ-Phanuel DAGBO, <strong>ingénieur logiciel</strong> et étudiant en{' '}
+      <strong>Master II Génie logiciel</strong>, option{' '}
+      <strong>Ingénierie Data et Cloud Computing</strong>, à l'<strong>ESATIC</strong> (Abidjan).
+      J'analyse les besoins réels et je conçois des solutions logicielles{' '}
+      <strong>fiables, performantes et orientées utilisateur</strong>.
     </>
   ),
   interests: (
     <>
-      Mes intérêts de recherche portent sur les systèmes qui exécutent et notent du code à grande
-      échelle, et sur la manière de les faire passer à l'échelle sans les rendre difficiles à
-      exploiter :
+      Ma recherche porte sur la{' '}
+      <strong>montée en charge des plateformes de correction automatique de programmes</strong> :
     </>
   ),
   topics: [
-    'Évaluation automatique de programmes (online judges, correction par tests)',
-    'Montée en charge et parallélisme : intra-nœud, inter-nœuds, loi universelle de passage à l\'échelle',
-    'Files de tâches persistantes en base de données et tolérance aux pannes',
-    'Exécution de code isolée (sandbox, limites de temps et de mémoire)',
-    "Ingénierie logicielle au service de l'éducation, en contexte à ressources limitées",
+    'Évaluation automatique de programmes (correction par tests)',
+    "Parallélisme et passage à l'échelle, sur un ou plusieurs serveurs",
+    'Files de tâches persistantes et tolérance aux pannes',
+    'Exécution de code isolée (sandbox)',
   ],
 }
 
@@ -104,6 +96,7 @@ export const projects = [
   },
 ]
 
+// Réalisations et résultats plutôt que missions
 export const experience = [
   {
     date: 'Avr. 2025 – Juin 2025',
@@ -113,10 +106,19 @@ export const experience = [
     logoAlt: 'SUNU DigiTech',
     text: (
       <>
-        Plateforme interne de gestion des commandes et des stocks : analyse des besoins et
-        modélisation <strong>UML</strong>, API REST en <strong>Java / Spring Boot</strong> et
-        PostgreSQL, authentification JWT et contrôle d'accès par rôle, interfaces{' '}
-        <strong>React</strong> / Tailwind CSS, conteneurisation <strong>Docker</strong>.
+        Livré une <strong>plateforme interne de gestion des commandes et des stocks</strong>, de
+        l'analyse des besoins à la mise en conteneur :
+        <ul className="missions">
+          <li>Besoins recueillis auprès du métier et modélisés en <strong>UML</strong>.</li>
+          <li>
+            API REST <strong>Java / Spring Boot</strong> sur PostgreSQL, sécurisée par JWT et
+            contrôle d'accès par rôle.
+          </li>
+          <li>
+            Interfaces <strong>React</strong> / Tailwind CSS ; application conteneurisée avec{' '}
+            <strong>Docker</strong>.
+          </li>
+        </ul>
       </>
     ),
   },
@@ -128,12 +130,15 @@ export const experience = [
     logoAlt: 'A-LEX',
     text: (
       <>
-        Développer l'image de marque d'A-LEX et assurer la communication interne et externe de
-        l'association. Missions :
         <ul className="missions">
-          <li>Élaborer la stratégie de communication.</li>
-          <li>Concevoir les visuels, vidéos et supports de communication.</li>
-          <li>Concevoir les outils digitaux de gestion de l'association.</li>
+          <li>
+            Conçu et mis en ligne le <strong>site des élections</strong> de l'association : vote et
+            présentation des candidats, puis organigramme du Bureau exécutif élu.
+          </li>
+          <li>
+            Publié les <strong>appels à candidature des commissions</strong>, avec envoi de la
+            candidature en un clic par WhatsApp.
+          </li>
         </ul>
       </>
     ),
@@ -158,12 +163,12 @@ export const education = [
 ]
 
 export const skills = [
-  { name: 'Langages', list: 'Java, Python, JavaScript, C, C++, Scala, SQL' },
-  { name: 'Backend', list: 'FastAPI, Spring Boot, API REST, JWT' },
-  { name: 'Frontend & mobile', list: 'React, React Native, Tailwind CSS' },
-  { name: 'Données', list: 'PostgreSQL, modélisation, ORM' },
-  { name: 'Systèmes', list: 'Docker, Linux, CI/CD, sandbox, files de tâches' },
-  { name: 'Recherche', list: 'Bancs de mesure reproductibles, bootstrap, Mann-Whitney, loi de Gunther' },
+  { name: 'Langages', items: ['Java', 'Python', 'JavaScript', 'C', 'C++', 'Scala', 'SQL'] },
+  { name: 'Backend', items: ['FastAPI', 'Spring Boot', 'API REST', 'JWT'] },
+  { name: 'Frontend & mobile', items: ['React', 'React Native', 'Tailwind CSS'] },
+  { name: 'Données', items: ['PostgreSQL', 'Modélisation', 'ORM'] },
+  { name: 'Systèmes', items: ['Docker', 'Linux', 'CI/CD', 'Sandbox', 'Files de tâches'] },
+  { name: 'Recherche', items: ['Bancs de mesure reproductibles', 'Bootstrap', 'Mann-Whitney', 'Loi de Gunther'] },
 ]
 
 export const certifications = [

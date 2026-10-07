@@ -398,11 +398,18 @@ function Home() {
             </ul>
 
             <h3 className="sub-title">Compétences</h3>
-            <ul className="topics">
-              {skills.map((s) => (
-                <li key={s.name}><em>{s.name}</em> : {s.list}</li>
+            <div className="skills">
+              {skills.map((group) => (
+                <div key={group.name} className="skill-group">
+                  <h4>{group.name}</h4>
+                  <ul>
+                    {group.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
 
             <h3 className="sub-title">Certifications</h3>
             <ul className="topics">
