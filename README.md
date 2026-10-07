@@ -12,8 +12,10 @@ des pages personnelles de chercheurs.
 ## Sections
 
 - **À propos** : présentation, intérêts de recherche, contact
-- **Travaux de recherche** : publications et travaux en cours, avec lien vers le PDF
-- **Projets** : projets réalisés, lien vers le site et technologies utilisées
+- **Travaux de recherche** : publications et travaux en cours ; chaque travail a sa propre page
+  détaillée (`/recherche/codeval`), avec le PDF à télécharger en fin de page
+- **Projets** : projets réalisés ; chaque projet a sa propre page détaillée (`/projets/...`), avec
+  le lien vers le site et vers le dépôt public
 - **Parcours** : expériences (avec le logo de la structure), formation, compétences,
   certifications et langues
 
