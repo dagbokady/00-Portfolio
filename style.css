@@ -489,7 +489,8 @@ a.paper-title:hover { color: var(--link); }
 .paper-style section > p { margin: 0 0 4px; }
 .paper-style .r-refs li { text-align: left; hyphens: none; }
 .paper-style section > p + :not(p) { margin-top: 12px; }
-.paper-style .r-figure figcaption, .paper-style .r-table figcaption, .paper-style .dg figcaption {
+.paper-style .r-figure figcaption, .paper-style .r-table figcaption, .paper-style .dg-i18n { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.dg figcaption {
   font-family: inherit; font-style: normal; font-weight: 700; color: #222; font-size: 15px;
 }
 .paper-style .r-table table { font-family: 'Source Sans 3', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; }
@@ -549,7 +550,7 @@ a.paper-title:hover { color: var(--link); }
 
 /* Schémas animés (style trait fin sur fond beige) */
 :root { --dg-bg: #d9d5ce; --dg-box: #e8e4dd; --dg-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace; }
-.dg { margin: 24px 0 28px; }
+.dg { position: relative; margin: 24px 0 28px; }
 .research-page .dg {
   width: min(1000px, calc(100vw - 32px));
   margin-left: calc(50% - min(500px, 50vw - 16px));

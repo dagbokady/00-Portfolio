@@ -139,8 +139,36 @@ export function Bar({ x, y, w, h = 36, label, slow, idle, start }) {
   )
 }
 
+// Google Traduction ne traduit pas le texte des SVG : chaque libellé est recopié dans un bloc
+// HTML invisible placé à côté du schéma, puis la traduction de ce bloc est reportée dans le SVG
+function useSvgTranslation(svgRef, mirrorRef) {
+  useEffect(() => {
+    if (!/googtrans=\/fr\/(?!fr)/.test(document.cookie)) return
+    const pairs = [...svgRef.current.querySelectorAll('text')].map((text) => {
+      const span = document.createElement('div')
+      span.textContent = text.textContent
+      mirrorRef.current.appendChild(span)
+      return [text, span, text.textContent]
+    })
+    const sync = () => pairs.forEach(([text, span, original]) => {
+      const translated = span.textContent.trim()
+      if (translated && translated !== original && text.textContent !== translated) text.textContent = translated
+    })
+    const observer = new MutationObserver(sync)
+    observer.observe(mirrorRef.current, { childList: true, subtree: true, characterData: true })
+    const mirror = mirrorRef.current
+    return () => {
+      observer.disconnect()
+      pairs.forEach(([text, , original]) => { text.textContent = original })
+      mirror.replaceChildren()
+    }
+  }, [svgRef, mirrorRef])
+}
+
 export function Diagram({ h, w = 1000, caption, children, minWidth = 720 }) {
   const ref = useRef(null)
+  const mirrorRef = useRef(null)
+  useSvgTranslation(ref, mirrorRef)
 
   useEffect(() => {
     const root = ref.current
@@ -235,6 +263,7 @@ export function Diagram({ h, w = 1000, caption, children, minWidth = 720 }) {
         </svg>
       </div>
       {caption && <figcaption>{caption}</figcaption>}
+      <div className="dg-i18n" ref={mirrorRef} aria-hidden="true" />
     </figure>
   )
 }

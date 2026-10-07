@@ -129,8 +129,10 @@ export function DocLayout({ paper, children }) {
               <a href={`#${item.id}`} className={item.id === active.h2 && !active.h3 ? 'active' : ''}>
                 {item.label}
               </a>
-              {item.id === active.h2 && item.subs.length > 0 && (
-                <ol>
+              {/* Toutes les sous-parties sont dans la page dès le départ (masquées hors de la partie
+                  active) pour que Google Traduction les traduise avec le reste */}
+              {item.subs.length > 0 && (
+                <ol hidden={item.id !== active.h2}>
                   {item.subs.map((sub) => (
                     <li key={sub.id}>
                       <a href={`#${sub.id}`} className={sub.id === active.h3 ? 'active' : ''}>
