@@ -370,7 +370,7 @@ a.paper-title:hover { color: var(--link); }
 .r-author { color: #444; }
 .r-toc {
   background: #f7f8fa;
-  border-left: 3px solid var(--link);
+  border-left: 3px solid var(--title);
   padding: 16px 20px;
   margin-bottom: 40px;
 }
@@ -463,6 +463,57 @@ a.paper-title:hover { color: var(--link); }
 .p-gallery .r-figure.narrow img { width: 100%; max-height: none; }
 .page-footer { max-width: 860px; margin: 0 auto 32px; padding-left: 24px; padding-right: 24px; }
 
+/* Pages détaillées : titres en couleur, retrait de première ligne, listes à retrait suspendu */
+:root { --title: var(--venue); }
+.research-page h2, .research-page h3, .research-page h4 { color: var(--title); }
+.research-page h2 { border-bottom-color: #efd3d4; }
+.research-page section > p { text-indent: 1.5em; }
+.research-page section > :is(h2, h3, h4) + p,
+.research-page section > p:first-child { text-indent: 0; }
+.research-page section > :is(ul, ol) { padding-left: 2.4em; }
+.research-page section > ol > li::marker { content: "(" counter(list-item) ")\00a0\00a0"; }
+.research-page li { padding-left: 2px; }
+.r-num { display: inline-block; min-width: 2.6em; margin-right: .4em; }
+.r-refs { padding-left: 2.6em !important; }
+.research-page .r-refs > li::marker { content: "[" counter(list-item) "]\00a0\00a0"; color: var(--title); font-weight: 600; }
+
+/* Mémoire de recherche : mise en page d'article scientifique */
+.paper-style .r-header, .paper-style .r-header p { text-align: center !important; }
+.paper-style .r-header h1 { font-family: inherit; font-size: 30px; }
+.paper-style { font-family: 'Libertinus Serif', 'Lora', Georgia, serif; font-size: 16.5px; line-height: 1.5; }
+.paper-style :is(h2, h3, h4) { font-family: inherit; font-weight: 700; }
+.paper-style h2 { font-size: 23px; }
+.paper-style h3 { font-size: 19px; }
+.paper-style h4 { font-size: 17px; }
+.paper-style section > p, .paper-style li { text-align: justify; hyphens: auto; }
+.paper-style section > p { margin: 0 0 4px; }
+.paper-style .r-refs li { text-align: left; hyphens: none; }
+.paper-style section > p + :not(p) { margin-top: 12px; }
+.paper-style .r-figure figcaption, .paper-style .r-table figcaption, .paper-style .dg-i18n { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.dg figcaption {
+  font-family: inherit; font-style: normal; font-weight: 700; color: #222; font-size: 15px;
+}
+.paper-style .r-table table { font-family: 'Source Sans 3', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; }
+.paper-style .r-toc, .paper-style .r-note, .paper-style .r-details { font-size: 15.5px; }
+
+/* Très grand écran : le mémoire passe sur deux colonnes, comme un article imprimé.
+   Les titres de partie, figures, tableaux et blocs de code occupent toute la largeur,
+   ce qui découpe le texte en blocs courts qu'on lit sans remonter loin */
+@media (min-width: 1600px) {
+  .doc-layout:has(.paper-style) { grid-template-columns: 260px minmax(0, 1240px); max-width: 1600px; }
+  .paper-style section { column-count: 2; column-gap: 44px; column-rule: 1px solid var(--line); }
+  .paper-style section > :is(h2, h3, figure, .r-figure, .r-table, .r-code, .r-formula, .dg, .r-details, .r-question, .r-note, .p-gallery, table, pre, div, aside, blockquote, dl) {
+    column-span: all;
+  }
+  .paper-style section > h3 { margin-top: 24px; }
+  .paper-style section > h4 { break-after: avoid; }
+  /* Un sous-titre suivi d'une figure ou d'un tableau reste collé au-dessus, sur toute la largeur */
+  .paper-style section > h4:has(+ :is(figure, .r-figure, .r-table, .r-code, .dg, div, table, pre)) { column-span: all; }
+  .paper-style section > :is(p, li, ul, ol) { orphans: 3; widows: 3; }
+  .paper-style section > :is(ul, ol) > li { break-inside: avoid; }
+  .paper-style .r-header, .paper-style .back-link { column-span: all; }
+}
+
 /* Pages détaillées : navigation fixe à gauche */
 .doc-nav {
   position: sticky;
@@ -481,7 +532,7 @@ a.paper-title:hover { color: var(--link); }
 .doc-nav li { margin: 0; }
 .doc-nav a { display: block; padding: 5px 10px; border-left: 2px solid var(--line); color: #555; text-decoration: none; }
 .doc-nav a:hover { color: var(--ink); background: #f7f8fa; }
-.doc-nav a.active { color: var(--link); border-left-color: var(--link); font-weight: 600; }
+.doc-nav a.active { color: var(--title); border-left-color: var(--title); font-weight: 600; }
 .doc-nav ol ol a { padding-left: 22px; font-size: 12.29px; }
 .doc-nav-top { margin-top: 14px; border-left: 0 !important; font-size: 12.29px; color: var(--muted) !important; }
 .doc-nav { display: none; }
@@ -499,7 +550,7 @@ a.paper-title:hover { color: var(--link); }
 
 /* Schémas animés (style trait fin sur fond beige) */
 :root { --dg-bg: #d9d5ce; --dg-box: #e8e4dd; --dg-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace; }
-.dg { margin: 24px 0 28px; }
+.dg { position: relative; margin: 24px 0 28px; }
 .research-page .dg {
   width: min(1000px, calc(100vw - 32px));
   margin-left: calc(50% - min(500px, 50vw - 16px));

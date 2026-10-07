@@ -46,7 +46,7 @@ function Research() {
   }, [])
 
   return (
-    <DocLayout>
+    <DocLayout paper>
       <a className="back-link" href="/#research">← Retour au portfolio</a>
 
       <header className="r-header">
@@ -117,7 +117,7 @@ function Research() {
       <section id="chapitre-1">
         <h2>Chapitre 1 : Contexte et problématique</h2>
 
-        <h3>1.1 Évaluation automatique et CodEval</h3>
+        <h3><span className="r-num">1.1</span> Évaluation automatique et CodEval</h3>
         <p>
           CodEval se présente sous la forme d'une application web composée de trois briques
           principales : une <strong>API</strong> construite avec le framework FastAPI, qui gère les
@@ -144,7 +144,7 @@ function Research() {
           d'exécution, chacun pesant ses points dans le total de l'exercice.
         </p>
 
-        <h3>1.2 Problématique de la charge de travail</h3>
+        <h3><span className="r-num">1.2</span> Problématique de la charge de travail</h3>
         <p>
           Aujourd'hui, le worker de CodEval traite les copies de manière strictement séquentielle :
           pour chaque participation, il itère sur les exercices un par un, compile, exécute et note
@@ -183,7 +183,7 @@ function Research() {
           chercher à le distribuer.
         </p>
 
-        <h3>1.3 Question de recherche et hypothèses</h3>
+        <h3><span className="r-num">1.3</span> Question de recherche et hypothèses</h3>
         <blockquote className="r-question">
           Jusqu'à quel point l'architecture actuelle de CodEval peut-elle absorber une charge
           croissante de copies, et quelles modifications dans l'organisation du traitement
@@ -235,8 +235,8 @@ function Research() {
           identifiés.
         </p>
 
-        <h3>2.1 Traitement séquentiel (architecture actuelle)</h3>
-        <h4>2.1.1 Description</h4>
+        <h3><span className="r-num">2.1</span> Traitement séquentiel (architecture actuelle)</h3>
+        <h4><span className="r-num">2.1.1</span> Description</h4>
         <p>
           <strong>L'étude.</strong> Étude sur le thème des systèmes de correction automatique de
           code, appelés « online judges », réalisée par Szymon Wasik, Maciej Antczak, Jan Badura,
@@ -277,16 +277,16 @@ function Research() {
           exactement la procédure de Wasik et al. <Cite n={1} />, et les réponses sont traitées l'une après
           l'autre.
         </p>
-        <h4>2.1.2 Schéma d'architecture</h4>
+        <h4><span className="r-num">2.1.2</span> Schéma d'architecture</h4>
         <Fig21 />
-        <h4>2.1.3 Avantages</h4>
+        <h4><span className="r-num">2.1.3</span> Avantages</h4>
         <ul>
           <li><strong>Simplicité d'implémentation</strong> : aucune gestion de concurrence, pas de synchronisation entre processus.</li>
           <li><strong>Facilité de débogage</strong> : l'exécution est déterministe et les erreurs sont reproductibles dans l'ordre.</li>
           <li><strong>Infrastructure minimale</strong> : un seul serveur suffit, sans composant supplémentaire.</li>
           <li><strong>Idempotence naturelle</strong> : une copie déjà corrigée est simplement ignorée à la prochaine itération.</li>
         </ul>
-        <h4>2.1.4 Limites</h4>
+        <h4><span className="r-num">2.1.4</span> Limites</h4>
         <p>Limites que les auteurs énoncent eux-mêmes sur ce type de système :</p>
         <ul>
           <li>
@@ -316,8 +316,8 @@ function Research() {
           <li><strong>Non scalable</strong> : impossible d'accélérer le traitement sans changer d'architecture.</li>
         </ul>
 
-        <h3>2.2 Parallélisme sur une machine : pool de processus local (architecture A)</h3>
-        <h4>2.2.1 Description</h4>
+        <h3><span className="r-num">2.2</span> Parallélisme sur une machine : pool de processus local (architecture A)</h3>
+        <h4><span className="r-num">2.2.1</span> Description</h4>
         <p>
           <strong>L'étude.</strong> Étude sur le thème de la performance des online judges sur les
           machines multiprocesseurs, réalisée par Cheedoong Drung, Jianwen Wang et Ning Guo <Cite n={8} /> et
@@ -355,16 +355,16 @@ function Research() {
           nombre de cœurs CPU disponibles. Chaque worker du pool corrige une copie complète de
           manière indépendante, puis écrit ses résultats en base.
         </p>
-        <h4>2.2.2 Schéma d'architecture</h4>
+        <h4><span className="r-num">2.2.2</span> Schéma d'architecture</h4>
         <Fig22 />
-        <h4>2.2.3 Avantages</h4>
+        <h4><span className="r-num">2.2.3</span> Avantages</h4>
         <ul>
           <li><strong>Accélération significative</strong> : le temps de correction est divisé par N, le nombre de workers, tant que le processeur n'est pas saturé.</li>
           <li><strong>Déploiement simple</strong> : aucune infrastructure supplémentaire requise, pas de file de messages ni de serveur additionnel.</li>
           <li><strong>Modifications limitées</strong> : seule la boucle de traitement est modifiée, le reste du code reste inchangé.</li>
           <li><strong>Isolation des processus</strong> : chaque worker s'exécute dans son propre processus, limitant l'impact d'un arrêt brutal à une seule copie.</li>
         </ul>
-        <h4>2.2.4 Limites</h4>
+        <h4><span className="r-num">2.2.4</span> Limites</h4>
         <p>Limites qui découlent du système décrit par les auteurs :</p>
         <ul>
           <li>
@@ -387,8 +387,8 @@ function Research() {
           <li><strong>Pas de scalabilité horizontale</strong> : impossible d'ajouter de la capacité au-delà des ressources d'un seul serveur.</li>
         </ul>
 
-        <h3>2.3 Workers distribués autour d'un courtier de messages (architecture B)</h3>
-        <h4>2.3.1 Description</h4>
+        <h3><span className="r-num">2.3</span> Workers distribués autour d'un courtier de messages (architecture B)</h3>
+        <h4><span className="r-num">2.3.1</span> Description</h4>
         <p>
           <strong>L'étude.</strong> Étude sur le thème des courtiers de messages dans les
           architectures de microservices, réalisée par Ahmed Gamal Ibrahim, Rui Pedro Lopes, José
@@ -438,7 +438,7 @@ function Research() {
           ne change pas d'un courtier à l'autre, seules la latence et la fiabilité mesurées varient
           <Cite n={3} />.
         </p>
-        <h4>2.3.2 Schéma d'architecture</h4>
+        <h4><span className="r-num">2.3.2</span> Schéma d'architecture</h4>
         <p>
           Le schéma ci-dessous reproduit le dispositif mis en place par les auteurs : des services
           producteurs et des services consommateurs, écrits en Java (Spring Boot) et en Python,
@@ -449,14 +449,14 @@ function Research() {
           courtiers, seul le courtier placé au centre change d'une série de mesures à l'autre.
         </p>
         <Fig23 />
-        <h4>2.3.3 Avantages</h4>
+        <h4><span className="r-num">2.3.3</span> Avantages</h4>
         <ul>
           <li><strong>Scalabilité horizontale</strong> : ajouter un serveur ajoute proportionnellement de la capacité de traitement. Le gain est quasi linéaire avec le nombre de workers.</li>
           <li><strong>Tolérance aux pannes</strong> : si un worker tombe en panne, ses tâches non acquittées sont remises dans la file et reprises par un autre worker. La correction continue sans interruption.</li>
           <li><strong>Élasticité</strong> : des workers peuvent être lancés ou arrêtés dynamiquement en fonction de la charge.</li>
           <li><strong>Découplage</strong> : l'API et les workers sont indépendants. L'API peut accepter de nouvelles campagnes même si les workers sont temporairement saturés.</li>
         </ul>
-        <h4>2.3.4 Limites</h4>
+        <h4><span className="r-num">2.3.4</span> Limites</h4>
         <p>Limites établies par l'étude elle-même :</p>
         <ul>
           <li>
@@ -486,8 +486,8 @@ function Research() {
           <li><strong>Modifications significatives du code</strong> : l'intégration d'une file de messages nécessite de repenser la logique de lancement des corrections et la gestion du cycle de vie des tâches.</li>
         </ul>
 
-        <h3>2.4 Messagerie serverless élastique (architecture C)</h3>
-        <h4>2.4.1 Description</h4>
+        <h3><span className="r-num">2.4</span> Messagerie serverless élastique (architecture C)</h3>
+        <h4><span className="r-num">2.4.1</span> Description</h4>
         <p>
           <strong>L'étude.</strong> Étude sur le thème de la messagerie « serverless » à grande
           échelle, réalisée par Juntao Ji, Yubao Fu, Rongtong Jin et Qingshan Lin <Cite n={5} /> (Alibaba
@@ -526,16 +526,16 @@ function Research() {
           file et redescend à zéro quand il n'y a plus rien à corriger. Les notes sont toujours
           écrites dans PostgreSQL.
         </p>
-        <h4>2.4.2 Schéma d'architecture</h4>
+        <h4><span className="r-num">2.4.2</span> Schéma d'architecture</h4>
         <Fig24 />
-        <h4>2.4.3 Avantages</h4>
+        <h4><span className="r-num">2.4.3</span> Avantages</h4>
         <ul>
           <li><strong>Élasticité complète</strong> : la capacité de correction passe de zéro à un grand nombre de workers selon la charge, sans intervention.</li>
           <li><strong>Aucun serveur de file à administrer</strong> : le fournisseur gère la disponibilité, la reprise et la montée en charge de la messagerie.</li>
           <li><strong>Pas de limite de débit par file</strong>, grâce à la séparation du stockage et du calcul.</li>
           <li><strong>Paiement à l'usage</strong> : en dehors des périodes d'examen, les workers ne consomment rien.</li>
         </ul>
-        <h4>2.4.4 Limites</h4>
+        <h4><span className="r-num">2.4.4</span> Limites</h4>
         <p>Limites qui découlent du système décrit par les auteurs :</p>
         <ul>
           <li>
@@ -560,7 +560,7 @@ function Research() {
           <li><strong>Coût récurrent</strong> et impossibilité de reproduire l'architecture sur le matériel dont nous disposons.</li>
         </ul>
 
-        <h3>2.5 Discussion sur les limites</h3>
+        <h3><span className="r-num">2.5</span> Discussion sur les limites</h3>
         <p>Les quatre architectures présentent des compromis distincts entre simplicité et performance.</p>
         <p><strong>Traitement séquentiel</strong></p>
         <ul>
@@ -618,7 +618,7 @@ function Research() {
       <section id="chapitre-3">
         <h2>Chapitre 3 : Architecture proposée</h2>
 
-        <h3>3.1 Bilan des architectures étudiées</h3>
+        <h3><span className="r-num">3.1</span> Bilan des architectures étudiées</h3>
         <p>Le tableau suivant résume ce que chaque architecture apporte et ce qui lui manque.</p>
         <Table
           caption="Tableau 3.1 - Bilan des architectures étudiées"
@@ -655,15 +655,15 @@ function Research() {
           </li>
         </ul>
 
-        <h3>3.2 Des limites aux exigences de conception</h3>
+        <h3><span className="r-num">3.2</span> Des limites aux exigences de conception</h3>
         <p>
           Chaque limite relevée au chapitre 2 devient une exigence que l'architecture proposée doit
           satisfaire. La figure 3.1 montre cette correspondance.
         </p>
         <Fig31 />
 
-        <h3>3.3 Principe de l'architecture proposée</h3>
-        <h4>3.3.1 Ce que fait CodEval aujourd'hui</h4>
+        <h3><span className="r-num">3.3</span> Principe de l'architecture proposée</h3>
+        <h4><span className="r-num">3.3.1</span> Ce que fait CodEval aujourd'hui</h4>
         <p>
           Dans l'architecture actuelle, lancer une correction crée une campagne dans la table{' '}
           <code>correction_runs</code>. Un processus unique, le worker, réserve cette campagne,
@@ -676,7 +676,7 @@ function Research() {
           reste inactif pendant que la sandbox attend l'expiration de ses délais, et l'arrêt du
           processus fait perdre la totalité de la progression de la campagne.
         </p>
-        <h4>3.3.2 L'idée de l'architecture proposée</h4>
+        <h4><span className="r-num">3.3.2</span> L'idée de l'architecture proposée</h4>
         <p>
           L'architecture proposée, notée P dans la suite, change une seule chose de fond :{' '}
           <strong>
@@ -708,7 +708,7 @@ function Research() {
           sur un même serveur, et lancer la même commande sur un second serveur pointant vers la
           même base, sans modifier une ligne de code.
         </p>
-        <h4>3.3.3 Ce qui est ajouté par rapport à l'architecture actuelle</h4>
+        <h4><span className="r-num">3.3.3</span> Ce qui est ajouté par rapport à l'architecture actuelle</h4>
         <p>Cinq éléments sont ajoutés, chacun répondant à une limite identifiée.</p>
         <ol>
           <li>
@@ -750,10 +750,10 @@ function Research() {
           </li>
         </ol>
 
-        <h3>3.4 Description de l'architecture</h3>
-        <h4>3.4.1 Vue d'ensemble</h4>
+        <h3><span className="r-num">3.4</span> Description de l'architecture</h3>
+        <h4><span className="r-num">3.4.1</span> Vue d'ensemble</h4>
         <Fig32 />
-        <h4>3.4.2 Composants</h4>
+        <h4><span className="r-num">3.4.2</span> Composants</h4>
         <p>L'architecture compte cinq éléments, dont un seul est nouveau.</p>
         <p>
           <strong>L'API FastAPI.</strong> Elle reçoit la demande de l'enseignant et, dans la
@@ -784,7 +784,7 @@ function Research() {
           étudiant, inchangé. Chaque worker lance la sienne et attend sa fin ; c'est pendant cette
           attente que les autres workers du nœud occupent les cœurs.
         </p>
-        <h4>3.4.3 Unité de travail et granularité</h4>
+        <h4><span className="r-num">3.4.3</span> Unité de travail et granularité</h4>
         <p>
           La granularité désigne la taille de l'unité de travail qu'un correcteur réserve en une
           fois. Elle détermine le nombre de tâches présentes dans la file pour une même campagne,
@@ -813,19 +813,19 @@ function Research() {
           C (compilation et exécution), 2 pour l'algorithmique (transpilation et exécution), 1 pour
           les QCM, vrai/faux, correspondances et réponses courtes (comparaison directe).
         </p>
-        <h4>3.4.4 Cycle de vie d'une tâche</h4>
+        <h4><span className="r-num">3.4.4</span> Cycle de vie d'une tâche</h4>
         <Fig34 />
         <p>
           Une tâche failed ne bloque pas la campagne : celle-ci se termine avec le statut partial,
           comme aujourd'hui quand <code>process_run</code> rencontre une exception sur un exercice.
           L'enseignant voit les réponses concernées et peut relancer une campagne.
         </p>
-        <h4>3.4.5 Déroulement d'une campagne</h4>
+        <h4><span className="r-num">3.4.5</span> Déroulement d'une campagne</h4>
         <Fig35 />
-        <h4>3.4.6 Déploiement</h4>
+        <h4><span className="r-num">3.4.6</span> Déploiement</h4>
         <Fig36 />
 
-        <h3>3.5 Comparaison avec les architectures étudiées</h3>
+        <h3><span className="r-num">3.5</span> Comparaison avec les architectures étudiées</h3>
         <Table
           caption="Tableau 3.2 - Comparaison de l'architecture proposée avec les architectures étudiées"
           rows={[
@@ -878,8 +878,8 @@ function Research() {
           change. Les résultats sont au chapitre 5.
         </p>
 
-        <h3>4.1 Matériel et logiciels</h3>
-        <h4>4.1.1 Poste de mesure</h4>
+        <h3><span className="r-num">4.1</span> Matériel et logiciels</h3>
+        <h4><span className="r-num">4.1.1</span> Poste de mesure</h4>
         <p>Toutes les mesures se font sur un seul poste, celui du développement de CodEval.</p>
         <Table
           caption="Tableau 4.1 - Poste de mesure"
@@ -899,7 +899,7 @@ function Research() {
           cœurs d'efficacité. Le gain par worker ajouté devrait donc baisser à partir de 4, et les
           mesures doivent le montrer.
         </p>
-        <h4>4.1.2 Logiciels</h4>
+        <h4><span className="r-num">4.1.2</span> Logiciels</h4>
         <Table
           caption="Tableau 4.2 - Logiciels utilisés et leur rôle"
           rows={[
@@ -919,7 +919,7 @@ function Research() {
           PostgreSQL garde sa configuration par défaut : ses 100 connexions suffisent aux 8 workers,
           à l'orchestrateur et à l'échantillonneur.
         </p>
-        <h4>4.1.3 Instruments de mesure</h4>
+        <h4><span className="r-num">4.1.3</span> Instruments de mesure</h4>
         <p>
           Quatre outils entourent l'application pendant chaque mesure. Ils observent la correction,
           ils ne la font pas.
@@ -931,7 +931,7 @@ function Research() {
           <li><strong>L'horloge de référence</strong> est celle de PostgreSQL. Dans la base de test, chaque note enregistrée porte l'heure de son écriture. Toutes les durées en découlent, ce qui évite de comparer des horloges différentes.</li>
         </ul>
         <Fig41 />
-        <h4>4.1.4 Conditions de mesure</h4>
+        <h4><span className="r-num">4.1.4</span> Conditions de mesure</h4>
         <p>Avant chaque série de mesures :</p>
         <ol>
           <li>brancher le poste sur secteur et désactiver le mode économie d'énergie ;</li>
@@ -947,13 +947,13 @@ function Research() {
           ralentie pour une raison étrangère à l'architecture testée.
         </p>
 
-        <h3>4.2 Données corrigées pendant les mesures</h3>
+        <h3><span className="r-num">4.2</span> Données corrigées pendant les mesures</h3>
         <p>
           Les données de test viennent de contenus de CodEval, pas d'exercices inventés pour le banc.
           L'application les charge elle-même en base. Chaque architecture suit donc le vrai chemin
           de correction.
         </p>
-        <h4>4.2.1 L'évaluation de référence</h4>
+        <h4><span className="r-num">4.2.1</span> L'évaluation de référence</h4>
         <p>
           L'évaluation « BENCH-SRIT » reprend les types d'exercices qu'un enseignant de l'ESATIC
           combine dans une épreuve.
@@ -974,7 +974,7 @@ function Research() {
           valeurs par défaut de CodEval : 2 000 ms par test, 5 secondes de temps processeur, 20
           secondes pour la compilation.
         </p>
-        <h4>4.2.2 Le contenu des copies</h4>
+        <h4><span className="r-num">4.2.2</span> Le contenu des copies</h4>
         <p>
           Une copie réelle n'est pas toujours juste. Elle peut échouer à la compilation, boucler sans
           fin ou rester vide, et ces cas changent beaucoup le temps de correction. Pour chaque
@@ -998,7 +998,7 @@ function Research() {
           deviennent disponibles, elles sont anonymisées et leurs proportions remplacent celles du
           tableau. Les variantes, elles, ne changent pas.
         </p>
-        <h4>4.2.3 Les profils de charge</h4>
+        <h4><span className="r-num">4.2.3</span> Les profils de charge</h4>
         <Table
           caption="Tableau 4.5 - Profils de charge"
           rows={[
@@ -1011,7 +1011,7 @@ function Research() {
           ]}
         />
 
-        <h3>4.3 Construction du jeu de données</h3>
+        <h3><span className="r-num">4.3</span> Construction du jeu de données</h3>
         <p>
           Le jeu de données ne dépend d'aucune architecture. Il est construit une seule fois, avant
           toute mesure, puis gelé. Toutes les architectures corrigent ensuite exactement les mêmes
@@ -1104,8 +1104,8 @@ CODEVAL_DATABASE_URL=postgresql+psycopg://codeval:codeval@localhost:5432/codeval
           l'empreinte et rend la rupture visible.
         </p>
 
-        <h3>4.4 Ce que nous mesurons</h3>
-        <h4>4.4.1 Les questions posées</h4>
+        <h3><span className="r-num">4.4</span> Ce que nous mesurons</h3>
+        <h4><span className="r-num">4.4.1</span> Les questions posées</h4>
         <Table
           caption="Tableau 4.8 - Question posée par chaque expérience"
           rows={[
@@ -1138,7 +1138,7 @@ CODEVAL_DATABASE_URL=postgresql+psycopg://codeval:codeval@localhost:5432/codeval
             ['Dépendante', 'Indicateurs', 'Section 4.4.2'],
           ]}
         />
-        <h4>4.4.2 Les indicateurs</h4>
+        <h4><span className="r-num">4.4.2</span> Les indicateurs</h4>
         <Table
           caption="Tableau 4.10 - Indicateurs mesurés"
           rows={[
@@ -1157,7 +1157,7 @@ CODEVAL_DATABASE_URL=postgresql+psycopg://codeval:codeval@localhost:5432/codeval
             ['M12', "Coût d'exploitation", "Composants à déployer en plus de l'API et de PostgreSQL ; ampleur des modifications du backend", 'Inventaire', 'nombre'],
           ]}
         />
-        <h4>4.4.3 Les seuils de réussite</h4>
+        <h4><span className="r-num">4.4.3</span> Les seuils de réussite</h4>
         <p>Ces seuils sont fixés avant les mesures. Ils servent à décider, pas à décrire après coup.</p>
         <Table
           caption="Tableau 4.11 - Seuils de réussite"
@@ -1206,7 +1206,7 @@ CODEVAL_DATABASE_URL=postgresql+psycopg://codeval:codeval@localhost:5432/codeval
           <li><strong>H3</strong> est confirmée si B atteint un rapport T_total(1 nœud) sur T_total(2 nœuds) d'au moins 1,5.</li>
           <li><strong>HP</strong> est confirmée si P est validée selon la règle ci-dessus.</li>
         </ul>
-        <h4>4.4.4 Plan d'ensemble des mesures</h4>
+        <h4><span className="r-num">4.4.4</span> Plan d'ensemble des mesures</h4>
         <Table
           caption="Tableau 4.12 - Plan d'ensemble des mesures"
           rows={[
@@ -1227,13 +1227,13 @@ CODEVAL_DATABASE_URL=postgresql+psycopg://codeval:codeval@localhost:5432/codeval
           ne pénalise pas toujours la même architecture.
         </p>
 
-        <h3>4.5 Mesure de l'architecture actuelle (référence)</h3>
+        <h3><span className="r-num">4.5</span> Mesure de l'architecture actuelle (référence)</h3>
         <p>
           Cette section décrit le protocole en entier. Les suivantes ne reprendront que ce qui
           change. L'application est supposée installée et fonctionnelle : il s'agit de la préparer,
           de lancer une correction et de relever ce qui s'est passé.
         </p>
-        <h4>4.5.1 Préparation, une seule fois</h4>
+        <h4><span className="r-num">4.5.1</span> Préparation, une seule fois</h4>
         <ol>
           <li>Se placer sur le commit de référence et vérifier qu'aucune modification locale n'est en attente.</li>
           <li>Installer le backend dans un environnement Python dédié et figer les versions installées.</li>
@@ -1251,7 +1251,7 @@ ALTER TABLE correction_results
           <li>Générer et charger le jeu de données comme en section 4.3, et noter son empreinte.</li>
           <li>Enregistrer l'environnement dans un fichier : version du système, nombre de cœurs, mémoire, versions de PostgreSQL et du compilateur, empreinte du commit, empreinte du jeu de données.</li>
         </ol>
-        <h4>4.5.2 Déroulement d'une mesure</h4>
+        <h4><span className="r-num">4.5.2</span> Déroulement d'une mesure</h4>
         <p>
           Une mesure correspond à un quadruplet (architecture, N, charge, répétition). Elle se
           déroule toujours selon les huit étapes de la figure 4.2.
@@ -1421,7 +1421,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           comparent jamais d'un système à l'autre : la sandbox n'applique pas les mêmes limites
           (section 4.7).
         </p>
-        <h4>4.5.3 Mesure avec panne (X4)</h4>
+        <h4><span className="r-num">4.5.3</span> Mesure avec panne (X4)</h4>
         <ol>
           <li>Préparer et lancer une mesure à 200 copies comme ci-dessus.</li>
           <li>À mi-campagne, quand la moitié des notes attendues est enregistrée, arrêter brutalement un processus correcteur en train de corriger. Il n'est pas relancé à la main.</li>
@@ -1433,7 +1433,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           Pour l'architecture actuelle, aucun mécanisme de reprise n'est ajouté : nous observons le
           comportement tel quel. Une campagne restée bloquée est notée « non reprise ».
         </p>
-        <h4>4.5.4 Vérification des notes (X5)</h4>
+        <h4><span className="r-num">4.5.4</span> Vérification des notes (X5)</h4>
         <p>
           La correction séquentielle sert de référence. Pour chaque charge, la première répétition
           analysée fournit les notes de référence. Chaque mesure suivante lui est comparée couple
@@ -1442,21 +1442,21 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           réponses de classe K4 sont les plus exposées, car leur statut dépend d'un délai : tout
           écart les concernant est examiné cas par cas.
         </p>
-        <h4>4.5.5 Réactivité de l'API (X6)</h4>
+        <h4><span className="r-num">4.5.5</span> Réactivité de l'API (X6)</h4>
         <p>
           L'API est lancée normalement, en un seul processus. Pendant la correction, la sonde
           s'authentifie comme l'enseignante et demande la liste de ses évaluations toutes les 200
           millisecondes, en notant chaque temps de réponse. Une mesure de 60 secondes sans
           correction en cours sert de référence pour l'API au repos.
         </p>
-        <h4>4.5.6 Traitement des mesures</h4>
+        <h4><span className="r-num">4.5.6</span> Traitement des mesures</h4>
         <ul>
           <li>Pour chaque configuration, nous retenons la médiane des 5 répétitions et son intervalle de confiance à 95 % obtenu par rééchantillonnage (bootstrap, 4 000 tirages).</li>
           <li>Pour comparer deux architectures, nous utilisons le test de Mann-Whitney (bilatéral, seuil 0,05), qui ne suppose pas de loi normale, avec le delta de Cliff pour la taille de l'effet, effet dit grand au-delà de 0,474 en valeur absolue. Avec 5 répétitions par groupe, la plus petite valeur p atteignable est 0,008 : une différence nette reste détectable.</li>
           <li>Pour X2, la loi de passage à l'échelle universelle est ajustée sur le débit en fonction de N. Elle estime le nombre de workers au-delà duquel en ajouter fait baisser le débit.</li>
           <li>Pour H1, une régression linéaire du temps total sur le nombre de copies donne la pente, en secondes par copie, et le coefficient R².</li>
         </ul>
-        <h4>4.5.7 Traçabilité</h4>
+        <h4><span className="r-num">4.5.7</span> Traçabilité</h4>
         <p>
           Chaque mesure produit un fichier nommé d'après sa configuration. Il contient la
           configuration complète, l'empreinte du commit, l'empreinte du jeu de données, les
@@ -1466,7 +1466,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           reprendre les sections 4.5.1 et 4.5.2 avec le même commit et le même jeu de données.
         </p>
 
-        <h3>4.6 Mesure de l'architecture A (pool de processus local)</h3>
+        <h3><span className="r-num">4.6</span> Mesure de l'architecture A (pool de processus local)</h3>
         <p>
           <strong>Mise en place.</strong> A se construit à partir de l'existant sans toucher au
           moteur de correction. Le worker unique ne corrige plus lui-même : après avoir réservé la
@@ -1483,7 +1483,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           qu'elle est.
         </p>
 
-        <h3>4.7 Mesure de l'architecture B (workers distribués via Redis)</h3>
+        <h3><span className="r-num">4.7</span> Mesure de l'architecture B (workers distribués via Redis)</h3>
         <p>
           <strong>Pourquoi Redis et non l'un des quatre courtiers de l'étude.</strong> L'étude <Cite n={3} />
           qui fonde B compare Kafka, ActiveMQ Artemis, RabbitMQ et NATS, et désigne NATS. Le banc
@@ -1532,7 +1532,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           donc qu'entre eux, un nœud contre deux nœuds, jamais aux mesures faites sur macOS.
         </p>
 
-        <h3>4.8 Mesure de l'architecture proposée (P)</h3>
+        <h3><span className="r-num">4.8</span> Mesure de l'architecture proposée (P)</h3>
         <p>
           <strong>Mise en place.</strong> Les modifications sont celles de la section 3.3.3. Pour la
           mesure, elles tiennent en trois opérations. Une table de file est ajoutée au schéma par
@@ -1556,7 +1556,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           des tâches change. La réservation, le bail et l'écriture restent identiques.
         </p>
 
-        <h3>4.9 Pourquoi l'architecture C n'est pas mesurée</h3>
+        <h3><span className="r-num">4.9</span> Pourquoi l'architecture C n'est pas mesurée</h3>
         <p>
           C suppose un service de messagerie géré par un fournisseur cloud et des workers lancés à la
           demande dans son infrastructure. Elle ne peut pas être reproduite sur le poste de mesure.
@@ -1565,7 +1565,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           comparaison qualitative du chapitre 3 et dans la discussion.
         </p>
 
-        <h3>4.10 Limites du dispositif</h3>
+        <h3><span className="r-num">4.10</span> Limites du dispositif</h3>
         <ul>
           <li><strong>Un seul poste.</strong> PostgreSQL, les workers et l'orchestrateur partagent les mêmes 8 cœurs. Cette concurrence touche toutes les architectures de la même façon, mais elle allonge les temps par rapport à une base installée sur un serveur séparé.</li>
           <li><strong>Cœurs hétérogènes.</strong> Les cœurs de performance et d'efficacité n'ont pas la même vitesse, et macOS ne permet pas d'attacher un processus à un cœur. L'accélération au-delà de N = 4 sera donc inférieure à celle d'un serveur à cœurs identiques.</li>
@@ -1587,7 +1587,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           fichiers produits par l'orchestrateur.
         </aside>
 
-        <h3>5.1 État d'avancement</h3>
+        <h3><span className="r-num">5.1</span> État d'avancement</h3>
         <Table
           caption="Tableau 5.1 - État d'avancement des expériences"
           rows={[
@@ -1608,7 +1608,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           impossibles.
         </p>
 
-        <h3>5.2 Vérification du dispositif</h3>
+        <h3><span className="r-num">5.2</span> Vérification du dispositif</h3>
         <p>
           Le dispositif a été éprouvé de bout en bout avant toute campagne, sur une charge de 10
           copies et l'architecture actuelle. Cette mesure ne figure pas dans les résultats : elle
@@ -1639,7 +1639,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           que la vitesse ne pose problème. Ce point sera tranché par X1 et X2.
         </p>
 
-        <h3>5.3 Mesures déjà disponibles : effet de la granularité</h3>
+        <h3><span className="r-num">5.3</span> Mesures déjà disponibles : effet de la granularité</h3>
         <p>
           Une série préliminaire a comparé deux façons de découper le travail, avec le moteur de
           correction et la sandbox réels, sur une table de tâches dédiée. Elle ne porte pas sur les
@@ -1704,7 +1704,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           « une tâche par unité ».
         </p>
 
-        <h3>5.4 à 5.9 Résultats des expériences X1 à X6</h3>
+        <h3><span className="r-num">5.4</span> à 5.9 Résultats des expériences X1 à X6</h3>
         <p>
           Les tableaux de résultats sont prêts à recevoir les mesures ; ils seront remplis à partir
           des fichiers produits par l'orchestrateur.
@@ -1722,7 +1722,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           ]}
         />
 
-        <h3>5.10 Décision sur les critères</h3>
+        <h3><span className="r-num">5.10</span> Décision sur les critères</h3>
         <p>Les seuils sont ceux de la section 4.4.3, fixés avant les mesures.</p>
         <Table
           caption="Tableau 5.10 - Décision sur les critères R1 à R6"
@@ -1742,7 +1742,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           serveur. Si R2 ou R3 échoue, P n'est pas retenue et la recommandation se fait entre A et B.
         </p>
 
-        <h3>5.11 Décision sur les hypothèses</h3>
+        <h3><span className="r-num">5.11</span> Décision sur les hypothèses</h3>
         <Table
           caption="Tableau 5.11 - Décision sur les hypothèses"
           rows={[
@@ -1768,8 +1768,8 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           formulées au chapitre 1 et identifie les limites de l'étude.
         </p>
 
-        <h3>6.1 Analyse des résultats</h3>
-        <h4>6.1.1 Le traitement séquentiel est inefficace pour le processeur</h4>
+        <h3><span className="r-num">6.1</span> Analyse des résultats</h3>
+        <h4><span className="r-num">6.1.1</span> Le traitement séquentiel est inefficace pour le processeur</h4>
         <p>
           Les mesures confirment que l'architecture séquentielle n'exploite qu'environ 12 % du
           processeur. Ce faible taux s'explique par la nature du travail de correction : la majeure
@@ -1779,7 +1779,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           pleinement l'introduction de parallélisme : les temps d'attente d'une copie peuvent être
           occupés par le traitement d'une autre.
         </p>
-        <h4>6.1.2 L'accélération n'est pas parfaitement linéaire</h4>
+        <h4><span className="r-num">6.1.2</span> L'accélération n'est pas parfaitement linéaire</h4>
         <p>
           Avec 8 workers en pool local, l'accélération atteint 6,6 au lieu des 8 théoriques. Cet
           écart s'explique par plusieurs facteurs :
@@ -1789,7 +1789,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           <li><strong>Surcoût de la gestion du pool</strong> : la création et la synchronisation des processus consomment du temps, notamment pour les petits profils de charge où ce surcoût représente une fraction significative du temps total.</li>
           <li><strong>Saturation du processeur</strong> : à 80 % d'utilisation, le système d'exploitation doit gérer les changements de contexte entre processus, ce qui dégrade les performances.</li>
         </ul>
-        <h4>6.1.3 L'architecture distribuée dépasse le pool local à nombre égal de workers</h4>
+        <h4><span className="r-num">6.1.3</span> L'architecture distribuée dépasse le pool local à nombre égal de workers</h4>
         <p>
           Avec 8 workers, l'architecture distribuée, soit 2 serveurs de 4 workers, atteint une
           accélération de 7,2 contre 6,6 pour le pool local. La différence provient de la répartition
@@ -1799,8 +1799,8 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           surcharger un seul serveur.
         </p>
 
-        <h3>6.2 Vérification des hypothèses</h3>
-        <h4>6.2.1 Hypothèse H1 : le traitement séquentiel est un goulot d'étranglement</h4>
+        <h3><span className="r-num">6.2</span> Vérification des hypothèses</h3>
+        <h4><span className="r-num">6.2.1</span> Hypothèse H1 : le traitement séquentiel est un goulot d'étranglement</h4>
         <p>
           <strong>Confirmée.</strong> Le temps total croît linéairement avec le nombre de copies,
           avec une pente de 1,88 seconde par copie, et l'utilisation du processeur reste faible, à
@@ -1809,7 +1809,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           traitement séquentiel constitue bien un goulot d'étranglement à partir de quelques
           dizaines de copies.
         </p>
-        <h4>6.2.2 Hypothèse H2 : le parallélisme intra-nœud réduit le temps de correction</h4>
+        <h4><span className="r-num">6.2.2</span> Hypothèse H2 : le parallélisme intra-nœud réduit le temps de correction</h4>
         <p>
           <strong>Confirmée avec réserve.</strong> Le pool de processus réduit significativement le
           temps de correction : une accélération de 3,75 avec 4 workers et de 6,6 avec 8 workers.
@@ -1818,7 +1818,7 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           intra-nœud est efficace tant que les ressources ne sont pas saturées, conformément à
           l'hypothèse.
         </p>
-        <h4>6.2.3 Hypothèse H3 : le parallélisme inter-nœuds permet une scalabilité quasi proportionnelle</h4>
+        <h4><span className="r-num">6.2.3</span> Hypothèse H3 : le parallélisme inter-nœuds permet une scalabilité quasi proportionnelle</h4>
         <p>
           <strong>Confirmée.</strong> L'architecture distribuée maintient une accélération quasi
           proportionnelle au nombre de workers car chaque nœud reste en dessous de son seuil de
@@ -1828,22 +1828,22 @@ seq_N1_c10_r1 terminee : 52.334 s, 11.46 copies/min, 50 notes`}</Code>
           proportionnelle sans refonte profonde.
         </p>
 
-        <h3>6.3 Limites et implications</h3>
-        <h4>6.3.1 Limites de l'étude</h4>
+        <h3><span className="r-num">6.3</span> Limites et implications</h3>
+        <h4><span className="r-num">6.3.1</span> Limites de l'étude</h4>
         <ul>
           <li><strong>Données synthétiques</strong> : les copies des étudiants sont générées automatiquement avec des réponses valides. En situation réelle, la distribution des temps d'exécution est plus hétérogène : certains programmes bouclent et atteignent le délai maximal, d'autres échouent à la compilation. Cela pourrait modifier la répartition de la charge entre les workers.</li>
           <li><strong>Nombre de nœuds limité</strong> : nous avons testé jusqu'à 2 serveurs. Le comportement au-delà de ce seuil, latence réseau, contention sur le courtier, saturation de PostgreSQL, n'a pas été mesuré.</li>
           <li><strong>Absence de pannes simulées</strong> : le protocole ne teste pas la tolérance aux pannes, arrêt d'un worker en cours de correction ou perte de connexion au courtier. L'idempotence du moteur de correction devrait permettre une reprise, mais cela n'a pas été vérifié expérimentalement.</li>
           <li><strong>Serveur Redis sur le même nœud</strong> : dans nos tests, Redis est hébergé sur le premier serveur. En production, un Redis dédié éviterait une compétition pour les ressources.</li>
         </ul>
-        <h4>6.3.2 Implications pratiques</h4>
+        <h4><span className="r-num">6.3.2</span> Implications pratiques</h4>
         <p>Pour un déploiement de CodEval en production, les résultats suggèrent la stratégie suivante :</p>
         <ul>
           <li><strong>Cohortes jusqu'à 50 étudiants</strong> : le traitement séquentiel suffit, avec un temps de correction inférieur à 2 minutes.</li>
           <li><strong>Cohortes de 50 à 200 étudiants</strong> : un pool de 4 workers locaux divise le temps par 3,7 sans infrastructure supplémentaire.</li>
           <li><strong>Cohortes de plus de 200 étudiants ou corrections simultanées</strong> : l'architecture distribuée avec un courtier est recommandée. Elle permet d'ajouter des nœuds à la demande et de maintenir un temps de correction raisonnable.</li>
         </ul>
-        <h4>6.3.3 Implications pour la conception</h4>
+        <h4><span className="r-num">6.3.3</span> Implications pour la conception</h4>
         <p>
           L'idempotence du moteur de correction de CodEval, une copie déjà corrigée étant ignorée,
           est un atout pour les architectures parallèles : elle permet de relancer un worker sans
