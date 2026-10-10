@@ -19,7 +19,7 @@ export const identity = {
   ],
   languages: [
     { label: 'Français (natif)', flag: 'fr' },
-    { label: 'Anglais (B1)', flag: 'gb' },
+    { label: 'Anglais (B2)', flag: 'gb' },
     { label: 'Japonais (débutant)', flag: 'jp' },
   ],
   softSkills: ['Autonomie', 'Rigueur', "Esprit d'analyse", 'Communication', 'Travail en équipe', 'Gestion de projet'],
@@ -173,5 +173,5 @@ export const skills = [
 
 export const certifications = [
   { title: 'React Native · Udemy', href: 'https://www.udemy.com/certificate/UC-a7fc0d81-e068-4c44-bc6d-cf562916ee62/' },
-  { title: 'English · EF SET (B1)', href: 'https://cert.efset.org/fr/QjvCKh' },
+  { title: 'English · EF SET (B2)', href: 'https://cert.efset.org/fr/QjvCKh' },
 ]
