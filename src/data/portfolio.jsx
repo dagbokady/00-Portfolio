@@ -172,6 +172,10 @@ export const skills = [
 ]
 
 export const certifications = [
+  {
+    title: 'SAP BTP Solution Architect · SAP Learning',
+    href: 'https://badger.learning.sap.com/verify/xavom-godup-tobyd-vohim-honug',
+  },
   { title: 'React Native · Udemy', href: 'https://www.udemy.com/certificate/UC-a7fc0d81-e068-4c44-bc6d-cf562916ee62/' },
   { title: 'English · EF SET (B2)', href: 'https://cert.efset.org/fr/QjvCKh' },
 ]
