@@ -59,13 +59,12 @@ function References({ items }) {
 }
 
 const CODEVAL_REFS = [
-  { text: <>C.-P. Dagbo, « Montée en charge de la plateforme de correction automatique CodEval », mémoire de recherche, ESATIC, 2026.</>, href: '/recherche/codeval' },
+  { text: <>C.-P. Dagbo, « Montée en charge de la plateforme de correction automatique CodEval », travail de recherche, ESATIC, 2026.</>, href: '/recherche/codeval' },
   { text: <>S. Wasik et al., « A Survey on Online Judge Systems and Their Applications », <em>ACM Computing Surveys</em>, vol. 51, n° 1, 2018.</>, href: 'https://doi.org/10.1145/3143560' },
   { text: <>PostgreSQL, documentation de <code>SELECT</code> : clause de verrouillage <code>FOR UPDATE … SKIP LOCKED</code>.</>, href: 'https://www.postgresql.org/docs/current/sql-select.html#SQL-FOR-UPDATE-SHARE' },
   { text: <>SQLAlchemy 2.0, documentation.</>, href: 'https://docs.sqlalchemy.org/en/20/' },
   { text: <>FastAPI, documentation.</>, href: 'https://fastapi.tiangolo.com/' },
   { text: <>Alembic, documentation des migrations.</>, href: 'https://alembic.sqlalchemy.org/' },
-  { text: <>N. J. Gunther, <em>Guerrilla Capacity Planning</em>, Springer, 2007, ISBN 978-3-540-26138-4 (loi de passage à l'échelle universelle).</> },
   { text: <>IETF, RFC 7208 (SPF), RFC 6376 (DKIM) et RFC 7489 (DMARC).</>, href: 'https://www.rfc-editor.org/rfc/rfc7489' },
 ]
 
@@ -252,38 +251,13 @@ export function CodEval() {
       </section>
 
       <section>
-        <h2>Mesures de performance</h2>
-        <p>
-          Un banc de mesure reproductible appelle le vrai moteur de correction et le vrai bac à
-          sable, sur un jeu de 500 copies générées avec une graine fixée (réponses correctes,
-          partielles, erreurs de compilation, boucles infinies, copies vides). Ce travail est
-          détaillé dans le <a href="/recherche/codeval">mémoire de recherche</a> <Cite n={1} />.
-        </p>
-        <Table
-          rows={[
-            ['Mesure', 'Résultat'],
-            ['Débit de correction (banc local)', '≈ 117 copies / minute, stable de 40 à 1 000 copies'],
-            ['1 000 copies corrigées', '8 min 34 s, 0 échec'],
-            ['Coût médian par test', 'analyse 108 ms · compilation 51 ms · exécution 249 ms'],
-            ['Découpage fin (une tâche = une réponse) avec 8 workers', '≈ 263 copies / minute, soit × 2,2 par rapport au découpage par campagne'],
-            ["Reprise après crash d'un worker", '60 / 60 copies corrigées, aucun doublon'],
-          ]}
-        />
-        <p>
-          Le débit selon le nombre de workers est analysé avec la loi de Gunther <Cite n={7} />.
-          Le banc a orienté la suite : le découpage fin des tâches est la prochaine évolution du
-          moteur de correction.
-        </p>
-      </section>
-
-      <section>
         <h2>Qualité et déploiement</h2>
         <ul>
           <li><strong>Tests d'intégration sur PostgreSQL</strong> (mêmes types et mêmes verrous qu'en production) couvrant le parcours complet : inscription, rôles, création d'une évaluation, ouverture de session, sauvegarde, soumission, gel, <strong>correction réelle avec compilation et exécution</strong>, ajustement tracé, relance d'une seconde campagne, export.</li>
           <li><strong>Lint</strong> ESLint côté frontend, build Vite vérifié.</li>
           <li><strong>Migrations</strong> Alembic <Cite n={6} />, attente de la base au démarrage, schéma reproductible sur base vide.</li>
           <li><strong>Déploiement</strong> conteneurisé (Docker), HTTPS, sauvegardes automatisées.</li>
-          <li><strong>E-mails</strong> transactionnels avec domaine authentifié (SPF / DKIM / DMARC) <Cite n={8} />.</li>
+          <li><strong>E-mails</strong> transactionnels avec domaine authentifié (SPF / DKIM / DMARC) <Cite n={7} />.</li>
         </ul>
       </section>
 

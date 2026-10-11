@@ -20,7 +20,6 @@ export const identity = {
   languages: [
     { label: 'Français (natif)', flag: 'fr' },
     { label: 'Anglais (B2)', flag: 'gb' },
-    { label: 'Japonais (débutant)', flag: 'jp' },
   ],
   softSkills: ['Autonomie', 'Rigueur', "Esprit d'analyse", 'Communication', 'Travail en équipe', 'Gestion de projet'],
 }
@@ -168,7 +167,7 @@ export const skills = [
   { name: 'Frontend & mobile', items: ['React', 'React Native', 'Tailwind CSS'] },
   { name: 'Données', items: ['PostgreSQL', 'Modélisation', 'ORM'] },
   { name: 'Systèmes', items: ['Docker', 'Linux', 'CI/CD', 'Sandbox', 'Files de tâches'] },
-  { name: 'Recherche', items: ['Bancs de mesure reproductibles', 'Bootstrap', 'Mann-Whitney', 'Loi de Gunther'] },
+  { name: 'Recherche', items: ['Bancs de mesure reproductibles'] },
 ]
 
 export const certifications = [
