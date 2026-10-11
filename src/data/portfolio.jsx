@@ -20,7 +20,6 @@ export const identity = {
   languages: [
     { label: 'Français (natif)', flag: 'fr' },
     { label: 'Anglais (B2)', flag: 'gb' },
-    { label: 'Japonais (débutant)', flag: 'jp' },
   ],
   softSkills: ['Autonomie', 'Rigueur', "Esprit d'analyse", 'Communication', 'Travail en équipe', 'Gestion de projet'],
 }
@@ -168,7 +167,7 @@ export const skills = [
   { name: 'Frontend & mobile', items: ['React', 'React Native', 'Tailwind CSS'] },
   { name: 'Données', items: ['PostgreSQL', 'Modélisation', 'ORM'] },
   { name: 'Systèmes', items: ['Docker', 'Linux', 'CI/CD', 'Sandbox', 'Files de tâches'] },
-  { name: 'Recherche', items: ['Bancs de mesure reproductibles', 'Bootstrap', 'Mann-Whitney', 'Loi de Gunther'] },
+  { name: 'Recherche', items: ['Bancs de mesure reproductibles'] },
 ]
 
 export const certifications = [
@@ -177,5 +176,5 @@ export const certifications = [
     href: 'https://badger.learning.sap.com/verify/xavom-godup-tobyd-vohim-honug',
   },
   { title: 'React Native · Udemy', href: 'https://www.udemy.com/certificate/UC-a7fc0d81-e068-4c44-bc6d-cf562916ee62/' },
-  { title: 'English · EF SET (B2)', href: 'https://cert.efset.org/fr/QjvCKh' },
+  { title: 'English · EF SET (B2)', href: 'https://cert.efset.org/fr/U4JHgB' },
 ]
