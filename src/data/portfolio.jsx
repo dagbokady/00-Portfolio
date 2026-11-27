@@ -82,8 +82,9 @@ export const projects = [
   {
     tag: 'Web',
     title: 'Cantine Vatel · Gestion de cantine scolaire',
-    url: 'https://cantine-vatel.vercel.app',
+    url: 'https://cantine-vatel-ten.vercel.app',
     repo: 'https://github.com/dagbokady/cantine-vatel',
+    page: '/projets/cantine-vatel',
     stack: 'FastAPI, SQLAlchemy, PostgreSQL, Alembic, React, Tailwind CSS',
     text: (
       <>

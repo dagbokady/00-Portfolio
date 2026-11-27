@@ -2,7 +2,7 @@
 import { useEffect } from 'react'
 import { identity } from './data/portfolio.jsx'
 import { Picture, Table, Code, DocLayout, Cite } from './article.jsx'
-import { CodevalArchitecture, CodevalLifecycle, CodevalWorkflow, EsaticShareArchitecture } from './diagrams/projects.jsx'
+import { CodevalArchitecture, CodevalLifecycle, CodevalWorkflow, EsaticShareArchitecture, CantineVatelArchitecture } from './diagrams/projects.jsx'
 
 const GITHUB_ICON = (
   <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -80,7 +80,7 @@ const ESATICSHARE_REFS = [
   { text: <>MDN, applications web progressives (manifeste et Service Worker).</>, href: 'https://developer.mozilla.org/fr/docs/Web/Progressive_web_apps' },
 ]
 
-function ProjectPage({ title, tagline, kicker, site, repo, children }) {
+function ProjectPage({ title, tagline, kicker, site, repo, publicSource, children }) {
   useEffect(() => {
     const previous = document.title
     document.title = `${title} · ${identity.name}`
@@ -99,8 +99,10 @@ function ProjectPage({ title, tagline, kicker, site, repo, children }) {
       {children}
       <div className="r-download">
         <p>
-          Le code source complet est dans un dépôt privé. Démonstration ou accès en lecture sur
-          demande : <a href={`mailto:${identity.email}`}>{identity.email}</a>
+          {publicSource
+            ? 'Le code source complet est public. Démonstration sur demande : '
+            : 'Le code source complet est dans un dépôt privé. Démonstration ou accès en lecture sur demande : '}
+          <a href={`mailto:${identity.email}`}>{identity.email}</a>
         </p>
         <ProjectLinks site={site} repo={repo} />
         <a className="back-link" href="/#projects">← Retour au portfolio</a>
@@ -517,6 +519,178 @@ export function EsaticShare() {
       </section>
 
       <References items={ESATICSHARE_REFS} />
+    </ProjectPage>
+  )
+}
+
+const CANTINE_IMG = '/files/projets/cantine-vatel'
+
+const CANTINE_REFS = [
+  { text: <>IETF, RFC 8032 : Edwards-Curve Digital Signature Algorithm (EdDSA, Ed25519).</>, href: 'https://www.rfc-editor.org/rfc/rfc8032' },
+  { text: <>PostgreSQL, documentation de <code>SELECT</code> : clause de verrouillage <code>FOR UPDATE</code>.</>, href: 'https://www.postgresql.org/docs/current/sql-select.html#SQL-FOR-UPDATE-SHARE' },
+  { text: <>IETF, RFC 7519 : JSON Web Token (JWT).</>, href: 'https://www.rfc-editor.org/rfc/rfc7519' },
+  { text: <>FastAPI, documentation.</>, href: 'https://fastapi.tiangolo.com/' },
+  { text: <>Alembic, documentation des migrations.</>, href: 'https://alembic.sqlalchemy.org/' },
+]
+
+export function CantineVatel() {
+  return (
+    <ProjectPage
+      title="Cantine Vatel"
+      kicker="Web · Hackathon · Mobile first"
+      tagline="Zéro file, zéro gaspillage, zéro risque allergique : une seule plateforme pour gérer la cantine d'un établissement, du primaire au lycée."
+      site="https://cantine-vatel-ten.vercel.app"
+      repo="https://github.com/dagbokady/cantine-vatel"
+      publicSource
+    >
+      <section>
+        <Picture src={`${CANTINE_IMG}/landing-desktop.webp`} alt="Page d'accueil de Cantine Vatel" caption="Page d'accueil de Cantine Vatel" />
+      </section>
+
+      <section>
+        <h2>En bref</h2>
+        <Table
+          rows={[
+            ['Point', 'Détail'],
+            ['Problème', 'Files d\'attente aux heures de pointe, gaspillage faute de planification, allergies mal suivies, menus et tarifs découverts au comptoir, comptage à la main.'],
+            ['Solution', 'Une application web où chaque profil a son espace : l\'élève commande et choisit sa portion, la cuisine prépare ce qui sera mangé, le comptoir scanne un ticket QR, le parent suit et recharge.'],
+            ['Utilisateurs', 'Six rôles : élève, parent, cuisine, agent de comptoir, enseignant, administration.'],
+            ['Contexte', 'Projet de hackathon, à partir d\'un cahier des charges imposé : toutes les fonctionnalités minimum sont couvertes, ainsi que la plupart des bonus.'],
+            ['Période', 'Novembre 2026'],
+            ['Production', 'Frontend sur Vercel, API sur Render, base PostgreSQL'],
+          ]}
+        />
+      </section>
+
+      <section>
+        <h2>Deux modes pour un même établissement</h2>
+        <p>
+          Un enfant de primaire ne commande pas son repas comme un lycéen. L'administration choisit
+          donc, niveau par niveau, l'un des deux modes suivants. Ils ne se mélangent jamais : la
+          cuisine compte ses couverts à partir des réservations dans un cas, à partir de l'effectif
+          moins les absents dans l'autre.
+        </p>
+        <Table
+          rows={[
+            ['', 'Mode Classe (primaire)', 'Mode Commande (collège, lycée)'],
+            ['Qui choisit le repas', 'Personne : l\'élève est inscrit d\'office', 'L\'élève, sur son téléphone ou sur la borne'],
+            ['Portion', 'Standard, ajustable par la cuisine', '1/3, 2/3 ou 3/3, prix proportionnel'],
+            ['Passage', 'Une vague par classe, à heure fixe', 'Une vague de 20 minutes et une place sur le plan de salle'],
+            ['Présence', 'Appel fait par l\'enseignant', 'Scan du ticket QR au comptoir'],
+            ['Allergies', 'Plat sans allergène servi d\'office', 'Plats incompatibles masqués et refusés par le serveur'],
+          ]}
+        />
+        <Picture src={`${CANTINE_IMG}/landing-presentation.webp`} alt="Avant et avec Cantine Vatel" caption="Avant et avec Cantine Vatel" />
+      </section>
+
+      <section>
+        <h2>Fonctionnalités</h2>
+        <h3>Élève</h3>
+        <ul>
+          <li><strong>Commande en quatre étapes</strong> : plat, portion, vague de passage, place sur le plan de salle. Le ticket QR est délivré à la fin.</li>
+          <li><strong>Portion équitable</strong> : un curseur à 3 crans remplit une assiette dessinée, le prix suit la portion et s'arrondit à 25 F.</li>
+          <li>Les plats contenant un de ses allergènes sont affichés à part avec la raison (« Contient poisson ») et <strong>ne peuvent pas être commandés</strong>.</li>
+          <li><strong>Mode borne</strong> sur tablette partagée : déconnexion automatique après chaque commande.</li>
+        </ul>
+        <h3>Parent</h3>
+        <ul>
+          <li>Rattachement de plusieurs enfants par matricule, <strong>déclaration des allergies</strong> (le parent est le seul à pouvoir les modifier).</li>
+          <li><strong>Recharge Mobile Money</strong> simulée (Wave, MTN MoMo, Orange Money, Moov Money), avec transaction en attente puis validée ou échouée.</li>
+          <li>Historique de ce que l'enfant a réellement mangé, notifications à chaque étape et alerte de solde bas.</li>
+        </ul>
+        <h3>Cuisine et comptoir</h3>
+        <ul>
+          <li><strong>Plats composés à partir d'ingrédients</strong> : les allergènes sont déduits, avec le nombre et le pourcentage d'élèves concernés. Aucune saisie manuelle, donc aucun oubli.</li>
+          <li>Service du jour en <strong>portions équivalentes</strong> par vague, plateaux sans allergène nominatifs.</li>
+          <li><strong>Retours d'assiettes</strong> : terminée ou non, appréciée ou non. Ces saisies alimentent les statistiques de gaspillage.</li>
+          <li><strong>Scan du ticket</strong> à la caméra : nom, plat, portion, vague et place, ou une alerte claire si le ticket est faux, déjà servi ou d'un autre jour.</li>
+        </ul>
+        <h3>Enseignant et administration</h3>
+        <ul>
+          <li><strong>Appel</strong> d'un geste en mode Classe : les absents sont retirés des couverts de la cuisine.</li>
+          <li>Tableau de bord et statistiques qui ne mélangent jamais trois notions : <strong>commandé, servi, consommé</strong>.</li>
+          <li><strong>Suggestions de portion</strong> calculées sur les 20 derniers repas d'un élève, jamais appliquées sans validation de l'administration.</li>
+          <li>Paramétrage du mode par niveau, des horaires, du découvert autorisé, des vagues et du plan de salle.</li>
+        </ul>
+        <div className="p-gallery">
+          <Picture src={`${CANTINE_IMG}/landing-fonctionnalites.webp`} alt="Un espace par profil" caption="Un espace par profil" />
+          <Picture src={`${CANTINE_IMG}/landing-mobile.webp`} alt="Version mobile" caption="Version mobile" narrow />
+        </div>
+      </section>
+
+      <section>
+        <h2>Architecture</h2>
+        <CantineVatelArchitecture />
+        <p>
+          <strong>Routeurs fins, services épais.</strong> Les routes lisent la requête et l'identité,
+          toute la logique métier vit dans <code>services/</code> et se teste indépendamment.
+          L'identité vient uniquement du jeton <Cite n={3} /> : un élève ne peut jamais agir pour un
+          autre, un parent n'accède qu'à ses enfants.
+        </p>
+      </section>
+
+      <section>
+        <h2>Défis techniques</h2>
+        <h3>Une commande, une transaction</h3>
+        <p>
+          Créer une réservation verrouille l'élève, le menu, la vague et la place
+          (<code>SELECT … FOR UPDATE</code> <Cite n={2} />), puis vérifie dans l'ordre la fenêtre de
+          commande, les allergènes, le stock, la capacité, la place, le solde et le doublon avant de
+          débiter. Pas de double débit, pas de place vendue deux fois, pas de stock négatif. Une
+          contrainte d'unicité sur la place par vague sert de dernier rempart, et les erreurs
+          métier remontent en HTTP 409 avec un message en français.
+        </p>
+        <h3>Un ticket infalsifiable</h3>
+        <p>
+          Le ticket QR est signé en <strong>Ed25519</strong> <Cite n={1} /> avec une clé privée
+          hors du dépôt, et ne peut servir qu'une fois. La clé publique est exposée sur{' '}
+          <code>/public-key</code> : elle prépare une vérification hors ligne au comptoir.
+        </p>
+        <h3>Des allergènes déduits, pas saisis</h3>
+        <p>
+          La base relie chaque ingrédient à ses allergènes (arachide, gluten, poisson, crustacés,
+          œuf, lait, soja, fruits à coque, piment). Un plat hérite des allergènes de
+          ses ingrédients, et la règle est appliquée côté serveur : un plat incompatible n'est ni
+          proposé ni accepté, quel que soit le client.
+        </p>
+        <h3>Des stocks en tiers de portion</h3>
+        <p>
+          Comme l'élève choisit 1/3, 2/3 ou 3/3, les stocks sont comptés en tiers. La cuisine lit
+          directement le nombre de portions pleines équivalentes à préparer, vague par vague.
+        </p>
+      </section>
+
+      <section>
+        <h2>Règles de gestion</h2>
+        <Table
+          rows={[
+            ['Règle', 'Détail'],
+            ['Prix', 'Prix du plat × portion, arrondi au multiple de 25 F supérieur'],
+            ['Fenêtre de commande', 'Ouverture la veille à 18 h, clôture au début de la dernière vague moins le délai de préparation'],
+            ['Annulation', 'Remboursée uniquement avant 10 h'],
+            ['Découvert', 'Jusqu\'à moins 1 500 F (paramétrable), plus aucune commande avec un solde négatif'],
+            ['Paiement', 'Crédité une seule fois par transaction grâce à une clé d\'idempotence'],
+            ['Suggestions de portion', 'Jamais automatiques, et une suggestion refusée n\'est pas reproposée pendant 14 jours'],
+          ]}
+        />
+      </section>
+
+      <section>
+        <h2>Stack technique</h2>
+        <Table
+          rows={[
+            ['Couche', 'Technologies'],
+            ['Frontend', 'React 19, Vite 8, Tailwind CSS 4, React Router 7, Axios, qrcode.react, html5-qrcode'],
+            ['Backend', 'Python 3, FastAPI, SQLAlchemy 2, Alembic, Pydantic 2, PyJWT'],
+            ['Données', 'PostgreSQL, migrations Alembic'],
+            ['Sécurité', 'bcrypt (mots de passe et PIN), JWT, signature Ed25519 (cryptography)'],
+            ['Hébergement', 'Vercel (front), Render (API)'],
+          ]}
+        />
+        <Picture src={`${CANTINE_IMG}/landing-ecoles.webp`} alt="Ce que l'école y gagne" caption="Ce que l'école y gagne" />
+      </section>
+
+      <References items={CANTINE_REFS} />
     </ProjectPage>
   )
 }

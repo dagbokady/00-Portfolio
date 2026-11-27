@@ -10,7 +10,7 @@ import {
 } from './data/portfolio.jsx'
 import Research from './Research.jsx'
 import Education from './Education.jsx'
-import { CodEval, EsaticShare } from './Projects.jsx'
+import { CodEval, EsaticShare, CantineVatel } from './Projects.jsx'
 
 const NAV = [
   { id: 'about', label: 'À propos' },
@@ -438,6 +438,7 @@ const PAGES = {
   '/recherche/codeval': Research,
   '/projets/codeval': CodEval,
   '/projets/esaticshare': EsaticShare,
+  '/projets/cantine-vatel': CantineVatel,
 }
 
 function App() {

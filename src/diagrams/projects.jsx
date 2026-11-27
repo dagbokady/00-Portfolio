@@ -124,3 +124,23 @@ export function EsaticShareArchitecture() {
     </Diagram>
   )
 }
+
+export function CantineVatelArchitecture() {
+  return (
+    <Diagram h={420} caption="Architecture de Cantine Vatel">
+      <Group x={20} y={30} w={300} h={250} label="client : React (Vercel)" tone="api" />
+      <Box x={40} y={65} w={260} h={80} tone="api" title="React 19 + Tailwind" lines={['mobile first · borne']} />
+      <Box x={40} y={180} w={260} h={80} tone="sandbox" title="QR" lines={['génération · scan caméra']} />
+      <Group x={420} y={30} w={560} h={250} label="API : FastAPI (Render)" tone="worker" />
+      <Box x={440} y={65} w={250} h={80} tone="worker" title="Routeurs par rôle" lines={['identité issue du JWT']} />
+      <Box x={710} y={65} w={250} h={80} tone="neutral" title="Signature Ed25519" lines={['tickets à usage unique']} />
+      <Box x={440} y={180} w={520} h={80} tone="worker" title="Couche services" lines={['commande · allergènes · cuisine · paiement · statistiques']} />
+      <Edge points={[[300, 105], [440, 105]]} flow="api" label="HTTPS / JWT" lx={370} ly={97} />
+      <Edge points={[[300, 220], [440, 220]]} flow="api" label="ticket signé" lx={370} ly={212} />
+      <Edge points={[[565, 145], [565, 180]]} flow="worker" />
+      <Edge points={[[835, 145], [835, 180]]} flow="neutral" />
+      <Box x={560} y={330} w={280} h={70} tone="db" title="PostgreSQL" lines={['SQLAlchemy 2 · Alembic']} />
+      <Edge points={[[700, 260], [700, 330]]} flow="db" label="FOR UPDATE" lx={760} ly={300} />
+    </Diagram>
+  )
+}
