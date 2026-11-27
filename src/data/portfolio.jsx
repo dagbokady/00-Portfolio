@@ -81,6 +81,21 @@ export const projects = [
   },
   {
     tag: 'Web',
+    title: 'Cantine Vatel · Gestion de cantine scolaire',
+    url: 'https://cantine-vatel.vercel.app',
+    repo: 'https://github.com/dagbokady/cantine-vatel',
+    stack: 'FastAPI, SQLAlchemy, PostgreSQL, Alembic, React, Tailwind CSS',
+    text: (
+      <>
+        Projet de hackathon : une plateforme unique pour la cantine du primaire au lycée. Plats
+        composés à partir d'ingrédients avec <strong>détection automatique des allergènes</strong>,
+        portions au choix payées au prorata, vagues de passage et plan de salle, et{' '}
+        <strong>ticket QR signé Ed25519</strong> à usage unique. Suivi du gaspillage par assiette.
+      </>
+    ),
+  },
+  {
+    tag: 'Web',
     title: 'EsaticShare · Plateforme de ressources académiques',
     url: 'https://esaticshare.vercel.app',
     repo: 'https://github.com/dagbokady/esaticshare',
