@@ -365,7 +365,7 @@ function Home() {
                 <li key={p.title} className="paper">
                   <span className="venue-tag">[{p.tag}]</span>{' '}
                   <a className="project-title" href={p.page}><strong>{p.title}</strong></a>.{' '}
-                  <a className="paper-link" href={p.page}>[détails]</a>
+                  {p.page && <a className="paper-link" href={p.page}>[détails]</a>}
                   {p.url && (
                     <a className="paper-link" href={p.url} target="_blank" rel="noreferrer">
                       [{p.url.replace(/^https?:\/\//, '')}]
