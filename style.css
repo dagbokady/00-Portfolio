@@ -461,6 +461,10 @@ a.paper-title:hover { color: var(--link); }
 .p-gallery { display: grid; grid-template-columns: 3fr 1fr; gap: 16px; align-items: start; }
 .p-gallery .r-figure { margin: 0; }
 .p-gallery .r-figure.narrow img { width: 100%; max-height: none; }
+/* Captures d'écran de téléphone côte à côte */
+.p-phones { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 16px 0 24px; align-items: start; }
+.p-phones .r-figure { margin: 0; }
+.p-phones.p-single { grid-template-columns: minmax(0, 260px); justify-content: center; }
 .page-footer { max-width: 860px; margin: 0 auto 32px; padding-left: 24px; padding-right: 24px; }
 
 /* Pages détaillées : titres en couleur, retrait de première ligne, listes à retrait suspendu */
@@ -627,6 +631,7 @@ a.paper-title:hover { color: var(--link); }
   .research-page h3 { font-size: 14.92px; }
   .research-page li { text-align: left; }
   .p-gallery { grid-template-columns: 1fr; }
+  .p-phones { grid-template-columns: 1fr 1fr; gap: 10px; }
   .p-gallery .r-figure.narrow img { width: auto; max-height: 420px; }
   .dg-frame { padding: 12px; }
 }

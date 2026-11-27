@@ -584,6 +584,55 @@ export function CantineVatel() {
       </section>
 
       <section>
+        <h2>Les nouveaux processus</h2>
+        <h3>Avec les enseignants (primaire)</h3>
+        <p>
+          Au primaire, l'enfant ne commande rien : il est inscrit d'office et sa classe passe à une
+          heure fixe. L'enseignant devient le point de contrôle.
+        </p>
+        <ol>
+          <li>Le matin, la cuisine voit ses couverts : effectif de chaque classe, réparti entre plat principal et plateaux <strong>sans allergène nominatifs</strong>.</li>
+          <li>À l'heure de passage, l'enseignant ouvre la liste de sa classe sur son téléphone. Les élèves allergiques sont mis en évidence avec leur allergène.</li>
+          <li>Il <strong>valide la classe d'un geste</strong>, puis décoche les absents. Les absents sont retirés des couverts de la cuisine.</li>
+          <li>L'élève allergique reçoit son plateau sans allergène, préparé et étiqueté à son nom.</li>
+          <li>Le parent est notifié : repas servi avec l'heure, ou absence.</li>
+        </ol>
+        <div className="p-phones p-single">
+          <Picture src={`${CANTINE_IMG}/appel.webp`} alt="L'appel : allergies à surveiller, absents décochés" caption="L'appel : allergies à surveiller, absents décochés" />
+        </div>
+        <h3>Avec les élèves qui ont un téléphone (collège, lycée)</h3>
+        <p>L'élève n'a jamais d'argent en main : le parent recharge son crédit, et payer, pour lui, c'est commander.</p>
+        <ol>
+          <li>Dès la veille à 18 h, il se connecte avec son <strong>matricule et son PIN</strong>.</li>
+          <li>Il choisit un plat parmi ceux <strong>compatibles avec ses allergies</strong> (les autres sont affichés à part, avec l'allergène en cause).</li>
+          <li>Il choisit sa portion (1/3, 2/3 ou 3/3) sur une assiette qui se remplit, et paie au prorata.</li>
+          <li>Le jour même, à partir de la récréation, il choisit sa <strong>vague de 20 minutes</strong> et sa <strong>place</strong> sur le plan de salle.</li>
+          <li>Il reçoit un <strong>ticket QR signé</strong>, qu'il présente au comptoir. L'agent le scanne, sert la portion commandée, et l'élève va s'asseoir à sa place.</li>
+          <li>Annulation possible avant 10 h, avec remboursement automatique.</li>
+        </ol>
+        <div className="p-phones">
+          <Picture src={`${CANTINE_IMG}/plat.webp`} alt="1. Le plat" caption="1. Le plat" />
+          <Picture src={`${CANTINE_IMG}/portion.webp`} alt="2. La portion" caption="2. La portion" />
+          <Picture src={`${CANTINE_IMG}/vague.webp`} alt="3. La vague" caption="3. La vague" />
+          <Picture src={`${CANTINE_IMG}/place.webp`} alt="4. La place" caption="4. La place" />
+          <Picture src={`${CANTINE_IMG}/ticket.webp`} alt="5. Le ticket" caption="5. Le ticket" />
+        </div>
+        <h3>Avec les élèves sans téléphone</h3>
+        <p>Aucun élève n'est exclu faute de téléphone : l'école installe une <strong>borne</strong>, une tablette partagée.</p>
+        <ol>
+          <li>L'élève se connecte sur la borne avec son matricule puis son PIN.</li>
+          <li>Il suit le même parcours : plat compatible, portion, vague et place.</li>
+          <li>En plus du QR, la borne affiche un <strong>code de secours à 6 caractères</strong>, facile à retenir ou à noter.</li>
+          <li>La session se ferme seule après 30 secondes, pour l'élève suivant.</li>
+          <li>Au comptoir, l'agent saisit le code de secours au lieu de scanner : mêmes contrôles, même service.</li>
+        </ol>
+        <div className="p-phones">
+          <Picture src={`${CANTINE_IMG}/borne.webp`} alt="La borne de l'école" caption="La borne de l'école" />
+          <Picture src={`${CANTINE_IMG}/comptoir.webp`} alt="Le comptoir après saisie du code" caption="Le comptoir après saisie du code" />
+        </div>
+      </section>
+
+      <section>
         <h2>Fonctionnalités</h2>
         <h3>Élève</h3>
         <ul>
