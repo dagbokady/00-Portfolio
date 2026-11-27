@@ -628,7 +628,7 @@ export function CantineVatel() {
         </ol>
         <div className="p-phones">
           <Picture src={`${CANTINE_IMG}/borne.webp`} alt="La borne de l'école" caption="La borne de l'école" />
-          <Picture src={`${CANTINE_IMG}/comptoir.webp`} alt="Le comptoir après saisie du code" caption="Le comptoir après saisie du code" />
+          <Picture src={`${CANTINE_IMG}/comptoir.webp`} alt="Le comptoir : fiche de service après saisie du code" caption="Le comptoir : fiche de service" />
         </div>
       </section>
 
